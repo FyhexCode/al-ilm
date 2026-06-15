@@ -24,3 +24,9 @@ export interface Category {
   description: string;
   icon: string;
 }
+
+export interface VerseCluster {
+  ayahs: number[];
+  keyTakeaway: string;
+  lesson: string;
+}

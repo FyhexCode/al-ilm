@@ -7,6 +7,7 @@ import type { Verse } from "@/lib/types";
 import ArabicText from "./ArabicText";
 import TafseerSection from "./TafseerSection";
 import { CATEGORIES } from "@/data/categories";
+import { buildClusterList } from "@/lib/getVerseClusters";
 
 interface Props {
   lesson: LessonGroup;
@@ -179,61 +180,90 @@ function OverviewTab({
 /* ── Verses ────────────────────────────────────────────────── */
 
 function VersesTab({ lesson }: { lesson: LessonGroup }) {
+  const verseMap = new Map(lesson.verses.map((v) => [v.ayah, v]));
+  const clusters = buildClusterList(
+    lesson.surah,
+    lesson.verses.map((v) => v.ayah)
+  );
+
   return (
     <div className="space-y-6">
       <p className="text-dark/40 text-xs tracking-widest uppercase">
         {lesson.verses.length} {lesson.verses.length === 1 ? "verse" : "verses"} in {lesson.surahName}
       </p>
 
-      {lesson.verses.map((verse) => (
-        <div
-          key={`${verse.surah}-${verse.ayah}`}
-          className="bg-cream rounded-2xl border border-gold/20 overflow-hidden"
-        >
-          {/* Verse header */}
-          <div className="px-5 py-3 flex items-center justify-between bg-primary/5 border-b border-gold/15">
-            <div>
-              <span className="text-gold font-mono text-xs font-semibold">
-                {verse.surah}:{verse.ayah}
-              </span>
-              {verse.lessonTitle && (
-                <span className="text-dark/50 text-xs ml-3 italic">{verse.lessonTitle}</span>
-              )}
+      {clusters.map((cluster) => {
+        const clusterVerses = cluster.ayahs.map((a) => verseMap.get(a)).filter(Boolean) as Verse[];
+        const isGroup = cluster.ayahs.length > 1;
+        const rangeLabel = isGroup
+          ? `${lesson.surah}:${cluster.ayahs[0]}–${cluster.ayahs[cluster.ayahs.length - 1]}`
+          : `${lesson.surah}:${cluster.ayahs[0]}`;
+
+        return (
+          <div
+            key={cluster.ayahs.join("-")}
+            className={`rounded-2xl border overflow-hidden ${
+              isGroup ? "border-gold/30 bg-cream" : "border-gold/20 bg-cream"
+            }`}
+          >
+            {/* Cluster header */}
+            <div className="px-5 py-3 flex items-center justify-between bg-primary/5 border-b border-gold/15">
+              <div className="flex items-center gap-2">
+                <span className="text-gold font-mono text-xs font-semibold">{rangeLabel}</span>
+                {isGroup && (
+                  <span className="text-gold/50 text-xs bg-gold/10 px-2 py-0.5 rounded-full">
+                    connected
+                  </span>
+                )}
+              </div>
+              <Link
+                href={`/verse/${lesson.surah}/${cluster.ayahs[0]}`}
+                className="text-xs text-primary/50 hover:text-primary transition-colors"
+              >
+                Full page →
+              </Link>
             </div>
-            <Link
-              href={`/verse/${verse.surah}/${verse.ayah}`}
-              className="text-xs text-primary/50 hover:text-primary transition-colors"
-            >
-              Full page →
-            </Link>
-          </div>
 
-          {/* Arabic */}
-          <div className="px-5 py-5 bg-dark/3">
-            <ArabicText text={verse.arabic} size="md" align="right" className="text-dark/90" />
-          </div>
+            {/* Verses in cluster */}
+            {clusterVerses.map((verse, idx) => (
+              <div key={verse.ayah}>
+                {isGroup && (
+                  <p className="text-gold/40 font-mono text-xs px-5 pt-4 pb-1">
+                    {verse.surah}:{verse.ayah}
+                  </p>
+                )}
+                <div className="px-5 py-4 bg-dark/3">
+                  <ArabicText text={verse.arabic} size="md" align="right" className="text-dark/90" />
+                </div>
+                <div className="px-5 pt-2 pb-1">
+                  <p className="text-xs italic text-primary/50 text-right">{verse.transliteration}</p>
+                </div>
+                <div className={`px-5 pb-4 pt-2 ${idx < clusterVerses.length - 1 ? "border-b border-gold/10" : ""}`}>
+                  <p className="text-dark/80 text-sm leading-relaxed">
+                    &ldquo;{verse.translation}&rdquo;
+                  </p>
+                </div>
+              </div>
+            ))}
 
-          {/* Transliteration */}
-          <div className="px-5 pt-2 pb-1">
-            <p className="text-xs italic text-primary/50 text-right">{verse.transliteration}</p>
+            {/* Key takeaway + lesson */}
+            {cluster.keyTakeaway && (
+              <div className="px-5 py-4 border-t border-gold/15 bg-gold/5">
+                <p className="text-gold text-xs uppercase tracking-wider mb-1.5">Key Takeaway</p>
+                <p className="text-primary text-sm font-medium leading-snug mb-3">
+                  {cluster.keyTakeaway}
+                </p>
+                {cluster.lesson && (
+                  <>
+                    <p className="text-gold/60 text-xs uppercase tracking-wider mb-1.5">Lesson</p>
+                    <p className="text-dark/70 text-sm leading-relaxed">{cluster.lesson}</p>
+                  </>
+                )}
+              </div>
+            )}
           </div>
-
-          {/* Translation */}
-          <div className="px-5 pb-5 pt-2">
-            <p className="text-dark/80 text-sm leading-relaxed">
-              &ldquo;{verse.translation}&rdquo;
-            </p>
-          </div>
-
-          {/* Application if present */}
-          {verse.application && (
-            <div className="px-5 pb-4 pt-1 border-t border-gold/10">
-              <p className="text-gold/60 text-xs uppercase tracking-wider mb-1">Apply</p>
-              <p className="text-dark/60 text-xs leading-relaxed">{verse.application}</p>
-            </div>
-          )}
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
