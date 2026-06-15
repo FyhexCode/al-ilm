@@ -41,3 +41,11 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+# screenshots / scratch images (root only — keeps public/ assets trackable)
+/*.png
+
+# agent + tooling scratch dirs
+.claude/
+.playwright-mcp/
+.serena/
