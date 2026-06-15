@@ -25,14 +25,14 @@ export default function DailyLesson({ verse }: Props) {
         <div className="absolute inset-0 bg-gradient-to-b from-dark/40 via-dark/60 to-dark pointer-events-none" />
 
         <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center gap-8">
-          <span className="text-gold text-7xl sm:text-8xl font-[family-name:var(--font-amiri)] leading-none" aria-label="Bismillah ir-Rahman ir-Rahim">
+          <span className="block w-full text-center text-gold text-7xl sm:text-8xl font-[family-name:var(--font-amiri)] leading-[1.15]" aria-label="Bismillah ir-Rahman ir-Rahim">
             ﷽
           </span>
           <div className="flex flex-col items-center gap-2">
-            <p className="text-gold text-xs tracking-[0.2em] uppercase font-medium">
+            <p className="text-gold text-xs tracking-[0.2em] uppercase font-medium text-center">
               Lesson of the Day
             </p>
-            <p className="text-cream/40 text-xs tracking-widest uppercase">
+            <p className="text-cream/40 text-xs tracking-[0.1em] uppercase text-center">
               {today}
             </p>
           </div>
