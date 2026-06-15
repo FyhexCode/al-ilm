@@ -16,11 +16,11 @@ export default function LessonCard({ lesson }: LessonCardProps) {
   return (
     <Link
       href={`/lesson/${lesson.surah}/${lesson.firstAyah}`}
-      className="group block bg-dark border border-gold/10 rounded-2xl overflow-hidden hover:border-gold/40 hover:-translate-y-0.5 transition-all duration-200 shadow-md hover:shadow-lg"
+      className="group block bg-dark border border-gold/25 rounded-2xl overflow-hidden hover:border-gold/60 hover:-translate-y-0.5 transition-all duration-200 shadow-md hover:shadow-lg"
     >
       {/* Arabic name — visual anchor */}
       <div className="px-5 pt-5 pb-1">
-        <p className="text-gold/30 text-2xl font-[family-name:var(--font-amiri)] text-right leading-none">
+        <p className="text-gold/70 text-2xl font-[family-name:var(--font-amiri)] text-right leading-none">
           {lesson.surahNameAr}
         </p>
       </div>
@@ -48,7 +48,7 @@ export default function LessonCard({ lesson }: LessonCardProps) {
           {cats.map((cat) => (
             <span
               key={cat.slug}
-              className="text-xs bg-gold/10 text-gold/70 px-2.5 py-0.5 rounded-full border border-gold/20"
+              className="text-xs bg-gold/10 text-gold/80 px-2.5 py-0.5 rounded-full border border-gold/30"
             >
               {cat.label}
             </span>

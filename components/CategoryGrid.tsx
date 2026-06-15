@@ -5,9 +5,8 @@ export default function CategoryGrid() {
   return (
     <section className="max-w-5xl mx-auto px-6 py-16">
       <div className="text-center mb-10">
-        <h2 className="text-3xl font-bold text-primary mb-2">Browse by Theme</h2>
-        <div className="w-16 h-1 bg-gold mx-auto rounded-full" />
-        <p className="text-dark/60 mt-4 text-sm">
+        <h2 className="text-3xl font-semibold text-primary mb-3 font-[family-name:var(--font-display)]">Browse by Theme</h2>
+        <p className="text-dark/60 text-sm">
           Explore Quran verses organised by the wisdom they carry
         </p>
       </div>

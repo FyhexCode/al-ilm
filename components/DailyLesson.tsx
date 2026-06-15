@@ -24,17 +24,17 @@ export default function DailyLesson({ verse }: Props) {
       <section className="hero-pattern relative min-h-svh flex flex-col items-center justify-center px-6 text-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-dark/40 via-dark/60 to-dark pointer-events-none" />
 
-        <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center gap-6">
-          <p className="text-cream/40 text-xs sm:text-sm tracking-widest uppercase">
-            {today}
-          </p>
-          <p className="gold-shimmer text-xs sm:text-sm tracking-[0.2em] uppercase font-medium">
-            Lesson of the Day
-          </p>
-          <div className="flex items-center gap-4 w-full max-w-xs">
-            <div className="flex-1 h-px bg-gold/20" />
-            <span className="text-gold/30 text-lg font-[family-name:var(--font-amiri)]">﷽</span>
-            <div className="flex-1 h-px bg-gold/20" />
+        <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center gap-8">
+          <span className="text-gold text-7xl sm:text-8xl font-[family-name:var(--font-amiri)] leading-none" aria-label="Bismillah ir-Rahman ir-Rahim">
+            ﷽
+          </span>
+          <div className="flex flex-col items-center gap-2">
+            <p className="text-gold text-xs tracking-[0.2em] uppercase font-medium">
+              Lesson of the Day
+            </p>
+            <p className="text-cream/40 text-xs tracking-widest uppercase">
+              {today}
+            </p>
           </div>
         </div>
 
@@ -48,7 +48,7 @@ export default function DailyLesson({ verse }: Props) {
 
       {/* Lesson title — scrolls normally then sticks below the navbar */}
       <div className="sticky top-16 z-10 bg-dark py-6 px-6">
-        <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-cream leading-tight text-center max-w-3xl mx-auto">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-semibold text-cream leading-tight text-center max-w-3xl mx-auto font-[family-name:var(--font-display)]">
           {lessonText}
         </h1>
       </div>
@@ -56,13 +56,12 @@ export default function DailyLesson({ verse }: Props) {
       {/* Detail sections */}
       <section className="bg-primary-dark py-20 px-6 overflow-hidden">
         <div className="max-w-2xl mx-auto text-center">
-          <p className="text-gold/60 text-xs tracking-widest uppercase mb-4">Source</p>
-          <p className="text-cream text-2xl sm:text-3xl font-semibold mb-1">{verse.surahName}</p>
+          <p className="text-cream text-2xl sm:text-3xl font-semibold mb-1 font-[family-name:var(--font-display)]">{verse.surahName}</p>
           <p className="text-cream/50 text-sm mb-4">{verse.surahNameTranslation}</p>
           <p className="text-gold font-mono text-sm tracking-wider mb-6">
             {verse.surah}:{verse.ayah}
           </p>
-          <p className="text-cream/30 text-2xl font-[family-name:var(--font-amiri)]">
+          <p className="text-gold/60 text-2xl font-[family-name:var(--font-amiri)]">
             {verse.surahNameAr}
           </p>
         </div>
@@ -80,7 +79,7 @@ export default function DailyLesson({ verse }: Props) {
 
       <section className="bg-cream py-20 px-6 overflow-hidden">
         <div className="max-w-2xl mx-auto text-center">
-          <p className="text-dark/40 text-xs tracking-widest uppercase mb-6">What it says</p>
+          <p className="text-dark/50 text-sm italic mb-6 font-[family-name:var(--font-display)]">— Translation —</p>
           <blockquote className="text-dark text-xl sm:text-2xl font-light leading-relaxed mb-8">
             &ldquo;{verse.translation}&rdquo;
           </blockquote>

@@ -12,6 +12,7 @@
   --color-dark: #0f2e1c;
 
   --font-amiri: "Amiri", serif;
+  --font-display: var(--font-cormorant);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -37,7 +38,7 @@ body {
 
 /* Islamic crescent moon + star background pattern */
 .hero-pattern {
-  background-image: url("data:image/svg+xml,%3Csvg width='130' height='72' viewBox='0 0 130 72' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M34,8 C17,8,6,20,6,36 C6,52,17,64,34,64 C28,64,20,54,20,38 C20,21,28,10,34,8 Z' fill='%23C9A347' opacity='0.13'/%3E%3Cpolygon points='88,10 91,22 104,22 94,30 97,42 88,34 79,42 82,30 72,22 85,22' fill='%23C9A347' opacity='0.13'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='130' height='72' viewBox='0 0 130 72' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M34,8 C17,8,6,20,6,36 C6,52,17,64,34,64 C28,64,20,54,20,38 C20,21,28,10,34,8 Z' fill='%23C9A347' opacity='0.28'/%3E%3Cpolygon points='88,10 91,22 104,22 94,30 97,42 88,34 79,42 82,30 72,22 85,22' fill='%23C9A347' opacity='0.28'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 130px 72px;
 }

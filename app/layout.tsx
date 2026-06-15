@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
-import { Amiri } from "next/font/google";
+import { Amiri, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 
@@ -15,6 +15,12 @@ const amiri = Amiri({
   weight: ["400", "700"],
 });
 
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
+
 export const metadata: Metadata = {
   title: "Al-Ilm — Quran Verses",
   description: "Discover Quran verses by theme. Daily verse, category browsing, and more.",
@@ -26,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${amiri.variable} h-full`}>
+    <html lang="en" className={`${geistSans.variable} ${amiri.variable} ${cormorant.variable} h-full`}>
       <body className="min-h-full flex flex-col bg-cream text-dark antialiased">
         <Navbar />
         <main className="flex-1">{children}</main>
