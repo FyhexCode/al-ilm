@@ -27,12 +27,12 @@ export default function DailyLesson({ verse, clusterVerses, cluster }: Props) {
         <div className="absolute inset-0 bg-gradient-to-b from-dark/40 via-dark/60 to-dark pointer-events-none" />
 
         <div className="relative z-10 w-full max-w-3xl mx-auto flex flex-col items-center gap-8">
-          <div className="relative w-full overflow-hidden h-24 sm:h-[7rem]">
+          <div className="relative w-full h-36 sm:h-44 flex items-center justify-center">
             <span
-              className="absolute top-0 left-1/2 -translate-x-[175px] sm:-translate-x-[233px] text-gold text-7xl sm:text-8xl font-[family-name:var(--font-amiri)] leading-[1.15]"
+              className="text-gold text-4xl sm:text-6xl font-[family-name:var(--font-amiri)] leading-[1.6] whitespace-nowrap"
               aria-label="Bismillah ir-Rahman ir-Rahim"
             >
-              ﷽
+              بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
             </span>
           </div>
           <div className="flex flex-col items-center gap-2">
