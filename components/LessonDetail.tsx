@@ -69,14 +69,17 @@ function OverviewTab({
   lesson: LessonGroup;
   cats: ReturnType<typeof CATEGORIES.filter>;
 }) {
-  const [selectedAyah, setSelectedAyah] = useState<number | null>(null);
+  const [openCluster, setOpenCluster] = useState<string | null>(null);
 
   const range =
     lesson.firstAyah === lesson.lastAyah
       ? `${lesson.surah}:${lesson.firstAyah}`
       : `${lesson.surah}:${lesson.firstAyah}–${lesson.lastAyah}`;
 
-  const lessonsWithTitles = lesson.verses.filter((v) => v.lessonTitle);
+  const clusters = buildClusterList(
+    lesson.surah,
+    lesson.verses.map((v) => v.ayah)
+  ).filter((c) => c.keyTakeaway);
 
   return (
     <div className="space-y-10">
@@ -94,43 +97,45 @@ function OverviewTab({
         </div>
       </div>
 
-      {/* Per-verse lesson titles — clickable to reveal application */}
-      {lessonsWithTitles.length > 0 && (
+      {/* Cluster-based lessons — clickable to reveal lesson text */}
+      {clusters.length > 0 && (
         <div>
           <p className="text-dark/40 text-xs tracking-widest uppercase mb-4">
             Lessons in this surah
-            <span className="ml-2 normal-case text-dark/30">— tap a lesson to see how to apply it</span>
+            <span className="ml-2 normal-case text-dark/30">— tap to see how to apply it</span>
           </p>
           <div className="rounded-2xl border border-gold/20 overflow-hidden divide-y divide-gold/10">
-            {lessonsWithTitles.map((v) => {
-              const isOpen = selectedAyah === v.ayah;
+            {clusters.map((cluster) => {
+              const key = cluster.ayahs.join("-");
+              const isOpen = openCluster === key;
+              const rangeLabel =
+                cluster.ayahs.length > 1
+                  ? `${lesson.surah}:${cluster.ayahs[0]}–${cluster.ayahs[cluster.ayahs.length - 1]}`
+                  : `${lesson.surah}:${cluster.ayahs[0]}`;
               return (
-                <div key={`${v.surah}-${v.ayah}`}>
+                <div key={key}>
                   <button
-                    onClick={() => setSelectedAyah(isOpen ? null : v.ayah)}
+                    onClick={() => setOpenCluster(isOpen ? null : key)}
                     aria-expanded={isOpen}
                     className="w-full flex items-start gap-3 px-5 py-3.5 text-left hover:bg-gold/5 transition-colors cursor-pointer"
                   >
-                    <span className="text-gold font-mono text-xs shrink-0 mt-0.5 w-12">
-                      {v.surah}:{v.ayah}
+                    <span className="text-gold font-mono text-xs shrink-0 mt-0.5 w-16">
+                      {rangeLabel}
                     </span>
                     <p className={`text-sm flex-1 ${isOpen ? "text-primary font-medium" : "text-dark/80"}`}>
-                      {v.lessonTitle}
+                      {cluster.keyTakeaway}
                     </p>
                     <span className="text-dark/30 text-xs shrink-0 mt-0.5">
                       {isOpen ? "▲" : "▼"}
                     </span>
                   </button>
 
-                  {isOpen && (
+                  {isOpen && cluster.lesson && (
                     <div className="px-5 pb-4 pt-1 bg-primary/5 border-t border-gold/10">
                       <p className="text-gold/60 text-xs tracking-widest uppercase mb-2">
                         How to apply this today
                       </p>
-                      <p className="text-dark/70 text-sm leading-relaxed">
-                        {v.application ??
-                          "Reflect on this verse throughout your day and consider how its wisdom applies to your current circumstances."}
-                      </p>
+                      <p className="text-dark/70 text-sm leading-relaxed">{cluster.lesson}</p>
                     </div>
                   )}
                 </div>
