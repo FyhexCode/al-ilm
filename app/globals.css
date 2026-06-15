@@ -1,26 +1,63 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-primary: #1a5c38;
+  --color-primary-light: #2d8653;
+  --color-primary-dark: #0f3d24;
+  --color-gold: #c9a347;
+  --color-gold-light: #e8c96a;
+  --color-gold-dark: #a07c2a;
+  --color-cream: #fdf8ee;
+  --color-cream-dark: #f5ead6;
+  --color-dark: #0f2e1c;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --font-amiri: "Amiri", serif;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #fdf8ee;
+  --foreground: #0f2e1c;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Arabic text direction and spacing */
+.arabic {
+  direction: rtl;
+  font-family: var(--font-amiri);
+  font-size: 1.75rem;
+  line-height: 2.5rem;
+  letter-spacing: 0.02em;
+}
+
+/* Islamic crescent moon + star background pattern */
+.hero-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='130' height='72' viewBox='0 0 130 72' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M34,8 C17,8,6,20,6,36 C6,52,17,64,34,64 C28,64,20,54,20,38 C20,21,28,10,34,8 Z' fill='%23C9A347' opacity='0.13'/%3E%3Cpolygon points='88,10 91,22 104,22 94,30 97,42 88,34 79,42 82,30 72,22 85,22' fill='%23C9A347' opacity='0.13'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 130px 72px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Gold shimmer animation for verse of the day badge */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.gold-shimmer {
+  background: linear-gradient(90deg, #c9a347 0%, #e8c96a 40%, #c9a347 60%, #a07c2a 100%);
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
