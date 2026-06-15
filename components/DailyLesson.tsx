@@ -26,10 +26,15 @@ export default function DailyLesson({ verse, clusterVerses, cluster }: Props) {
       <section className="hero-pattern relative min-h-svh flex flex-col items-center justify-center px-6 text-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-dark/40 via-dark/60 to-dark pointer-events-none" />
 
-        <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center gap-8">
-          <span className="block w-full text-center text-gold text-7xl sm:text-8xl font-[family-name:var(--font-amiri)] leading-[1.15]" aria-label="Bismillah ir-Rahman ir-Rahim">
-            ﷽
-          </span>
+        <div className="relative z-10 w-full max-w-3xl mx-auto flex flex-col items-center gap-8">
+          <div className="relative w-full overflow-hidden h-24 sm:h-[7rem]">
+            <span
+              className="absolute top-0 left-1/2 -translate-x-[175px] sm:-translate-x-[233px] text-gold text-7xl sm:text-8xl font-[family-name:var(--font-amiri)] leading-[1.15]"
+              aria-label="Bismillah ir-Rahman ir-Rahim"
+            >
+              ﷽
+            </span>
+          </div>
           <div className="flex flex-col items-center gap-2">
             <p className="text-gold text-xs tracking-[0.2em] uppercase font-medium text-center">
               Lesson of the Day
