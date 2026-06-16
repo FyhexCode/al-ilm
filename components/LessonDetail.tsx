@@ -8,6 +8,9 @@ import ArabicText from "./ArabicText";
 import TafseerSection from "./TafseerSection";
 import { CATEGORIES } from "@/data/categories";
 import { buildClusterList } from "@/lib/getVerseClusters";
+import { useLanguage } from "@/lib/i18n/useLanguage";
+import { useT } from "@/lib/i18n/useT";
+import { localizeLesson, localizeCluster, localizeCategory, localizeVerse } from "@/lib/i18n/pick";
 
 interface Props {
   lesson: LessonGroup;
@@ -16,9 +19,20 @@ interface Props {
 
 const TABS = ["Overview", "Verses", "Tafseer", "Surah"] as const;
 type Tab = (typeof TABS)[number];
+const TAB_KEYS = {
+  Overview: "tab.overview",
+  Verses: "tab.verses",
+  Tafseer: "tab.tafseer",
+  Surah: "tab.surah",
+} as const;
 
-export default function LessonDetail({ lesson, surahVerses }: Props) {
+export default function LessonDetail({ lesson: rawLesson, surahVerses: rawSurahVerses }: Props) {
+  const { locale } = useLanguage();
+  const t = useT();
   const [tab, setTab] = useState<Tab>("Overview");
+
+  const lesson = localizeLesson(rawLesson, locale);
+  const surahVerses = rawSurahVerses.map((v) => localizeVerse(v, locale));
 
   const lessonCats = CATEGORIES.filter((c) => lesson.categories.includes(c.slug));
   const tafseerVerse = lesson.verses.find((v) => v.tafseer !== null) ?? null;
@@ -28,19 +42,19 @@ export default function LessonDetail({ lesson, surahVerses }: Props) {
       {/* Sticky tab bar */}
       <div className="sticky top-16 z-20 bg-cream border-b border-gold/20">
         <div className="max-w-3xl mx-auto px-4 flex gap-0" role="tablist">
-          {TABS.map((t) => (
+          {TABS.map((tabId) => (
             <button
-              key={t}
+              key={tabId}
               role="tab"
-              aria-selected={tab === t}
-              onClick={() => setTab(t)}
+              aria-selected={tab === tabId}
+              onClick={() => setTab(tabId)}
               className={`px-5 py-3 text-sm font-medium transition-colors border-b-2 -mb-px cursor-pointer ${
-                tab === t
+                tab === tabId
                   ? "border-gold text-primary"
                   : "border-transparent text-dark/50 hover:text-primary hover:border-gold/40"
               }`}
             >
-              {t}
+              {t(TAB_KEYS[tabId])}
             </button>
           ))}
         </div>
@@ -69,6 +83,8 @@ function OverviewTab({
   lesson: LessonGroup;
   cats: ReturnType<typeof CATEGORIES.filter>;
 }) {
+  const { locale } = useLanguage();
+  const t = useT();
   const [openCluster, setOpenCluster] = useState<string | null>(null);
 
   const range =
@@ -79,7 +95,9 @@ function OverviewTab({
   const clusters = buildClusterList(
     lesson.surah,
     lesson.verses.map((v) => v.ayah)
-  ).filter((c) => c.keyTakeaway);
+  )
+    .filter((c) => c.keyTakeaway)
+    .map((c) => localizeCluster(c, locale));
 
   return (
     <div className="space-y-10">
@@ -101,8 +119,8 @@ function OverviewTab({
       {clusters.length > 0 && (
         <div>
           <p className="text-dark/40 text-xs tracking-widest uppercase mb-4">
-            Lessons in this surah
-            <span className="ml-2 normal-case text-dark/30">— tap to see how to apply it</span>
+            {t("lesson.lessonsInSurah")}
+            <span className="ml-2 normal-case text-dark/30">{t("lesson.tapToApply")}</span>
           </p>
           <div className="rounded-2xl border border-gold/20 overflow-hidden divide-y divide-gold/10">
             {clusters.map((cluster) => {
@@ -133,7 +151,7 @@ function OverviewTab({
                   {isOpen && cluster.lesson && (
                     <div className="px-5 pb-4 pt-1 bg-primary/5 border-t border-gold/10">
                       <p className="text-gold/60 text-xs tracking-widest uppercase mb-2">
-                        How to apply this today
+                        {t("lesson.howToApply")}
                       </p>
                       <p className="text-dark/70 text-sm leading-relaxed">{cluster.lesson}</p>
                     </div>
@@ -148,17 +166,20 @@ function OverviewTab({
       {/* Categories */}
       {cats.length > 0 && (
         <div>
-          <p className="text-dark/40 text-xs tracking-widest uppercase mb-3">Themes</p>
+          <p className="text-dark/40 text-xs tracking-widest uppercase mb-3">{t("common.themes")}</p>
           <div className="flex flex-wrap gap-2">
-            {cats.map((cat) => (
-              <Link
-                key={cat.slug}
-                href={`/browse?category=${cat.slug}`}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium bg-gold/15 text-gold-dark hover:bg-gold/25 transition-colors border border-gold/30"
-              >
-                {cat.icon} {cat.label}
-              </Link>
-            ))}
+            {cats.map((raw) => {
+              const cat = localizeCategory(raw, locale);
+              return (
+                <Link
+                  key={cat.slug}
+                  href={`/browse?category=${cat.slug}`}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium bg-gold/15 text-gold-dark hover:bg-gold/25 transition-colors border border-gold/30"
+                >
+                  {cat.icon} {cat.label}
+                </Link>
+              );
+            })}
           </div>
         </div>
       )}
@@ -168,13 +189,13 @@ function OverviewTab({
         <div className="bg-cream-dark rounded-xl p-4 text-center border border-gold/15">
           <p className="text-2xl font-bold text-primary">{lesson.verses.length}</p>
           <p className="text-dark/50 text-xs mt-1">
-            {lesson.verses.length === 1 ? "Verse" : "Verses"}
+            {lesson.verses.length === 1 ? t("common.verse") : t("common.verses")}
           </p>
         </div>
         <div className="bg-cream-dark rounded-xl p-4 text-center border border-gold/15">
           <p className="text-2xl font-bold text-primary">{cats.length}</p>
           <p className="text-dark/50 text-xs mt-1">
-            {cats.length === 1 ? "Theme" : "Themes"}
+            {cats.length === 1 ? t("common.theme") : t("common.themes")}
           </p>
         </div>
       </div>
@@ -185,16 +206,18 @@ function OverviewTab({
 /* ── Verses ────────────────────────────────────────────────── */
 
 function VersesTab({ lesson }: { lesson: LessonGroup }) {
+  const { locale } = useLanguage();
+  const t = useT();
   const verseMap = new Map(lesson.verses.map((v) => [v.ayah, v]));
   const clusters = buildClusterList(
     lesson.surah,
     lesson.verses.map((v) => v.ayah)
-  );
+  ).map((c) => localizeCluster(c, locale));
 
   return (
     <div className="space-y-6">
       <p className="text-dark/40 text-xs tracking-widest uppercase">
-        {lesson.verses.length} {lesson.verses.length === 1 ? "verse" : "verses"} in {lesson.surahName}
+        {lesson.verses.length} {lesson.verses.length === 1 ? t("common.verse") : t("common.verses")} {t("common.in")} {lesson.surahName}
       </p>
 
       {clusters.map((cluster) => {
@@ -217,7 +240,7 @@ function VersesTab({ lesson }: { lesson: LessonGroup }) {
                 <span className="text-gold font-mono text-xs font-semibold">{rangeLabel}</span>
                 {isGroup && (
                   <span className="text-gold/50 text-xs bg-gold/10 px-2 py-0.5 rounded-full">
-                    connected
+                    {t("lesson.connected")}
                   </span>
                 )}
               </div>
@@ -225,7 +248,7 @@ function VersesTab({ lesson }: { lesson: LessonGroup }) {
                 href={`/verse/${lesson.surah}/${cluster.ayahs[0]}`}
                 className="text-xs text-primary/50 hover:text-primary transition-colors"
               >
-                Full page →
+                {t("lesson.fullPage")}
               </Link>
             </div>
 
@@ -254,13 +277,13 @@ function VersesTab({ lesson }: { lesson: LessonGroup }) {
             {/* Key takeaway + lesson */}
             {cluster.keyTakeaway && (
               <div className="px-5 py-4 border-t border-gold/15 bg-gold/5">
-                <p className="text-gold text-xs uppercase tracking-wider mb-1.5">Key Takeaway</p>
+                <p className="text-gold text-xs uppercase tracking-wider mb-1.5">{t("lesson.keyTakeaway")}</p>
                 <p className="text-primary text-sm font-medium leading-snug mb-3">
                   {cluster.keyTakeaway}
                 </p>
                 {cluster.lesson && (
                   <>
-                    <p className="text-gold/60 text-xs uppercase tracking-wider mb-1.5">Lesson</p>
+                    <p className="text-gold/60 text-xs uppercase tracking-wider mb-1.5">{t("lesson.lessonLabel")}</p>
                     <p className="text-dark/70 text-sm leading-relaxed">{cluster.lesson}</p>
                   </>
                 )}
@@ -276,11 +299,12 @@ function VersesTab({ lesson }: { lesson: LessonGroup }) {
 /* ── Tafseer ───────────────────────────────────────────────── */
 
 function TafseerTab({ verse }: { verse: Verse | null }) {
+  const t = useT();
   if (!verse) {
     return (
       <div className="text-center py-16">
         <p className="text-dark/30 text-4xl mb-4">📖</p>
-        <p className="text-dark/50 text-sm">No tafseer available for this surah.</p>
+        <p className="text-dark/50 text-sm">{t("lesson.noTafseer")}</p>
       </div>
     );
   }
@@ -306,6 +330,7 @@ function SurahTab({
   lesson: LessonGroup;
   surahVerses: Verse[];
 }) {
+  const t = useT();
   const lessonAyahs = new Set(lesson.verses.map((v) => v.ayah));
   const first = surahVerses[0];
   if (!first) return null;
@@ -320,17 +345,17 @@ function SurahTab({
         <p className="text-cream text-xl font-bold mb-1">{first.surahName}</p>
         <p className="text-cream/50 text-sm mb-4">{first.surahNameTranslation}</p>
         <div className="flex justify-center gap-6 text-xs text-cream/30">
-          <span>Surah {first.surah}</span>
+          <span>{t("lesson.surahWord")} {first.surah}</span>
           <span>·</span>
-          <span>{surahVerses.length} verses</span>
+          <span>{surahVerses.length} {t("common.verses")}</span>
           <span>·</span>
-          <span>Juz {first.juz}</span>
+          <span>{t("lesson.juzWord")} {first.juz}</span>
         </div>
       </div>
 
       {/* Verse list */}
       <div>
-        <p className="text-dark/40 text-xs tracking-widest uppercase mb-3">All verses</p>
+        <p className="text-dark/40 text-xs tracking-widest uppercase mb-3">{t("lesson.allVerses")}</p>
         <div className="space-y-0.5">
           {surahVerses.map((verse) => {
             const isInLesson = lessonAyahs.has(verse.ayah);

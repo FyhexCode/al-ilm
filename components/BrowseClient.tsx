@@ -5,6 +5,9 @@ import { useSearchParams } from "next/navigation";
 import LessonCard from "./LessonCard";
 import type { LessonGroup } from "@/lib/getLessons";
 import type { Category } from "@/lib/types";
+import { useLanguage } from "@/lib/i18n/useLanguage";
+import { useT } from "@/lib/i18n/useT";
+import { localizeCategory } from "@/lib/i18n/pick";
 
 interface BrowseClientProps {
   lessons: LessonGroup[];
@@ -12,9 +15,16 @@ interface BrowseClientProps {
 }
 
 export default function BrowseClient({ lessons, categories }: BrowseClientProps) {
+  const { locale } = useLanguage();
+  const t = useT();
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get("category") ?? "all";
   const [active, setActive] = useState(initialCategory);
+
+  const localizedCategories = useMemo(
+    () => categories.map((c) => localizeCategory(c, locale)),
+    [categories, locale]
+  );
 
   const filtered = useMemo(
     () =>
@@ -23,6 +33,9 @@ export default function BrowseClient({ lessons, categories }: BrowseClientProps)
         : lessons.filter((l) => l.categories.includes(active)),
     [lessons, active]
   );
+
+  const activeLabel = localizedCategories.find((c) => c.slug === active)?.label;
+  const lessonWord = filtered.length === 1 ? t("common.lesson") : t("common.lessons");
 
   return (
     <>
@@ -36,9 +49,9 @@ export default function BrowseClient({ lessons, categories }: BrowseClientProps)
               : "bg-cream-dark text-primary border border-gold/30 hover:border-gold hover:bg-gold/10"
           }`}
         >
-          All Lessons
+          {t("browse.allLessons")}
         </button>
-        {categories.map((cat) => (
+        {localizedCategories.map((cat) => (
           <button
             key={cat.slug}
             onClick={() => setActive(cat.slug)}
@@ -55,14 +68,13 @@ export default function BrowseClient({ lessons, categories }: BrowseClientProps)
 
       {/* Result count */}
       <p className="text-sm text-dark/50 mt-6 mb-4">
-        Showing <span className="font-semibold text-primary">{filtered.length}</span>{" "}
-        {filtered.length === 1 ? "lesson" : "lessons"}
-        {active !== "all" && (
+        {t("browse.showing")}{" "}
+        <span className="font-semibold text-primary">{filtered.length}</span>{" "}
+        {lessonWord}
+        {active !== "all" && activeLabel && (
           <>
-            {" "}in{" "}
-            <span className="font-semibold text-primary">
-              {categories.find((c) => c.slug === active)?.label}
-            </span>
+            {" "}{t("common.in")}{" "}
+            <span className="font-semibold text-primary">{activeLabel}</span>
           </>
         )}
       </p>

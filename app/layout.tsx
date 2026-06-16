@@ -3,6 +3,8 @@ import { Geist } from "next/font/google";
 import { Amiri, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { LanguageProvider } from "@/lib/i18n/LanguageProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,11 +36,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${amiri.variable} ${cormorant.variable} h-full`}>
       <body className="min-h-full flex flex-col bg-cream text-dark antialiased">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <footer className="bg-dark text-cream/60 text-center text-sm py-6">
-          <p>Al-Ilm &mdash; Illuminated by the words of the Quran</p>
-        </footer>
+        <LanguageProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );

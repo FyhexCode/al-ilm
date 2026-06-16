@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useT } from "@/lib/i18n/useT";
 
 interface TafseerSectionProps {
   tafseer: string;
@@ -19,6 +20,7 @@ export default function TafseerSection({
   verseCount,
   surahName,
 }: TafseerSectionProps) {
+  const t = useT();
   const [expanded, setExpanded] = useState(false);
 
   const groupLabel =
@@ -41,21 +43,21 @@ export default function TafseerSection({
       <div className="bg-primary px-5 py-4 flex items-start justify-between gap-3">
         <div>
           <div className="flex items-center gap-2 mb-0.5">
-            <h2 className="text-cream font-bold text-sm uppercase tracking-wider">Tafseer</h2>
+            <h2 className="text-cream font-bold text-sm uppercase tracking-wider">{t("tafseer.title")}</h2>
           </div>
           <p className="text-cream/50 text-xs">
-            Ibn Kathir (Abridged) · {groupLabel}
+            {t("tafseer.source")} · {groupLabel}
           </p>
         </div>
         {/* Attribution badge */}
-        <span className="text-gold/50 text-xs shrink-0 mt-0.5">English</span>
+        <span className="text-gold/50 text-xs shrink-0 mt-0.5">{t("tafseer.lang")}</span>
       </div>
 
       {/* About This Verse highlight */}
       {tafseerSummary && tafseerSummary.length >= 60 && (
         <div className="bg-gold/8 border-b border-gold/20 px-5 py-4">
           <p className="text-xs font-bold text-gold uppercase tracking-widest mb-2">
-            About This Verse
+            {t("tafseer.about")}
           </p>
           <p className="text-dark/85 text-sm leading-relaxed">{tafseerSummary}</p>
         </div>
@@ -77,7 +79,13 @@ export default function TafseerSection({
               onClick={() => setExpanded((v) => !v)}
               className="mt-3 text-sm text-primary hover:text-primary-light font-medium flex items-center gap-1.5 transition-colors"
             >
-              <span>{expanded ? "Show less ↑" : `Read full tafseer (${remainingParas.length} more section${remainingParas.length !== 1 ? "s" : ""}) ↓`}</span>
+              <span>
+                {expanded
+                  ? t("tafseer.showLess")
+                  : `${t("daily.readTafseer")} (${remainingParas.length} ${
+                      remainingParas.length !== 1 ? t("tafseer.sections") : t("tafseer.section")
+                    }) ↓`}
+              </span>
             </button>
           </>
         )}

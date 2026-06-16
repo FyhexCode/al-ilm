@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useT } from "@/lib/i18n/useT";
 
 export default function ShareButton({ surah, ayah }: { surah: number; ayah: number }) {
+  const t = useT();
   const [copied, setCopied] = useState(false);
 
   function handleCopy() {
@@ -19,7 +21,7 @@ export default function ShareButton({ surah, ayah }: { surah: number; ayah: numb
       className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-gold/40 text-sm text-gold hover:bg-gold/10 hover:border-gold transition-all duration-200"
     >
       {copied ? (
-        <>Link copied!</>
+        <>{t("share.copied")}</>
       ) : (
         <>
           <svg
@@ -36,7 +38,7 @@ export default function ShareButton({ surah, ayah }: { surah: number; ayah: numb
             <polyline points="16 6 12 2 8 6" />
             <line x1="12" y1="2" x2="12" y2="15" />
           </svg>
-          Share verse
+          {t("share.share")}
         </>
       )}
     </button>

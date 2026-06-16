@@ -1,8 +1,7 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { getLessons } from "@/lib/getLessons";
 import { getAllVerses } from "@/lib/getAllVerses";
-import LessonDetail from "@/components/LessonDetail";
+import LessonPageClient from "@/components/LessonPageClient";
 
 interface Props {
   params: Promise<{ surah: string; ayah: string }>;
@@ -50,50 +49,11 @@ export default async function LessonPage({ params }: Props) {
   const nextLesson = lessonIdx < lessons.length - 1 ? lessons[lessonIdx + 1] : null;
 
   return (
-    <div>
-      {/* Breadcrumb */}
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-8 pb-2">
-        <nav className="text-sm text-dark/40 flex items-center gap-2 flex-wrap">
-          <Link href="/" className="hover:text-primary transition-colors">Home</Link>
-          <span>/</span>
-          <Link href="/browse" className="hover:text-primary transition-colors">Browse</Link>
-          <span>/</span>
-          <span className="text-dark/70 truncate max-w-xs">{lesson.surahName}</span>
-        </nav>
-      </div>
-
-      <LessonDetail lesson={lesson} surahVerses={surahVerses} />
-
-      {/* Prev / Next navigation */}
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-12 mt-4">
-        <div className="grid grid-cols-2 gap-4">
-          {prevLesson ? (
-            <Link
-              href={`/lesson/${prevLesson.surah}/${prevLesson.firstAyah}`}
-              className="flex flex-col p-4 rounded-2xl border border-gold/20 hover:border-gold hover:bg-cream-dark transition-all"
-            >
-              <span className="text-xs text-dark/40 mb-1">← Previous</span>
-              <span className="text-sm font-semibold text-primary">{prevLesson.surahName}</span>
-              <span className="text-xs text-dark/40 mt-1">{prevLesson.surahNameTranslation}</span>
-            </Link>
-          ) : (
-            <div />
-          )}
-
-          {nextLesson ? (
-            <Link
-              href={`/lesson/${nextLesson.surah}/${nextLesson.firstAyah}`}
-              className="flex flex-col p-4 rounded-2xl border border-gold/20 hover:border-gold hover:bg-cream-dark transition-all text-right"
-            >
-              <span className="text-xs text-dark/40 mb-1">Next →</span>
-              <span className="text-sm font-semibold text-primary">{nextLesson.surahName}</span>
-              <span className="text-xs text-dark/40 mt-1">{nextLesson.surahNameTranslation}</span>
-            </Link>
-          ) : (
-            <div />
-          )}
-        </div>
-      </div>
-    </div>
+    <LessonPageClient
+      lesson={lesson}
+      surahVerses={surahVerses}
+      prevLesson={prevLesson}
+      nextLesson={nextLesson}
+    />
   );
 }

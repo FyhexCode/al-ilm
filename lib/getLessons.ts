@@ -6,8 +6,10 @@ export interface LessonGroup {
   surah: number;
   surahName: string;
   surahNameTranslation: string;
+  surahNameTranslationId?: string;
   surahNameAr: string;
   application: string | null;
+  applicationId?: string | null;
   categories: string[];
   firstAyah: number;
   lastAyah: number;
@@ -30,6 +32,7 @@ export function getLessons(): LessonGroup[] {
       }
       if (!group.application && verse.application) {
         group.application = verse.application;
+        group.applicationId = verse.applicationId ?? null;
       }
     } else {
       groupMap.set(key, {
@@ -37,8 +40,10 @@ export function getLessons(): LessonGroup[] {
         surah: verse.surah,
         surahName: verse.surahName,
         surahNameTranslation: verse.surahNameTranslation,
+        surahNameTranslationId: verse.surahNameTranslationId,
         surahNameAr: verse.surahNameAr,
         application: verse.application,
+        applicationId: verse.applicationId ?? null,
         categories: [...verse.categories],
         firstAyah: verse.ayah,
         lastAyah: verse.ayah,

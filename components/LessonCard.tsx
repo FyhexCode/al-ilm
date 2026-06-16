@@ -1,17 +1,29 @@
+"use client";
+
 import Link from "next/link";
 import type { LessonGroup } from "@/lib/getLessons";
 import { CATEGORIES } from "@/data/categories";
+import { useLanguage } from "@/lib/i18n/useLanguage";
+import { useT } from "@/lib/i18n/useT";
+import { localizeLesson, localizeCategory } from "@/lib/i18n/pick";
 
 interface LessonCardProps {
   lesson: LessonGroup;
 }
 
-export default function LessonCard({ lesson }: LessonCardProps) {
-  const cats = CATEGORIES.filter((c) => lesson.categories.includes(c.slug));
+export default function LessonCard({ lesson: rawLesson }: LessonCardProps) {
+  const { locale } = useLanguage();
+  const t = useT();
+  const lesson = localizeLesson(rawLesson, locale);
+
+  const cats = CATEGORIES.filter((c) => lesson.categories.includes(c.slug)).map((c) =>
+    localizeCategory(c, locale)
+  );
   const range =
     lesson.firstAyah === lesson.lastAyah
       ? `${lesson.surah}:${lesson.firstAyah}`
       : `${lesson.surah}:${lesson.firstAyah}–${lesson.lastAyah}`;
+  const verseWord = lesson.verses.length === 1 ? t("common.verse") : t("common.verses");
 
   return (
     <Link
@@ -38,7 +50,7 @@ export default function LessonCard({ lesson }: LessonCardProps) {
       {/* Range + verse count */}
       <div className="px-5 pb-4">
         <p className="text-gold/50 font-mono text-xs">
-          {range} · {lesson.verses.length} {lesson.verses.length === 1 ? "verse" : "verses"}
+          {range} · {lesson.verses.length} {verseWord}
         </p>
       </div>
 

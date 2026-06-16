@@ -3,6 +3,9 @@
 import Link from "next/link";
 import type { Verse, VerseCluster } from "@/lib/types";
 import ArabicText from "./ArabicText";
+import { useLanguage } from "@/lib/i18n/useLanguage";
+import { useT } from "@/lib/i18n/useT";
+import { localizeVerse, localizeCluster } from "@/lib/i18n/pick";
 
 interface Props {
   verse: Verse;
@@ -10,8 +13,15 @@ interface Props {
   cluster: VerseCluster | null;
 }
 
-export default function DailyLesson({ verse, clusterVerses, cluster }: Props) {
-  const today = new Date().toLocaleDateString("en-US", {
+export default function DailyLesson({ verse: rawVerse, clusterVerses: rawClusterVerses, cluster: rawCluster }: Props) {
+  const { locale } = useLanguage();
+  const t = useT();
+
+  const verse = localizeVerse(rawVerse, locale);
+  const clusterVerses = rawClusterVerses.map((v) => localizeVerse(v, locale));
+  const cluster = rawCluster ? localizeCluster(rawCluster, locale) : null;
+
+  const today = new Date().toLocaleDateString(locale === "id" ? "id-ID" : "en-US", {
     weekday: "long",
     year: "numeric",
     month: "long",
@@ -37,7 +47,7 @@ export default function DailyLesson({ verse, clusterVerses, cluster }: Props) {
           </div>
           <div className="flex flex-col items-center gap-2">
             <p className="text-gold text-xs tracking-[0.2em] uppercase font-medium text-center">
-              Lesson of the Day
+              {t("daily.ofTheDay")}
             </p>
             <p className="text-cream/40 text-xs tracking-[0.1em] uppercase text-center">
               {today}
@@ -96,7 +106,7 @@ export default function DailyLesson({ verse, clusterVerses, cluster }: Props) {
 
       <section className="bg-cream py-20 px-6 overflow-hidden">
         <div className="max-w-2xl mx-auto text-center">
-          <p className="text-dark/50 text-sm italic mb-6 font-[family-name:var(--font-display)]">— Translation —</p>
+          <p className="text-dark/50 text-sm italic mb-6 font-[family-name:var(--font-display)]">{t("daily.translationDivider")}</p>
           {clusterVerses.map((v, idx) => (
             <div key={v.ayah}>
               {clusterVerses.length > 1 && (
@@ -127,11 +137,10 @@ export default function DailyLesson({ verse, clusterVerses, cluster }: Props) {
       <section className="bg-primary-dark py-20 px-6 overflow-hidden">
         <div className="max-w-2xl mx-auto text-center">
           <p className="text-gold/60 text-xs tracking-widest uppercase mb-6">
-            How to apply this today
+            {t("daily.howToApply")}
           </p>
           <p className="text-cream/80 text-lg sm:text-xl leading-relaxed">
-            {cluster?.lesson ?? verse.application ??
-              "Reflect on this verse throughout your day and consider how its wisdom applies to your current circumstances."}
+            {cluster?.lesson ?? verse.application ?? t("daily.applicationFallback")}
           </p>
         </div>
       </section>
@@ -142,14 +151,14 @@ export default function DailyLesson({ verse, clusterVerses, cluster }: Props) {
             href={`/verse/${verse.surah}/${verse.ayah}`}
             className="px-6 py-3 bg-gold hover:bg-gold-light text-dark font-semibold rounded-full transition-colors text-center"
           >
-            Read Full Tafseer
+            {t("daily.readTafseer")}
           </Link>
           {verse.categories[0] && (
             <Link
               href={`/browse?category=${verse.categories[0]}`}
               className="px-6 py-3 border border-gold/40 text-gold hover:bg-gold/10 rounded-full transition-colors text-center"
             >
-              Browse Related
+              {t("daily.browseRelated")}
             </Link>
           )}
         </div>
