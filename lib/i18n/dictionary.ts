@@ -20,6 +20,7 @@ const en = {
 
   "daily.ofTheDay": "Lesson of the Day",
   "daily.translationDivider": "— Translation —",
+  "daily.theLesson": "The Lesson",
   "daily.howToApply": "How to apply this today",
   "daily.readTafseer": "Read Full Tafseer",
   "daily.browseRelated": "Browse Related",
@@ -94,6 +95,7 @@ const id: Record<DictKey, string> = {
 
   "daily.ofTheDay": "Pelajaran Hari Ini",
   "daily.translationDivider": "— Terjemahan —",
+  "daily.theLesson": "Pelajaran",
   "daily.howToApply": "Cara menerapkannya hari ini",
   "daily.readTafseer": "Baca Tafsir Lengkap",
   "daily.browseRelated": "Jelajahi Terkait",

@@ -28,6 +28,7 @@ export default function CategoryGrid() {
               href={`/browse?category=${cat.slug}`}
               className="group flex flex-col items-center text-center gap-3 p-5 rounded-2xl bg-cream border border-gold/20 hover:border-gold hover:shadow-md hover:shadow-gold/10 transition-all duration-200"
             >
+              {cat.icon && <span className="text-2xl" aria-hidden="true">{cat.icon}</span>}
               <span className="text-sm font-semibold text-primary">{cat.label}</span>
               <p className="text-xs text-dark/50 leading-relaxed hidden sm:block">
                 {cat.description}
@@ -41,6 +42,7 @@ export default function CategoryGrid() {
           href="/browse"
           className="group flex flex-col items-center text-center gap-3 p-5 rounded-2xl bg-primary hover:bg-primary-light border border-primary transition-all duration-200 hover:shadow-md"
         >
+          <span className="text-2xl" aria-hidden="true">📚</span>
           <span className="text-sm font-semibold text-cream">{t("categoryGrid.allVerses")}</span>
           <p className="text-xs text-cream/60 leading-relaxed hidden sm:block">
             {t("categoryGrid.allVersesDesc")}

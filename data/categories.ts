@@ -7,7 +7,7 @@ export const CATEGORIES: Category[] = [
     labelId: "Hari Kiamat",
     description: "Verses about Qiyamah, accountability, and the Hereafter",
     descriptionId: "Ayat-ayat tentang Kiamat, pertanggungjawaban, dan Akhirat",
-    icon: "",
+    icon: "⚖️",
   },
   {
     slug: "signs",
@@ -15,7 +15,7 @@ export const CATEGORIES: Category[] = [
     labelId: "Tanda-tanda Allah",
     description: "Verses reflecting on creation, nature, and the cosmos",
     descriptionId: "Ayat-ayat yang merenungkan penciptaan, alam, dan jagat raya",
-    icon: "",
+    icon: "🌙",
   },
   {
     slug: "guidance",
@@ -23,7 +23,7 @@ export const CATEGORIES: Category[] = [
     labelId: "Petunjuk & Kebajikan",
     description: "Verses that illuminate the straight path",
     descriptionId: "Ayat-ayat yang menerangi jalan yang lurus",
-    icon: "",
+    icon: "✨",
   },
   {
     slug: "purification",
@@ -31,7 +31,7 @@ export const CATEGORIES: Category[] = [
     labelId: "Penyucian & Shalat",
     description: "Verses on spiritual cleansing, salah, and tazkiyah",
     descriptionId: "Ayat-ayat tentang penyucian jiwa, shalat, dan tazkiyah",
-    icon: "",
+    icon: "🤲",
   },
   {
     slug: "gratitude",
@@ -39,7 +39,7 @@ export const CATEGORIES: Category[] = [
     labelId: "Syukur & Perenungan",
     description: "Verses on shukr, tafakkur, and divine blessings",
     descriptionId: "Ayat-ayat tentang syukur, tafakkur, dan nikmat ilahi",
-    icon: "",
+    icon: "🌿",
   },
   {
     slug: "faith",
@@ -47,7 +47,7 @@ export const CATEGORIES: Category[] = [
     labelId: "Iman & Keyakinan",
     description: "Verses affirming tawhid and the fundamentals of iman",
     descriptionId: "Ayat-ayat yang menegaskan tauhid dan dasar-dasar iman",
-    icon: "",
+    icon: "🌟",
   },
   {
     slug: "lessons",
@@ -55,6 +55,6 @@ export const CATEGORIES: Category[] = [
     labelId: "Kisah & Pelajaran",
     description: "Verses drawing wisdom from prophets and past nations",
     descriptionId: "Ayat-ayat yang menarik hikmah dari para nabi dan umat terdahulu",
-    icon: "",
+    icon: "📖",
   },
 ];
