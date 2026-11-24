@@ -41,7 +41,7 @@ export default function DailyLesson({ verse: rawVerse, clusterVerses: rawCluster
   return (
     <>
       {/* Hero */}
-      <section className="hero-pattern relative min-h-svh flex flex-col items-center justify-center px-6 text-center overflow-hidden">
+      <section className="hero-pattern relative min-h-[85svh] flex flex-col items-center justify-center px-6 text-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-dark/40 via-dark/60 to-dark pointer-events-none" />
 
         {/* Tazhib corner ornaments — reference illuminated Quran manuscript tradition */}
@@ -104,18 +104,18 @@ export default function DailyLesson({ verse: rawVerse, clusterVerses: rawCluster
       </div>
 
       {/* Detail sections */}
-      <section className="bg-primary-dark py-20 px-6 overflow-hidden">
+      <section className="bg-primary-dark py-12 sm:py-16 px-6 overflow-hidden">
         <div className="max-w-2xl mx-auto text-center">
           <p className="text-cream text-2xl sm:text-3xl font-semibold mb-1 font-[family-name:var(--font-display)]">{verse.surahName}</p>
           <p className="text-cream/50 text-sm mb-4">{verse.surahNameTranslation}</p>
           <p className="text-gold font-mono text-sm tracking-wider mb-6">
             {verse.surah}:{verse.ayah}
           </p>
-          <p className="text-gold/60 text-2xl font-[family-name:var(--font-amiri)] mb-16">
+          <p className="text-gold/60 text-2xl font-[family-name:var(--font-amiri)] mb-10">
             {verse.surahNameAr}
           </p>
 
-          <div className="h-px bg-gold/10 mb-16" />
+          <div className="h-px bg-gold/10 mb-10" />
 
           <div className="space-y-10">
             {clusterVerses.map((v, idx) => (
@@ -135,9 +135,9 @@ export default function DailyLesson({ verse: rawVerse, clusterVerses: rawCluster
         </div>
       </section>
 
-      <div className="h-24 bg-gradient-to-b from-dark to-cream" aria-hidden="true" />
+      <div className="h-14 bg-gradient-to-b from-dark to-cream" aria-hidden="true" />
 
-      <section className="bg-cream py-20 px-6 overflow-hidden">
+      <section className="bg-cream py-12 sm:py-16 px-6 overflow-hidden">
         <div className="max-w-2xl mx-auto text-center">
           <p className="text-dark/50 text-sm italic mb-2 font-[family-name:var(--font-display)]">{t("daily.translationDivider")}</p>
           <p className="text-8xl text-gold/20 font-[family-name:var(--font-display)] leading-none mb-2 select-none text-left" aria-hidden="true">&ldquo;</p>
@@ -167,9 +167,9 @@ export default function DailyLesson({ verse: rawVerse, clusterVerses: rawCluster
         </div>
       </section>
 
-      <div className="h-24 bg-gradient-to-b from-cream to-primary-dark" aria-hidden="true" />
+      <div className="h-14 bg-gradient-to-b from-cream to-primary-dark" aria-hidden="true" />
 
-      <section className="bg-primary-dark py-20 px-6 overflow-hidden">
+      <section className="bg-primary-dark py-12 sm:py-16 px-6 overflow-hidden">
         <div className="max-w-2xl mx-auto text-center">
           <p className="text-gold/50 text-sm italic mb-6 font-[family-name:var(--font-display)]">
             {t("daily.theLesson")}
@@ -180,7 +180,7 @@ export default function DailyLesson({ verse: rawVerse, clusterVerses: rawCluster
         </div>
       </section>
 
-      <section className="bg-dark py-20 px-6 overflow-hidden">
+      <section className="bg-dark py-12 sm:py-16 px-6 overflow-hidden">
         <div className="max-w-xl mx-auto">
           <p className="text-gold/50 text-sm italic mb-6 font-[family-name:var(--font-display)] text-center">
             {t("daily.howToApply")}
@@ -193,7 +193,7 @@ export default function DailyLesson({ verse: rawVerse, clusterVerses: rawCluster
         </div>
       </section>
 
-      <section className="bg-dark py-20 px-6 overflow-hidden">
+      <section className="bg-dark py-12 sm:py-16 px-6 overflow-hidden">
         <div className="max-w-2xl mx-auto flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href={`/verse/${verse.surah}/${verse.ayah}`}
