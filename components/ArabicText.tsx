@@ -7,11 +7,12 @@ interface ArabicTextProps {
   align?: "right" | "center";
 }
 
+// Sizes live in globals.css so the reader's Arabic-size preference (--arabic-scale) can scale them.
 const sizeClasses = {
-  sm: "text-xl sm:text-2xl leading-9 sm:leading-10",
-  md: "text-2xl sm:text-3xl leading-[2.5rem] sm:leading-[3rem]",
-  lg: "text-3xl sm:text-4xl leading-[3rem] sm:leading-[3.5rem]",
-  xl: "text-3xl sm:text-4xl md:text-5xl leading-[3rem] sm:leading-[3.5rem] md:leading-[4.5rem]",
+  sm: "arabic-sm",
+  md: "arabic-md",
+  lg: "arabic-lg",
+  xl: "arabic-xl",
 };
 
 export default function ArabicText({ text, className, size = "md", align = "right" }: ArabicTextProps) {

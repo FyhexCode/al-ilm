@@ -125,7 +125,7 @@ export default function DailyLesson({ verse: rawVerse, clusterVerses: rawCluster
                 )}
                 <ArabicText text={v.arabic} size="xl" align="center" className="text-cream mb-8" />
                 <div className="h-px bg-gold/20 mb-6" />
-                <p className="text-cream/50 text-sm italic leading-relaxed">{v.transliteration}</p>
+                <p className="translit text-cream/50 text-sm italic leading-relaxed">{v.transliteration}</p>
                 {idx < clusterVerses.length - 1 && (
                   <div className="mt-10 h-px bg-gold/10" />
                 )}

@@ -309,7 +309,7 @@ function VersesTab({ lesson }: { lesson: LessonGroup }) {
                 <div className="px-5 py-4 bg-dark/3">
                   <ArabicText text={verse.arabic} size="md" align="right" className="text-dark/90" />
                 </div>
-                <div className="px-5 pt-2 pb-1">
+                <div className="translit px-5 pt-2 pb-1">
                   <p className="text-xs italic text-primary/50 text-right">{verse.transliteration}</p>
                 </div>
                 <div className={`px-5 pb-4 pt-2 ${idx < clusterVerses.length - 1 ? "border-b border-gold/10" : ""}`}>

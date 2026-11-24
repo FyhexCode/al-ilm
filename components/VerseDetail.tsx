@@ -74,7 +74,7 @@ export default function VerseDetail({ verse: rawVerse, prev, next }: Props) {
             <div className="flex-1 h-px bg-gold/30" />
           </div>
 
-          <p className="text-gold-light/80 italic text-base mb-6 text-center">
+          <p className="translit text-gold-light/80 italic text-base mb-6 text-center">
             {verse.transliteration}
           </p>
 

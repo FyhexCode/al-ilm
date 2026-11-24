@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import LanguageSwitcher from "./LanguageSwitcher";
+import ReadingControls from "./ReadingControls";
 import { useT } from "@/lib/i18n/useT";
 
 export default function Navbar() {
@@ -9,11 +10,11 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 bg-dark/95 backdrop-blur-sm border-b border-gold/20">
-      <nav className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+      <nav className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5 group">
+        <Link href="/" className="flex items-center gap-2.5 group shrink-0">
           <div>
-            <span className="font-bold text-cream text-lg leading-none block">Al-Ilm</span>
+            <span className="font-bold text-cream text-lg leading-none block whitespace-nowrap">Al-Ilm</span>
             <span className="text-gold/60 text-[10px] tracking-widest uppercase leading-none block">
               العِلم
             </span>
@@ -23,6 +24,7 @@ export default function Navbar() {
         {/* Nav links */}
         <div className="flex items-center gap-1">
           <LanguageSwitcher />
+          <ReadingControls />
           {/* Hidden on mobile — logo already links home */}
           <Link
             href="/"

@@ -13,6 +13,10 @@ const en = {
   "nav.saved": "Saved",
   "nav.random": "Random verse",
 
+  "reading.title": "Reading settings",
+  "reading.arabicSize": "Arabic size",
+  "reading.transliteration": "Show transliteration",
+
   "saved.title": "Saved verses",
   "saved.empty": "No saved verses yet. Tap Save on any verse to keep it here.",
   "saved.save": "Save",
@@ -111,6 +115,10 @@ const id: Record<DictKey, string> = {
   "nav.search": "Cari",
   "nav.saved": "Tersimpan",
   "nav.random": "Ayat acak",
+
+  "reading.title": "Pengaturan bacaan",
+  "reading.arabicSize": "Ukuran teks Arab",
+  "reading.transliteration": "Tampilkan transliterasi",
 
   "saved.title": "Ayat tersimpan",
   "saved.empty": "Belum ada ayat tersimpan. Ketuk Simpan pada ayat mana pun untuk menyimpannya di sini.",

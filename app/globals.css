@@ -62,3 +62,21 @@ html {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* Arabic text sizes — scaled by the reader's preference (set on <html> by ReadingControls). */
+.arabic-sm { font-size: calc(1.25rem * var(--arabic-scale, 1)); line-height: calc(2.25rem * var(--arabic-scale, 1)); }
+.arabic-md { font-size: calc(1.5rem * var(--arabic-scale, 1)); line-height: calc(2.5rem * var(--arabic-scale, 1)); }
+.arabic-lg { font-size: calc(1.875rem * var(--arabic-scale, 1)); line-height: calc(3rem * var(--arabic-scale, 1)); }
+.arabic-xl { font-size: calc(1.875rem * var(--arabic-scale, 1)); line-height: calc(3rem * var(--arabic-scale, 1)); }
+@media (min-width: 40rem) {
+  .arabic-sm { font-size: calc(1.5rem * var(--arabic-scale, 1)); line-height: calc(2.5rem * var(--arabic-scale, 1)); }
+  .arabic-md { font-size: calc(1.875rem * var(--arabic-scale, 1)); line-height: calc(3rem * var(--arabic-scale, 1)); }
+  .arabic-lg { font-size: calc(2.25rem * var(--arabic-scale, 1)); line-height: calc(3.5rem * var(--arabic-scale, 1)); }
+  .arabic-xl { font-size: calc(2.25rem * var(--arabic-scale, 1)); line-height: calc(3.5rem * var(--arabic-scale, 1)); }
+}
+@media (min-width: 48rem) {
+  .arabic-xl { font-size: calc(3rem * var(--arabic-scale, 1)); line-height: calc(4.5rem * var(--arabic-scale, 1)); }
+}
+
+/* Transliteration toggle */
+html[data-translit="off"] .translit { display: none; }
