@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { useSearchParams } from "next/navigation";
+import { useMemo } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import LessonCard from "./LessonCard";
 import type { LessonGroup } from "@/lib/getLessons";
 import type { Category } from "@/lib/types";
@@ -17,9 +17,17 @@ interface BrowseClientProps {
 export default function BrowseClient({ lessons, categories }: BrowseClientProps) {
   const { locale } = useLanguage();
   const t = useT();
+  const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
-  const initialCategory = searchParams.get("category") ?? "all";
-  const [active, setActive] = useState(initialCategory);
+  // URL is the source of truth so filters are shareable and survive back/refresh.
+  const requested = searchParams.get("category");
+  const active =
+    requested && categories.some((c) => c.slug === requested) ? requested : "all";
+
+  function setActive(slug: string) {
+    router.replace(slug === "all" ? pathname : `${pathname}?category=${slug}`, { scroll: false });
+  }
 
   const localizedCategories = useMemo(
     () => categories.map((c) => localizeCategory(c, locale)),

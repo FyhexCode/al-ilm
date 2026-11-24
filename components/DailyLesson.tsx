@@ -5,15 +5,18 @@ import type { Verse, VerseCluster } from "@/lib/types";
 import ArabicText from "./ArabicText";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import { useT } from "@/lib/i18n/useT";
-import { localizeVerse, localizeCluster } from "@/lib/i18n/pick";
+import { localizeVerse, localizeCluster, localizeCategory } from "@/lib/i18n/pick";
+import { CATEGORIES } from "@/data/categories";
 
 interface Props {
   verse: Verse;
   clusterVerses: Verse[];
   cluster: VerseCluster | null;
+  /** YYYY-MM-DD (UTC) the verse was picked for — keeps date label and verse in sync. */
+  dateISO: string;
 }
 
-export default function DailyLesson({ verse: rawVerse, clusterVerses: rawClusterVerses, cluster: rawCluster }: Props) {
+export default function DailyLesson({ verse: rawVerse, clusterVerses: rawClusterVerses, cluster: rawCluster, dateISO }: Props) {
   const { locale } = useLanguage();
   const t = useT();
 
@@ -21,7 +24,12 @@ export default function DailyLesson({ verse: rawVerse, clusterVerses: rawCluster
   const clusterVerses = rawClusterVerses.map((v) => localizeVerse(v, locale));
   const cluster = rawCluster ? localizeCluster(rawCluster, locale) : null;
 
-  const today = new Date().toLocaleDateString(locale === "id" ? "id-ID" : "en-US", {
+  const verseCategories = CATEGORIES.filter((c) => verse.categories.includes(c.slug)).map((c) =>
+    localizeCategory(c, locale)
+  );
+
+  const today = new Date(`${dateISO}T00:00:00Z`).toLocaleDateString(locale === "id" ? "id-ID" : "en-US", {
+    timeZone: "UTC",
     weekday: "long",
     year: "numeric",
     month: "long",
@@ -143,15 +151,16 @@ export default function DailyLesson({ verse: rawVerse, clusterVerses: rawCluster
               </blockquote>
             </div>
           ))}
-          {verse.categories.length > 0 && (
+          {verseCategories.length > 0 && (
             <div className="flex flex-wrap gap-2 justify-center">
-              {verse.categories.map((cat) => (
-                <span
-                  key={cat}
-                  className="px-3 py-1 rounded-full border border-dark/20 text-dark/60 text-xs uppercase tracking-wider"
+              {verseCategories.map((cat) => (
+                <Link
+                  key={cat.slug}
+                  href={`/browse?category=${cat.slug}`}
+                  className="px-3 py-1 rounded-full border border-dark/20 text-dark/60 hover:border-gold hover:text-primary text-xs uppercase tracking-wider transition-colors"
                 >
-                  {cat}
-                </span>
+                  {cat.label}
+                </Link>
               ))}
             </div>
           )}

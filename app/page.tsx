@@ -2,12 +2,16 @@ import DailyLesson from "@/components/DailyLesson";
 import CategoryGrid from "@/components/CategoryGrid";
 import JuzCountNote from "@/components/JuzCountNote";
 import { getAllVerses } from "@/lib/getAllVerses";
-import { getDailyVerse } from "@/lib/getDailyVerse";
+import { getDailyVerse, getTodayISO } from "@/lib/getDailyVerse";
 import { getClusterForVerse } from "@/lib/getVerseClusters";
+
+// Regenerate hourly so "Verse of the Day" rolls over instead of freezing at build time.
+export const revalidate = 3600;
 
 export default function Home() {
   const verses = getAllVerses();
-  const dailyVerse = getDailyVerse(verses);
+  const dateISO = getTodayISO();
+  const dailyVerse = getDailyVerse(verses, dateISO);
   const cluster = getClusterForVerse(dailyVerse.surah, dailyVerse.ayah);
   const clusterVerses = cluster
     ? (cluster.ayahs
@@ -17,7 +21,7 @@ export default function Home() {
 
   return (
     <>
-      <DailyLesson verse={dailyVerse} clusterVerses={clusterVerses} cluster={cluster ?? null} />
+      <DailyLesson verse={dailyVerse} clusterVerses={clusterVerses} cluster={cluster ?? null} dateISO={dateISO} />
       <CategoryGrid />
 
       <JuzCountNote count={verses.length} />
