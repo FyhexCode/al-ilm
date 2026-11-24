@@ -5,6 +5,7 @@ import type { LessonGroup } from "@/lib/getLessons";
 import { CATEGORIES } from "@/data/categories";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import { useT } from "@/lib/i18n/useT";
+import { useProgress } from "@/lib/progress";
 import { localizeLesson, localizeCategory } from "@/lib/i18n/pick";
 
 interface LessonCardProps {
@@ -14,7 +15,9 @@ interface LessonCardProps {
 export default function LessonCard({ lesson: rawLesson }: LessonCardProps) {
   const { locale } = useLanguage();
   const t = useT();
+  const { isRead } = useProgress();
   const lesson = localizeLesson(rawLesson, locale);
+  const done = isRead(lesson.surah);
 
   const cats = CATEGORIES.filter((c) => lesson.categories.includes(c.slug)).map((c) =>
     localizeCategory(c, locale)
@@ -57,6 +60,7 @@ export default function LessonCard({ lesson: rawLesson }: LessonCardProps) {
       <div className="px-5 pb-4">
         <p className="text-gold/50 font-mono text-xs">
           {range} · {lesson.verses.length} {verseWord}
+          {done && <span className="ml-2 text-gold-light font-sans font-semibold">✓ {t("progress.read")}</span>}
         </p>
       </div>
 

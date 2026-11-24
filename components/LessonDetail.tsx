@@ -6,6 +6,7 @@ import type { LessonGroup } from "@/lib/getLessons";
 import type { Verse } from "@/lib/types";
 import ArabicText from "./ArabicText";
 import TafseerSection from "./TafseerSection";
+import MarkReadButton from "./MarkReadButton";
 import { CATEGORIES } from "@/data/categories";
 import { buildClusterList } from "@/lib/getVerseClusters";
 import { useLanguage } from "@/lib/i18n/useLanguage";
@@ -230,21 +231,8 @@ function OverviewTab({
         </div>
       )}
 
-      {/* Quick stats */}
-      <div className="grid grid-cols-2 gap-4">
-        <div className="bg-cream-dark rounded-xl p-4 text-center border border-gold/15">
-          <p className="text-2xl font-bold text-primary">{lesson.verses.length}</p>
-          <p className="text-dark/50 text-xs mt-1">
-            {lesson.verses.length === 1 ? t("common.verse") : t("common.verses")}
-          </p>
-        </div>
-        <div className="bg-cream-dark rounded-xl p-4 text-center border border-gold/15">
-          <p className="text-2xl font-bold text-primary">{cats.length}</p>
-          <p className="text-dark/50 text-xs mt-1">
-            {cats.length === 1 ? t("common.theme") : t("common.themes")}
-          </p>
-        </div>
-      </div>
+      {/* Progress — replaces the old verse/theme count tiles */}
+      <MarkReadButton surah={lesson.surah} />
     </div>
   );
 }

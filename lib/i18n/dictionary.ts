@@ -13,6 +13,12 @@ const en = {
   "nav.saved": "Saved",
   "nav.random": "Random verse",
 
+  "progress.markRead": "Mark this surah as read",
+  "progress.markedRead": "Read — tap to undo",
+  "progress.summary": "{read} of {total} surahs read",
+  "progress.streak": "{count}-day streak",
+  "progress.read": "Read",
+
   "reading.title": "Reading settings",
   "reading.arabicSize": "Arabic size",
   "reading.transliteration": "Show transliteration",
@@ -115,6 +121,12 @@ const id: Record<DictKey, string> = {
   "nav.search": "Cari",
   "nav.saved": "Tersimpan",
   "nav.random": "Ayat acak",
+
+  "progress.markRead": "Tandai surah ini sudah dibaca",
+  "progress.markedRead": "Sudah dibaca — ketuk untuk batal",
+  "progress.summary": "{read} dari {total} surah dibaca",
+  "progress.streak": "Beruntun {count} hari",
+  "progress.read": "Dibaca",
 
   "reading.title": "Pengaturan bacaan",
   "reading.arabicSize": "Ukuran teks Arab",

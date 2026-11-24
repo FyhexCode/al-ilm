@@ -4,6 +4,7 @@ import { Amiri, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import VisitTracker from "@/components/VisitTracker";
 import { LanguageProvider } from "@/lib/i18n/LanguageProvider";
 
 const geistSans = Geist({
@@ -37,6 +38,7 @@ export default function RootLayout({
     <html lang="en" className={`${geistSans.variable} ${amiri.variable} ${cormorant.variable} h-full`}>
       <body className="min-h-full flex flex-col bg-cream text-dark antialiased">
         <LanguageProvider>
+          <VisitTracker />
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
