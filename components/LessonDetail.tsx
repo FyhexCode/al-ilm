@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import type { LessonGroup } from "@/lib/getLessons";
 import type { Verse } from "@/lib/types";
@@ -26,10 +26,52 @@ const TAB_KEYS = {
   Surah: "tab.surah",
 } as const;
 
+// The active tab lives in the URL hash (#verses) so refresh/share keeps it.
+const hashListeners = new Set<() => void>();
+
+function subscribeHash(onChange: () => void) {
+  hashListeners.add(onChange);
+  window.addEventListener("hashchange", onChange);
+  return () => {
+    hashListeners.delete(onChange);
+    window.removeEventListener("hashchange", onChange);
+  };
+}
+
+function readHashTab(): Tab {
+  const hash = window.location.hash.slice(1).toLowerCase();
+  return TABS.find((tab) => tab.toLowerCase() === hash) ?? "Overview";
+}
+
+function useHashTab(): [Tab, (tab: Tab) => void] {
+  const tab = useSyncExternalStore(subscribeHash, readHashTab, () => "Overview" as Tab);
+  const setTab = useCallback((next: Tab) => {
+    window.history.replaceState(null, "", next === "Overview" ? window.location.pathname : `#${next.toLowerCase()}`);
+    hashListeners.forEach((l) => l());
+  }, []);
+  return [tab, setTab];
+}
+
 export default function LessonDetail({ lesson: rawLesson, surahVerses: rawSurahVerses }: Props) {
   const { locale } = useLanguage();
   const t = useT();
-  const [tab, setTab] = useState<Tab>("Overview");
+  const [tab, setTab] = useHashTab();
+  const tabRefs = useRef<Partial<Record<Tab, HTMLButtonElement | null>>>({});
+
+  // WAI-ARIA tabs: arrow keys / Home / End move between tabs.
+  function onTabKeyDown(e: React.KeyboardEvent) {
+    const i = TABS.indexOf(tab);
+    const next =
+      e.key === "ArrowRight" ? TABS[(i + 1) % TABS.length]
+      : e.key === "ArrowLeft" ? TABS[(i - 1 + TABS.length) % TABS.length]
+      : e.key === "Home" ? TABS[0]
+      : e.key === "End" ? TABS[TABS.length - 1]
+      : null;
+    if (!next) return;
+    e.preventDefault();
+    setTab(next);
+    tabRefs.current[next]?.focus();
+  }
 
   const lesson = localizeLesson(rawLesson, locale);
   const surahVerses = rawSurahVerses.map((v) => localizeVerse(v, locale));
@@ -41,12 +83,16 @@ export default function LessonDetail({ lesson: rawLesson, surahVerses: rawSurahV
     <div>
       {/* Sticky tab bar */}
       <div className="sticky top-16 z-20 bg-cream border-b border-gold/20">
-        <div className="max-w-3xl mx-auto px-4 flex gap-0" role="tablist">
+        <div className="max-w-3xl mx-auto px-4 flex gap-0" role="tablist" onKeyDown={onTabKeyDown}>
           {TABS.map((tabId) => (
             <button
               key={tabId}
+              ref={(el) => {
+                tabRefs.current[tabId] = el;
+              }}
               role="tab"
               aria-selected={tab === tabId}
+              tabIndex={tab === tabId ? 0 : -1}
               onClick={() => setTab(tabId)}
               className={`px-5 py-3 text-sm font-medium transition-colors border-b-2 -mb-px cursor-pointer ${
                 tab === tabId
