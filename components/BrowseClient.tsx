@@ -14,6 +14,23 @@ interface BrowseClientProps {
   categories: Category[];
 }
 
+const SORT_KEYS = ["order", "reverse", "longest", "shortest"] as const;
+type SortKey = (typeof SORT_KEYS)[number];
+
+const SORT_LABELS = {
+  order: "browse.sort.order",
+  reverse: "browse.sort.reverse",
+  longest: "browse.sort.longest",
+  shortest: "browse.sort.shortest",
+} as const;
+
+const SORTERS: Record<SortKey, (a: LessonGroup, b: LessonGroup) => number> = {
+  order: (a, b) => a.surah - b.surah,
+  reverse: (a, b) => b.surah - a.surah,
+  longest: (a, b) => b.verses.length - a.verses.length || a.surah - b.surah,
+  shortest: (a, b) => a.verses.length - b.verses.length || a.surah - b.surah,
+};
+
 export default function BrowseClient({ lessons, categories }: BrowseClientProps) {
   const { locale } = useLanguage();
   const t = useT();
@@ -25,22 +42,27 @@ export default function BrowseClient({ lessons, categories }: BrowseClientProps)
   const active =
     requested && categories.some((c) => c.slug === requested) ? requested : "all";
 
-  function setActive(slug: string) {
-    router.replace(slug === "all" ? pathname : `${pathname}?category=${slug}`, { scroll: false });
+  const requestedSort = searchParams.get("sort");
+  const sort: SortKey = SORT_KEYS.find((k) => k === requestedSort) ?? "order";
+
+  function navigate(category: string, nextSort: SortKey) {
+    const params = new URLSearchParams();
+    if (category !== "all") params.set("category", category);
+    if (nextSort !== "order") params.set("sort", nextSort);
+    const qs = params.toString();
+    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
   }
+  const setActive = (slug: string) => navigate(slug, sort);
 
   const localizedCategories = useMemo(
     () => categories.map((c) => localizeCategory(c, locale)),
     [categories, locale]
   );
 
-  const filtered = useMemo(
-    () =>
-      active === "all"
-        ? lessons
-        : lessons.filter((l) => l.categories.includes(active)),
-    [lessons, active]
-  );
+  const filtered = useMemo(() => {
+    const list = active === "all" ? lessons : lessons.filter((l) => l.categories.includes(active));
+    return [...list].sort(SORTERS[sort]);
+  }, [lessons, active, sort]);
 
   const activeLabel = localizedCategories.find((c) => c.slug === active)?.label;
   const lessonWord = filtered.length === 1 ? t("common.lesson") : t("common.lessons");
@@ -74,8 +96,9 @@ export default function BrowseClient({ lessons, categories }: BrowseClientProps)
         ))}
       </div>
 
-      {/* Result count */}
-      <p className="text-sm text-dark/50 mt-6 mb-4">
+      {/* Result count + sort */}
+      <div className="flex flex-wrap items-center justify-between gap-3 mt-6 mb-4">
+      <p className="text-sm text-dark/50">
         {t("browse.showing")}{" "}
         <span className="font-semibold text-primary">{filtered.length}</span>{" "}
         {lessonWord}
@@ -86,6 +109,25 @@ export default function BrowseClient({ lessons, categories }: BrowseClientProps)
           </>
         )}
       </p>
+        <label className="flex items-center gap-2 text-sm text-dark/50">
+          {t("browse.sortBy")}
+          <select
+            value={sort}
+            onChange={(e) => navigate(active, e.target.value as SortKey)}
+            className="rounded-full border border-gold/30 bg-cream-dark text-primary px-3 py-1.5 text-sm cursor-pointer focus:outline-none focus:border-gold"
+          >
+            {SORT_KEYS.map((key) => (
+              <option key={key} value={key}>
+                {t(SORT_LABELS[key])}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      {filtered.length === 0 && (
+        <p className="text-center text-dark/50 text-sm py-12">{t("browse.empty")}</p>
+      )}
 
       {/* Lesson grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

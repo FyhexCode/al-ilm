@@ -11,6 +11,7 @@ const en = {
   "nav.next": "Next",
   "nav.search": "Search",
   "nav.saved": "Saved",
+  "nav.random": "Random verse",
 
   "saved.title": "Saved verses",
   "saved.empty": "No saved verses yet. Tap Save on any verse to keep it here.",
@@ -56,6 +57,12 @@ const en = {
   "browse.loading": "Loading...",
   "browse.allLessons": "All Lessons",
   "browse.showing": "Showing",
+  "browse.sortBy": "Sort by",
+  "browse.sort.order": "Mushaf order (78 → 114)",
+  "browse.sort.reverse": "Short surahs first (114 → 78)",
+  "browse.sort.longest": "Most verses",
+  "browse.sort.shortest": "Fewest verses",
+  "browse.empty": "No lessons match this filter.",
 
   "tab.overview": "Overview",
   "tab.verses": "Verses",
@@ -103,6 +110,7 @@ const id: Record<DictKey, string> = {
   "nav.next": "Berikutnya",
   "nav.search": "Cari",
   "nav.saved": "Tersimpan",
+  "nav.random": "Ayat acak",
 
   "saved.title": "Ayat tersimpan",
   "saved.empty": "Belum ada ayat tersimpan. Ketuk Simpan pada ayat mana pun untuk menyimpannya di sini.",
@@ -148,6 +156,12 @@ const id: Record<DictKey, string> = {
   "browse.loading": "Memuat...",
   "browse.allLessons": "Semua Pelajaran",
   "browse.showing": "Menampilkan",
+  "browse.sortBy": "Urutkan",
+  "browse.sort.order": "Urutan mushaf (78 → 114)",
+  "browse.sort.reverse": "Surah pendek dulu (114 → 78)",
+  "browse.sort.longest": "Ayat terbanyak",
+  "browse.sort.shortest": "Ayat tersedikit",
+  "browse.empty": "Tidak ada pelajaran yang cocok dengan filter ini.",
 
   "tab.overview": "Ikhtisar",
   "tab.verses": "Ayat",
