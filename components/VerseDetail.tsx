@@ -8,7 +8,8 @@ import type { Verse } from "@/lib/types";
 import { CATEGORIES } from "@/data/categories";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import { useT } from "@/lib/i18n/useT";
-import { localizeVerse, localizeCategory } from "@/lib/i18n/pick";
+import { localizeVerse, localizeCategory, localizeCluster } from "@/lib/i18n/pick";
+import { getClusterForVerse } from "@/lib/getVerseClusters";
 
 interface Props {
   verse: Verse;
@@ -20,6 +21,10 @@ export default function VerseDetail({ verse: rawVerse, prev, next }: Props) {
   const { locale } = useLanguage();
   const t = useT();
   const verse = localizeVerse(rawVerse, locale);
+
+  const rawCluster = getClusterForVerse(rawVerse.surah, rawVerse.ayah);
+  const cluster = rawCluster ? localizeCluster(rawCluster, locale) : null;
+  const hasLesson = Boolean(cluster?.keyTakeaway || cluster?.lesson);
 
   const verseCategories = CATEGORIES.filter((c) => verse.categories.includes(c.slug)).map((c) =>
     localizeCategory(c, locale)
@@ -93,6 +98,25 @@ export default function VerseDetail({ verse: rawVerse, prev, next }: Props) {
         </div>
       )}
 
+      {/* Lesson for this verse (cluster takeaway + how to apply) */}
+      {hasLesson && cluster && (
+        <section className="mb-8 rounded-2xl border border-gold/30 bg-gold/5 px-5 py-5">
+          <p className="text-gold text-xs uppercase tracking-widest mb-2">{t("verse.lessonHeading")}</p>
+          {cluster.keyTakeaway && (
+            <p className="text-primary font-semibold leading-snug mb-3">{cluster.keyTakeaway}</p>
+          )}
+          {cluster.lesson && (
+            <p className="text-dark/70 text-sm leading-relaxed">{cluster.lesson}</p>
+          )}
+          <Link
+            href={`/lesson/${verse.surah}/${firstAyahOfSurah(verse.tafseerGroup)}`}
+            className="inline-block mt-4 text-sm text-primary hover:text-primary-light font-medium transition-colors"
+          >
+            {t("verse.viewLesson", { surah: verse.surahName })}
+          </Link>
+        </section>
+      )}
+
       {/* Share */}
       <ShareButton surah={verse.surah} ayah={verse.ayah} />
 
@@ -124,6 +148,11 @@ export default function VerseDetail({ verse: rawVerse, prev, next }: Props) {
       </div>
     </div>
   );
+}
+
+// tafseerGroup is "<surah>:<firstAyah>" — the lesson page is keyed by that first ayah.
+function firstAyahOfSurah(tafseerGroup: string): number {
+  return Number(tafseerGroup.split(":")[1]);
 }
 
 function PrevNextLink({

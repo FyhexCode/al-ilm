@@ -9,6 +9,13 @@ const en = {
   "nav.browse": "Browse",
   "nav.prev": "Previous",
   "nav.next": "Next",
+  "nav.search": "Search",
+
+  "search.title": "Search verses",
+  "search.placeholder": "Search by meaning, Arabic, transliteration or lesson…",
+  "search.hint": "Type at least 2 characters. Try \"patience\", \"judgment\" or \"الله\".",
+  "search.noResults": "No verses found for \"{query}\".",
+  "search.count": "{count} results",
 
   "common.verse": "verse",
   "common.verses": "verses",
@@ -72,6 +79,8 @@ const en = {
   "share.copied": "Link copied!",
 
   "verse.ayahWord": "Ayah",
+  "verse.lessonHeading": "The lesson in this verse",
+  "verse.viewLesson": "View full lesson in {surah} →",
 
   "footer.tagline": "Al-Ilm — Illuminated by the words of the Quran",
 };
@@ -84,6 +93,13 @@ const id: Record<DictKey, string> = {
   "nav.browse": "Jelajahi",
   "nav.prev": "Sebelumnya",
   "nav.next": "Berikutnya",
+  "nav.search": "Cari",
+
+  "search.title": "Cari ayat",
+  "search.placeholder": "Cari berdasarkan makna, Arab, transliterasi, atau pelajaran…",
+  "search.hint": "Ketik minimal 2 karakter. Coba \"sabar\", \"kiamat\" atau \"الله\".",
+  "search.noResults": "Tidak ada ayat untuk \"{query}\".",
+  "search.count": "{count} hasil",
 
   "common.verse": "ayat",
   "common.verses": "ayat",
@@ -147,6 +163,8 @@ const id: Record<DictKey, string> = {
   "share.copied": "Tautan disalin!",
 
   "verse.ayahWord": "Ayat",
+  "verse.lessonHeading": "Pelajaran dalam ayat ini",
+  "verse.viewLesson": "Lihat pelajaran lengkap di {surah} →",
 
   "footer.tagline": "Al-Ilm — Diterangi oleh firman Al-Quran",
 };
