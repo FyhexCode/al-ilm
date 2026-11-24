@@ -12,6 +12,10 @@ const en = {
   "nav.search": "Search",
   "nav.saved": "Saved",
   "nav.random": "Random verse",
+  "nav.backToTop": "Back to top",
+
+  "copy.copy": "Copy verse",
+  "copy.copied": "Copied!",
 
   "progress.markRead": "Mark this surah as read",
   "progress.markedRead": "Read — tap to undo",
@@ -121,6 +125,10 @@ const id: Record<DictKey, string> = {
   "nav.search": "Cari",
   "nav.saved": "Tersimpan",
   "nav.random": "Ayat acak",
+  "nav.backToTop": "Kembali ke atas",
+
+  "copy.copy": "Salin ayat",
+  "copy.copied": "Tersalin!",
 
   "progress.markRead": "Tandai surah ini sudah dibaca",
   "progress.markedRead": "Sudah dibaca — ketuk untuk batal",

@@ -25,6 +25,12 @@ export async function generateMetadata({ params }: Props) {
   return {
     title: `${lesson.surahName} — Al-Ilm`,
     description: lesson.application ?? `${lesson.surahNameTranslation} — Surah ${lesson.surah}`,
+    openGraph: {
+      siteName: "Al-Ilm",
+      type: "article",
+      title: `${lesson.surahName} — Al-Ilm`,
+      description: lesson.previewTakeaway ?? lesson.application ?? `${lesson.surahNameTranslation} — Surah ${lesson.surah}`,
+    },
   };
 }
 

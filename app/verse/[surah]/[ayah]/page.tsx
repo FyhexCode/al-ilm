@@ -24,6 +24,12 @@ export async function generateMetadata({ params }: Props) {
   return {
     title: `${verse.surahName} ${verse.surah}:${verse.ayah} — Al-Ilm`,
     description: verse.translation,
+    openGraph: {
+      siteName: "Al-Ilm",
+      type: "article",
+      title: `${verse.surahName} ${verse.surah}:${verse.ayah} — Al-Ilm`,
+      description: verse.translation,
+    },
   };
 }
 

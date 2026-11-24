@@ -4,6 +4,7 @@ import Link from "next/link";
 import ArabicText from "./ArabicText";
 import ShareButton from "./ShareButton";
 import BookmarkButton from "./BookmarkButton";
+import CopyVerseButton from "./CopyVerseButton";
 import TafseerSection from "./TafseerSection";
 import type { Verse } from "@/lib/types";
 import { CATEGORIES } from "@/data/categories";
@@ -121,6 +122,11 @@ export default function VerseDetail({ verse: rawVerse, prev, next }: Props) {
       {/* Save + Share */}
       <div className="flex flex-wrap gap-3">
         <BookmarkButton surah={verse.surah} ayah={verse.ayah} />
+        <CopyVerseButton
+          arabic={verse.arabic}
+          translation={verse.translation}
+          reference={`${verse.surahName} ${verse.surah}:${verse.ayah}`}
+        />
         <ShareButton surah={verse.surah} ayah={verse.ayah} />
       </div>
 

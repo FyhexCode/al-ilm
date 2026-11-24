@@ -80,3 +80,8 @@ html {
 
 /* Transliteration toggle */
 html[data-translit="off"] .translit { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .gold-shimmer { animation: none; }
+}

@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import VisitTracker from "@/components/VisitTracker";
+import BackToTop from "@/components/BackToTop";
 import { LanguageProvider } from "@/lib/i18n/LanguageProvider";
 
 const geistSans = Geist({
@@ -27,6 +28,8 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   title: "Al-Ilm — Quran Verses",
   description: "Discover Quran verses by theme. Daily verse, category browsing, and more.",
+  openGraph: { siteName: "Al-Ilm", type: "website" },
+  twitter: { card: "summary" },
 };
 
 export default function RootLayout({
@@ -42,6 +45,7 @@ export default function RootLayout({
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
+          <BackToTop />
         </LanguageProvider>
       </body>
     </html>
