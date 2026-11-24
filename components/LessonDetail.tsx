@@ -11,20 +11,18 @@ import { CATEGORIES } from "@/data/categories";
 import { buildClusterList } from "@/lib/getVerseClusters";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import { useT } from "@/lib/i18n/useT";
-import { localizeLesson, localizeCluster, localizeCategory, localizeVerse } from "@/lib/i18n/pick";
+import { localizeLesson, localizeCluster, localizeCategory } from "@/lib/i18n/pick";
 
 interface Props {
   lesson: LessonGroup;
-  surahVerses: Verse[];
 }
 
-const TABS = ["Overview", "Verses", "Tafseer", "Surah"] as const;
+const TABS = ["Overview", "Verses", "Tafseer"] as const;
 type Tab = (typeof TABS)[number];
 const TAB_KEYS = {
   Overview: "tab.overview",
   Verses: "tab.verses",
   Tafseer: "tab.tafseer",
-  Surah: "tab.surah",
 } as const;
 
 // The active tab lives in the URL hash (#verses) so refresh/share keeps it.
@@ -53,7 +51,7 @@ function useHashTab(): [Tab, (tab: Tab) => void] {
   return [tab, setTab];
 }
 
-export default function LessonDetail({ lesson: rawLesson, surahVerses: rawSurahVerses }: Props) {
+export default function LessonDetail({ lesson: rawLesson }: Props) {
   const { locale } = useLanguage();
   const t = useT();
   const [tab, setTab] = useHashTab();
@@ -75,7 +73,6 @@ export default function LessonDetail({ lesson: rawLesson, surahVerses: rawSurahV
   }
 
   const lesson = localizeLesson(rawLesson, locale);
-  const surahVerses = rawSurahVerses.map((v) => localizeVerse(v, locale));
 
   const lessonCats = CATEGORIES.filter((c) => lesson.categories.includes(c.slug));
   const tafseerVerse = lesson.verses.find((v) => v.tafseer !== null) ?? null;
@@ -113,9 +110,6 @@ export default function LessonDetail({ lesson: rawLesson, surahVerses: rawSurahV
         )}
         {tab === "Verses" && <VersesTab lesson={lesson} />}
         {tab === "Tafseer" && <TafseerTab verse={tafseerVerse} />}
-        {tab === "Surah" && (
-          <SurahTab lesson={lesson} surahVerses={surahVerses} />
-        )}
       </div>
     </div>
   );
@@ -352,74 +346,5 @@ function TafseerTab({ verse }: { verse: Verse | null }) {
       verseCount={verse.tafseerVerseCount}
       surahName={verse.surahName}
     />
-  );
-}
-
-/* ── Surah ─────────────────────────────────────────────────── */
-
-function SurahTab({
-  lesson,
-  surahVerses,
-}: {
-  lesson: LessonGroup;
-  surahVerses: Verse[];
-}) {
-  const t = useT();
-  const lessonAyahs = new Set(lesson.verses.map((v) => v.ayah));
-  const first = surahVerses[0];
-  if (!first) return null;
-
-  return (
-    <div className="space-y-8">
-      {/* Surah intro */}
-      <div className="bg-dark rounded-2xl p-7 text-center">
-        <p className="text-cream/25 text-4xl font-[family-name:var(--font-amiri)] mb-3">
-          {first.surahNameAr}
-        </p>
-        <p className="text-cream text-xl font-bold mb-1">{first.surahName}</p>
-        <p className="text-cream/50 text-sm mb-4">{first.surahNameTranslation}</p>
-        <div className="flex justify-center gap-6 text-xs text-cream/30">
-          <span>{t("lesson.surahWord")} {first.surah}</span>
-          <span>·</span>
-          <span>{surahVerses.length} {t("common.verses")}</span>
-          <span>·</span>
-          <span>{t("lesson.juzWord")} {first.juz}</span>
-        </div>
-      </div>
-
-      {/* Verse list */}
-      <div>
-        <p className="text-dark/40 text-xs tracking-widest uppercase mb-3">{t("lesson.allVerses")}</p>
-        <div className="space-y-0.5">
-          {surahVerses.map((verse) => {
-            const isInLesson = lessonAyahs.has(verse.ayah);
-            return (
-              <Link
-                key={verse.ayah}
-                href={`/verse/${verse.surah}/${verse.ayah}`}
-                className={`flex items-start gap-4 px-4 py-3 rounded-xl transition-colors hover:bg-cream-dark ${
-                  isInLesson ? "border-l-2 border-gold bg-gold/5" : "border-l-2 border-transparent"
-                }`}
-              >
-                <span
-                  className={`font-mono text-xs shrink-0 mt-0.5 ${
-                    isInLesson ? "text-gold font-semibold" : "text-dark/30"
-                  }`}
-                >
-                  {verse.ayah}
-                </span>
-                <p
-                  className={`text-sm leading-relaxed line-clamp-2 ${
-                    isInLesson ? "text-dark/80 font-medium" : "text-dark/50"
-                  }`}
-                >
-                  {verse.translation}
-                </p>
-              </Link>
-            );
-          })}
-        </div>
-      </div>
-    </div>
   );
 }

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import type { LessonGroup } from "@/lib/getLessons";
-import type { Verse } from "@/lib/types";
 import LessonDetail from "./LessonDetail";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import { useT } from "@/lib/i18n/useT";
@@ -10,12 +9,11 @@ import { pick } from "@/lib/i18n/pick";
 
 interface Props {
   lesson: LessonGroup;
-  surahVerses: Verse[];
   prevLesson: LessonGroup | null;
   nextLesson: LessonGroup | null;
 }
 
-export default function LessonPageClient({ lesson, surahVerses, prevLesson, nextLesson }: Props) {
+export default function LessonPageClient({ lesson, prevLesson, nextLesson }: Props) {
   const { locale } = useLanguage();
   const t = useT();
 
@@ -32,7 +30,7 @@ export default function LessonPageClient({ lesson, surahVerses, prevLesson, next
         </nav>
       </div>
 
-      <LessonDetail lesson={lesson} surahVerses={surahVerses} />
+      <LessonDetail lesson={lesson} />
 
       {/* Prev / Next navigation */}
       <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-12 mt-4">

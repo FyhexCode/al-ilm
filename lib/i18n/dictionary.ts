@@ -81,7 +81,6 @@ const en = {
   "tab.overview": "Overview",
   "tab.verses": "Verses",
   "tab.tafseer": "Tafseer",
-  "tab.surah": "Surah",
 
   "lesson.lessonsInSurah": "Lessons in this surah",
   "lesson.tapToApply": "— tap to see how to apply it",
@@ -91,7 +90,6 @@ const en = {
   "lesson.keyTakeaway": "Key Takeaway",
   "lesson.lessonLabel": "Lesson",
   "lesson.noTafseer": "No tafseer available for this surah.",
-  "lesson.allVerses": "All verses",
   "lesson.surahWord": "Surah",
   "lesson.juzWord": "Juz",
 
@@ -194,7 +192,6 @@ const id: Record<DictKey, string> = {
   "tab.overview": "Ikhtisar",
   "tab.verses": "Ayat",
   "tab.tafseer": "Tafsir",
-  "tab.surah": "Surah",
 
   "lesson.lessonsInSurah": "Pelajaran dalam surah ini",
   "lesson.tapToApply": "— ketuk untuk melihat cara menerapkannya",
@@ -204,7 +201,6 @@ const id: Record<DictKey, string> = {
   "lesson.keyTakeaway": "Inti Pelajaran",
   "lesson.lessonLabel": "Pelajaran",
   "lesson.noTafseer": "Tafsir tidak tersedia untuk surah ini.",
-  "lesson.allVerses": "Semua ayat",
   "lesson.surahWord": "Surah",
   "lesson.juzWord": "Juz",
 

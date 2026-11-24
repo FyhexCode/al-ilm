@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import { getLessons } from "@/lib/getLessons";
-import { getAllVerses } from "@/lib/getAllVerses";
 import LessonPageClient from "@/components/LessonPageClient";
 
 interface Props {
@@ -46,8 +45,6 @@ export default async function LessonPage({ params }: Props) {
   );
   if (!lesson) notFound();
 
-  const surahVerses = getAllVerses().filter((v) => v.surah === surahNum);
-
   const lessonIdx = lessons.findIndex(
     (l) => l.surah === surahNum && l.firstAyah === ayahNum
   );
@@ -57,7 +54,6 @@ export default async function LessonPage({ params }: Props) {
   return (
     <LessonPageClient
       lesson={lesson}
-      surahVerses={surahVerses}
       prevLesson={prevLesson}
       nextLesson={nextLesson}
     />
