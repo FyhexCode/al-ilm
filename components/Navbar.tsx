@@ -31,6 +31,15 @@ export default function Navbar() {
             {t("nav.home")}
           </Link>
           <Link
+            href="/saved"
+            aria-label={t("nav.saved")}
+            className="p-2 text-cream/70 hover:text-cream hover:bg-white/5 rounded-lg transition-colors"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+            </svg>
+          </Link>
+          <Link
             href="/search"
             aria-label={t("nav.search")}
             className="p-2 text-cream/70 hover:text-cream hover:bg-white/5 rounded-lg transition-colors"

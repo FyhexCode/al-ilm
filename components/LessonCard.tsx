@@ -47,6 +47,12 @@ export default function LessonCard({ lesson: rawLesson }: LessonCardProps) {
         <p className="text-cream/40 text-sm mt-0.5">{lesson.surahNameTranslation}</p>
       </div>
 
+      {lesson.previewTakeaway && (
+        <p className="px-5 pb-3 text-cream/60 text-sm leading-snug line-clamp-2">
+          {lesson.previewTakeaway}
+        </p>
+      )}
+
       {/* Range + verse count */}
       <div className="px-5 pb-4">
         <p className="text-gold/50 font-mono text-xs">

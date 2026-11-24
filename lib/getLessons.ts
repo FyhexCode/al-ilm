@@ -1,5 +1,6 @@
 import type { Verse } from "./types";
 import { getAllVerses } from "./getAllVerses";
+import { getClustersForSurah } from "./getVerseClusters";
 
 export interface LessonGroup {
   id: string;
@@ -10,6 +11,9 @@ export interface LessonGroup {
   surahNameAr: string;
   application: string | null;
   applicationId?: string | null;
+  /** First cluster key takeaway — shown as a preview on lesson cards. */
+  previewTakeaway?: string;
+  previewTakeawayId?: string;
   categories: string[];
   firstAyah: number;
   lastAyah: number;
@@ -35,6 +39,7 @@ export function getLessons(): LessonGroup[] {
         group.applicationId = verse.applicationId ?? null;
       }
     } else {
+      const firstCluster = getClustersForSurah(verse.surah).find((c) => c.keyTakeaway);
       groupMap.set(key, {
         id: `${verse.surah}-${verse.ayah}`,
         surah: verse.surah,
@@ -44,6 +49,8 @@ export function getLessons(): LessonGroup[] {
         surahNameAr: verse.surahNameAr,
         application: verse.application,
         applicationId: verse.applicationId ?? null,
+        previewTakeaway: firstCluster?.keyTakeaway,
+        previewTakeawayId: firstCluster?.keyTakeawayId,
         categories: [...verse.categories],
         firstAyah: verse.ayah,
         lastAyah: verse.ayah,

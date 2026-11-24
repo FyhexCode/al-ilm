@@ -80,6 +80,27 @@ function scoreEntry(entry: IndexEntry, terms: string[], phrase: string): number 
   return score;
 }
 
+/** Slim verse summaries for ids like "78:1", in canonical surah/ayah order (used by Saved). */
+export function getVerseSummaries(ids: string[], locale: SearchLocale): SearchHit[] {
+  index ??= buildIndex();
+  const wanted = new Set(ids);
+  return index
+    .filter((e) => wanted.has(`${e.verse.surah}:${e.verse.ayah}`))
+    .map((e) => toHit(e, locale, 0));
+}
+
+function toHit(entry: IndexEntry, locale: SearchLocale, score: number): SearchHit {
+  const v = entry.verse;
+  return {
+    surah: v.surah,
+    ayah: v.ayah,
+    surahName: v.surahName,
+    translation: locale === "id" && v.translationId ? v.translationId : v.translation,
+    takeaway: locale === "id" && entry.takeawayId ? entry.takeawayId : entry.takeaway,
+    score,
+  };
+}
+
 export function searchVerses(query: string, locale: SearchLocale, limit = 30): SearchHit[] {
   const phrase = normalize(query);
   if (phrase.length < 2) return [];
@@ -90,15 +111,7 @@ export function searchVerses(query: string, locale: SearchLocale, limit = 30): S
   for (const entry of index) {
     const score = scoreEntry(entry, terms, phrase);
     if (score === 0) continue;
-    const v = entry.verse;
-    hits.push({
-      surah: v.surah,
-      ayah: v.ayah,
-      surahName: v.surahName,
-      translation: locale === "id" && v.translationId ? v.translationId : v.translation,
-      takeaway: locale === "id" && entry.takeawayId ? entry.takeawayId : entry.takeaway,
-      score,
-    });
+    hits.push(toHit(entry, locale, score));
   }
 
   return hits

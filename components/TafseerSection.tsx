@@ -25,7 +25,7 @@ export default function TafseerSection({
 
   const groupLabel =
     verseCount > 1
-      ? `${surahName} ${groupStart}–${groupEnd} (${verseCount} verses)`
+      ? `${surahName} ${groupStart}–${groupEnd} (${t("tafseer.versesCount", { count: verseCount })})`
       : `${surahName} ${groupStart}`;
 
   // Split tafseer into paragraphs for structured display

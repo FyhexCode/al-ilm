@@ -59,6 +59,9 @@ export function localizeLesson(lesson: LessonGroup, locale: Locale): LessonGroup
     ...lesson,
     surahNameTranslation: pick(locale, lesson.surahNameTranslation, lesson.surahNameTranslationId),
     application: pickNullable(locale, lesson.application, lesson.applicationId),
+    previewTakeaway: lesson.previewTakeaway
+      ? pick(locale, lesson.previewTakeaway, lesson.previewTakeawayId)
+      : undefined,
     verses: lesson.verses.map((v) => localizeVerse(v, locale)),
   };
 }

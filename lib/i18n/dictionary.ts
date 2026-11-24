@@ -10,6 +10,13 @@ const en = {
   "nav.prev": "Previous",
   "nav.next": "Next",
   "nav.search": "Search",
+  "nav.saved": "Saved",
+
+  "saved.title": "Saved verses",
+  "saved.empty": "No saved verses yet. Tap Save on any verse to keep it here.",
+  "saved.save": "Save",
+  "saved.saved": "Saved",
+  "saved.remove": "Remove from saved",
 
   "search.title": "Search verses",
   "search.placeholder": "Search by meaning, Arabic, transliteration or lesson…",
@@ -74,6 +81,7 @@ const en = {
   "tafseer.showLess": "Show less ↑",
   "tafseer.section": "section",
   "tafseer.sections": "sections",
+  "tafseer.versesCount": "{count} verses",
 
   "share.share": "Share verse",
   "share.copied": "Link copied!",
@@ -94,6 +102,13 @@ const id: Record<DictKey, string> = {
   "nav.prev": "Sebelumnya",
   "nav.next": "Berikutnya",
   "nav.search": "Cari",
+  "nav.saved": "Tersimpan",
+
+  "saved.title": "Ayat tersimpan",
+  "saved.empty": "Belum ada ayat tersimpan. Ketuk Simpan pada ayat mana pun untuk menyimpannya di sini.",
+  "saved.save": "Simpan",
+  "saved.saved": "Tersimpan",
+  "saved.remove": "Hapus dari tersimpan",
 
   "search.title": "Cari ayat",
   "search.placeholder": "Cari berdasarkan makna, Arab, transliterasi, atau pelajaran…",
@@ -158,6 +173,7 @@ const id: Record<DictKey, string> = {
   "tafseer.showLess": "Tampilkan lebih sedikit ↑",
   "tafseer.section": "bagian",
   "tafseer.sections": "bagian",
+  "tafseer.versesCount": "{count} ayat",
 
   "share.share": "Bagikan ayat",
   "share.copied": "Tautan disalin!",
