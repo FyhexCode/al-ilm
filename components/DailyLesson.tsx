@@ -89,8 +89,8 @@ export default function DailyLesson({ verse: rawVerse, clusterVerses: rawCluster
       </section>
 
       {/* Lesson title — scrolls normally then sticks below the navbar */}
-      <div className="sticky top-16 z-10 bg-dark border-b border-gold/10 py-6 px-6">
-        <h1 className="text-3xl sm:text-5xl md:text-6xl font-semibold text-cream leading-tight text-center max-w-3xl mx-auto font-[family-name:var(--font-display)]">
+      <div className="sticky top-16 z-10 bg-dark border-b border-gold/10 py-4 px-6 max-h-[25vh] overflow-y-auto">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-cream leading-snug text-center max-w-3xl mx-auto font-[family-name:var(--font-display)]">
           {lessonText}
         </h1>
       </div>
