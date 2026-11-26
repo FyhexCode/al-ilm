@@ -76,7 +76,7 @@ export default function BrowseClient({ lessons, categories }: BrowseClientProps)
           className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer ${
             active === "all"
               ? "bg-gold text-dark shadow-md"
-              : "bg-cream-dark text-primary border border-gold/30 hover:border-gold hover:bg-gold/10"
+              : "bg-surface-2 text-heading border border-gold/30 hover:border-gold hover:bg-gold/10"
           }`}
         >
           {t("browse.allLessons")}
@@ -88,7 +88,7 @@ export default function BrowseClient({ lessons, categories }: BrowseClientProps)
             className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer ${
               active === cat.slug
                 ? "bg-gold text-dark shadow-md"
-                : "bg-cream-dark text-primary border border-gold/30 hover:border-gold hover:bg-gold/10"
+                : "bg-surface-2 text-heading border border-gold/30 hover:border-gold hover:bg-gold/10"
             }`}
           >
             {cat.label}
@@ -98,23 +98,23 @@ export default function BrowseClient({ lessons, categories }: BrowseClientProps)
 
       {/* Result count + sort */}
       <div className="flex flex-wrap items-center justify-between gap-3 mt-6 mb-4">
-      <p className="text-sm text-dark/50">
+      <p className="text-sm text-ink/50">
         {t("browse.showing")}{" "}
-        <span className="font-semibold text-primary">{filtered.length}</span>{" "}
+        <span className="font-semibold text-heading">{filtered.length}</span>{" "}
         {lessonWord}
         {active !== "all" && activeLabel && (
           <>
             {" "}{t("common.in")}{" "}
-            <span className="font-semibold text-primary">{activeLabel}</span>
+            <span className="font-semibold text-heading">{activeLabel}</span>
           </>
         )}
       </p>
-        <label className="flex items-center gap-2 text-sm text-dark/50">
+        <label className="flex items-center gap-2 text-sm text-ink/50">
           {t("browse.sortBy")}
           <select
             value={sort}
             onChange={(e) => navigate(active, e.target.value as SortKey)}
-            className="rounded-full border border-gold/30 bg-cream-dark text-primary px-3 py-1.5 text-sm cursor-pointer focus:outline-none focus:border-gold"
+            className="rounded-full border border-gold/30 bg-surface-2 text-heading px-3 py-1.5 text-sm cursor-pointer focus:outline-none focus:border-gold"
           >
             {SORT_KEYS.map((key) => (
               <option key={key} value={key}>
@@ -126,7 +126,7 @@ export default function BrowseClient({ lessons, categories }: BrowseClientProps)
       </div>
 
       {filtered.length === 0 && (
-        <p className="text-center text-dark/50 text-sm py-12">{t("browse.empty")}</p>
+        <p className="text-center text-ink/50 text-sm py-12">{t("browse.empty")}</p>
       )}
 
       {/* Lesson grid */}

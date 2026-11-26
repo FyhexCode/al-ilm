@@ -35,25 +35,25 @@ export default function VerseDetail({ verse: rawVerse, prev, next }: Props) {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
       {/* Breadcrumb */}
-      <nav className="text-sm text-dark/40 mb-8 flex items-center gap-2 flex-wrap">
-        <Link href="/" className="hover:text-primary transition-colors">{t("nav.home")}</Link>
+      <nav className="text-sm text-ink/40 mb-8 flex items-center gap-2 flex-wrap">
+        <Link href="/" className="hover:text-heading transition-colors">{t("nav.home")}</Link>
         <span>/</span>
-        <Link href="/browse" className="hover:text-primary transition-colors">{t("nav.browse")}</Link>
+        <Link href="/browse" className="hover:text-heading transition-colors">{t("nav.browse")}</Link>
         <span>/</span>
-        <span className="text-dark/70">{verse.surahName} {verse.surah}:{verse.ayah}</span>
+        <span className="text-ink/70">{verse.surahName} {verse.surah}:{verse.ayah}</span>
       </nav>
 
       {/* Surah name + reference */}
       <div className="flex items-start justify-between mb-8 flex-wrap gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-primary">{verse.surahName}</h1>
-          <p className="text-dark/50 mt-1">{verse.surahNameTranslation}</p>
+          <h1 className="text-3xl font-bold text-heading">{verse.surahName}</h1>
+          <p className="text-ink/50 mt-1">{verse.surahNameTranslation}</p>
         </div>
         <div className="text-right">
           <span className="text-2xl font-[family-name:var(--font-amiri)] text-gold" dir="rtl">
             {verse.surahNameAr}
           </span>
-          <p className="text-xs text-dark/40 font-mono mt-1">
+          <p className="text-xs text-ink/40 font-mono mt-1">
             {t("lesson.surahWord")} {verse.surah} · {t("verse.ayahWord")} {verse.ayah} · {t("lesson.juzWord")} {verse.juz}
           </p>
         </div>
@@ -105,14 +105,14 @@ export default function VerseDetail({ verse: rawVerse, prev, next }: Props) {
         <section className="mb-8 rounded-2xl border border-gold/30 bg-gold/5 px-5 py-5">
           <p className="text-gold text-xs uppercase tracking-widest mb-2">{t("verse.lessonHeading")}</p>
           {cluster.keyTakeaway && (
-            <p className="text-primary font-semibold leading-snug mb-3">{cluster.keyTakeaway}</p>
+            <p className="text-heading font-semibold leading-snug mb-3">{cluster.keyTakeaway}</p>
           )}
           {cluster.lesson && (
-            <p className="text-dark/70 text-sm leading-relaxed">{cluster.lesson}</p>
+            <p className="text-ink/70 text-sm leading-relaxed">{cluster.lesson}</p>
           )}
           <Link
             href={`/lesson/${verse.surah}/${firstAyahOfSurah(verse.tafseerGroup)}`}
-            className="inline-block mt-4 text-sm text-primary hover:text-primary-light font-medium transition-colors"
+            className="inline-block mt-4 text-sm text-heading hover:text-primary-light font-medium transition-colors"
           >
             {t("verse.viewLesson", { surah: verse.surahName })}
           </Link>
@@ -179,13 +179,13 @@ function PrevNextLink({
   return (
     <Link
       href={`/verse/${verse.surah}/${verse.ayah}`}
-      className={`group flex flex-col p-4 rounded-2xl border border-gold/20 hover:border-gold hover:bg-cream-dark transition-all ${
+      className={`group flex flex-col p-4 rounded-2xl border border-gold/20 hover:border-gold hover:bg-surface-2 transition-all ${
         dir === "next" ? "text-right" : ""
       }`}
     >
-      <span className="text-xs text-dark/40 mb-1">{label}</span>
-      <span className="text-sm font-semibold text-primary">{verse.surahName} {verse.surah}:{verse.ayah}</span>
-      <p className="text-xs text-dark/50 mt-1 line-clamp-2">{verse.translation}</p>
+      <span className="text-xs text-ink/40 mb-1">{label}</span>
+      <span className="text-sm font-semibold text-heading">{verse.surahName} {verse.surah}:{verse.ayah}</span>
+      <p className="text-xs text-ink/50 mt-1 line-clamp-2">{verse.translation}</p>
     </Link>
   );
 }

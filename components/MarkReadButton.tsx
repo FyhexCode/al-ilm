@@ -15,7 +15,7 @@ export default function MarkReadButton({ surah }: { surah: number }) {
       className={`w-full rounded-2xl border px-5 py-4 text-sm font-semibold transition-colors cursor-pointer ${
         done
           ? "bg-primary text-cream border-primary hover:bg-primary-light"
-          : "bg-cream-dark text-primary border-gold/30 hover:border-gold hover:bg-gold/10"
+          : "bg-surface-2 text-heading border-gold/30 hover:border-gold hover:bg-gold/10"
       }`}
     >
       {done ? `✓ ${t("progress.markedRead")}` : t("progress.markRead")}

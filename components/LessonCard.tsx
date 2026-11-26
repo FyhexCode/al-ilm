@@ -51,9 +51,10 @@ export default function LessonCard({ lesson: rawLesson }: LessonCardProps) {
       </div>
 
       {lesson.previewTakeaway && (
-        <p className="px-5 pb-3 text-cream/60 text-sm leading-snug line-clamp-2">
-          {lesson.previewTakeaway}
-        </p>
+        <div className="px-5 pb-3">
+          {/* Padding lives on the wrapper: line-clamp's overflow:hidden would otherwise show a 3rd line inside the padding. */}
+          <p className="text-cream/60 text-sm leading-snug line-clamp-2">{lesson.previewTakeaway}</p>
+        </div>
       )}
 
       {/* Range + verse count */}

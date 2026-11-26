@@ -80,7 +80,7 @@ export default function LessonDetail({ lesson: rawLesson }: Props) {
   return (
     <div>
       {/* Sticky tab bar */}
-      <div className="sticky top-16 z-20 bg-cream border-b border-gold/20">
+      <div className="sticky top-16 z-20 bg-surface border-b border-gold/20">
         <div className="max-w-3xl mx-auto px-4 flex gap-0" role="tablist" onKeyDown={onTabKeyDown}>
           {TABS.map((tabId) => (
             <button
@@ -94,8 +94,8 @@ export default function LessonDetail({ lesson: rawLesson }: Props) {
               onClick={() => setTab(tabId)}
               className={`px-5 py-3 text-sm font-medium transition-colors border-b-2 -mb-px cursor-pointer ${
                 tab === tabId
-                  ? "border-gold text-primary"
-                  : "border-transparent text-dark/50 hover:text-primary hover:border-gold/40"
+                  ? "border-gold text-heading"
+                  : "border-transparent text-ink/50 hover:text-heading hover:border-gold/40"
               }`}
             >
               {t(TAB_KEYS[tabId])}
@@ -159,9 +159,9 @@ function OverviewTab({
       {/* Cluster-based lessons — clickable to reveal lesson text */}
       {clusters.length > 0 && (
         <div>
-          <p className="text-dark/40 text-xs tracking-widest uppercase mb-4">
+          <p className="text-ink/40 text-xs tracking-widest uppercase mb-4">
             {t("lesson.lessonsInSurah")}
-            <span className="ml-2 normal-case text-dark/30">{t("lesson.tapToApply")}</span>
+            <span className="ml-2 normal-case text-ink/30">{t("lesson.tapToApply")}</span>
           </p>
           <div className="rounded-2xl border border-gold/20 overflow-hidden divide-y divide-gold/10">
             {clusters.map((cluster) => {
@@ -181,10 +181,10 @@ function OverviewTab({
                     <span className="text-gold font-mono text-xs shrink-0 mt-0.5 w-16">
                       {rangeLabel}
                     </span>
-                    <p className={`text-sm flex-1 ${isOpen ? "text-primary font-medium" : "text-dark/80"}`}>
+                    <p className={`text-sm flex-1 ${isOpen ? "text-heading font-medium" : "text-ink/80"}`}>
                       {cluster.keyTakeaway}
                     </p>
-                    <span className="text-dark/30 text-xs shrink-0 mt-0.5">
+                    <span className="text-ink/30 text-xs shrink-0 mt-0.5">
                       {isOpen ? "▲" : "▼"}
                     </span>
                   </button>
@@ -194,7 +194,7 @@ function OverviewTab({
                       <p className="text-gold/60 text-xs tracking-widest uppercase mb-2">
                         {t("lesson.howToApply")}
                       </p>
-                      <p className="text-dark/70 text-sm leading-relaxed">{cluster.lesson}</p>
+                      <p className="text-ink/70 text-sm leading-relaxed">{cluster.lesson}</p>
                     </div>
                   )}
                 </div>
@@ -207,7 +207,7 @@ function OverviewTab({
       {/* Categories */}
       {cats.length > 0 && (
         <div>
-          <p className="text-dark/40 text-xs tracking-widest uppercase mb-3">{t("common.themes")}</p>
+          <p className="text-ink/40 text-xs tracking-widest uppercase mb-3">{t("common.themes")}</p>
           <div className="flex flex-wrap gap-2">
             {cats.map((raw) => {
               const cat = localizeCategory(raw, locale);
@@ -244,7 +244,7 @@ function VersesTab({ lesson }: { lesson: LessonGroup }) {
 
   return (
     <div className="space-y-6">
-      <p className="text-dark/40 text-xs tracking-widest uppercase">
+      <p className="text-ink/40 text-xs tracking-widest uppercase">
         {lesson.verses.length} {lesson.verses.length === 1 ? t("common.verse") : t("common.verses")} {t("common.in")} {lesson.surahName}
       </p>
 
@@ -259,7 +259,7 @@ function VersesTab({ lesson }: { lesson: LessonGroup }) {
           <div
             key={cluster.ayahs.join("-")}
             className={`rounded-2xl border overflow-hidden ${
-              isGroup ? "border-gold/30 bg-cream" : "border-gold/20 bg-cream"
+              isGroup ? "border-gold/30 bg-surface" : "border-gold/20 bg-surface"
             }`}
           >
             {/* Cluster header */}
@@ -274,7 +274,7 @@ function VersesTab({ lesson }: { lesson: LessonGroup }) {
               </div>
               <Link
                 href={`/verse/${lesson.surah}/${cluster.ayahs[0]}`}
-                className="text-xs text-primary/50 hover:text-primary transition-colors"
+                className="text-xs text-heading/50 hover:text-heading transition-colors"
               >
                 {t("lesson.fullPage")}
               </Link>
@@ -289,13 +289,13 @@ function VersesTab({ lesson }: { lesson: LessonGroup }) {
                   </p>
                 )}
                 <div className="px-5 py-4 bg-dark/3">
-                  <ArabicText text={verse.arabic} size="md" align="right" className="text-dark/90" />
+                  <ArabicText text={verse.arabic} size="md" align="right" className="text-ink/90" />
                 </div>
                 <div className="translit px-5 pt-2 pb-1">
-                  <p className="text-xs italic text-primary/50 text-right">{verse.transliteration}</p>
+                  <p className="text-xs italic text-heading/50 text-right">{verse.transliteration}</p>
                 </div>
                 <div className={`px-5 pb-4 pt-2 ${idx < clusterVerses.length - 1 ? "border-b border-gold/10" : ""}`}>
-                  <p className="text-dark/80 text-sm leading-relaxed">
+                  <p className="text-ink/80 text-sm leading-relaxed">
                     &ldquo;{verse.translation}&rdquo;
                   </p>
                 </div>
@@ -306,13 +306,13 @@ function VersesTab({ lesson }: { lesson: LessonGroup }) {
             {cluster.keyTakeaway && (
               <div className="px-5 py-4 border-t border-gold/15 bg-gold/5">
                 <p className="text-gold text-xs uppercase tracking-wider mb-1.5">{t("lesson.keyTakeaway")}</p>
-                <p className="text-primary text-sm font-medium leading-snug mb-3">
+                <p className="text-heading text-sm font-medium leading-snug mb-3">
                   {cluster.keyTakeaway}
                 </p>
                 {cluster.lesson && (
                   <>
                     <p className="text-gold/60 text-xs uppercase tracking-wider mb-1.5">{t("lesson.lessonLabel")}</p>
-                    <p className="text-dark/70 text-sm leading-relaxed">{cluster.lesson}</p>
+                    <p className="text-ink/70 text-sm leading-relaxed">{cluster.lesson}</p>
                   </>
                 )}
               </div>
@@ -331,8 +331,8 @@ function TafseerTab({ verse }: { verse: Verse | null }) {
   if (!verse) {
     return (
       <div className="text-center py-16">
-        <p className="text-dark/30 text-4xl mb-4">📖</p>
-        <p className="text-dark/50 text-sm">{t("lesson.noTafseer")}</p>
+        <p className="text-ink/30 text-4xl mb-4">📖</p>
+        <p className="text-ink/50 text-sm">{t("lesson.noTafseer")}</p>
       </div>
     );
   }

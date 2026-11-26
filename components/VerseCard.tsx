@@ -17,7 +17,7 @@ export default function VerseCard({ verse }: VerseCardProps) {
   return (
     <Link
       href={`/verse/${verse.surah}/${verse.ayah}`}
-      className="group block bg-cream rounded-2xl border-t-4 border-gold shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 overflow-hidden"
+      className="group block bg-surface rounded-2xl border-t-4 border-gold shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 overflow-hidden"
     >
       {/* Header */}
       <div className="px-5 pt-4 pb-2 flex items-center justify-between">
@@ -25,30 +25,30 @@ export default function VerseCard({ verse }: VerseCardProps) {
           <span className="text-xs font-semibold text-gold uppercase tracking-wider">
             {verse.surahName}
           </span>
-          <span className="text-xs text-primary/50 ml-2">
+          <span className="text-xs text-heading/50 ml-2">
             {verse.surahNameTranslation}
           </span>
         </div>
-        <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full font-mono">
+        <span className="text-xs bg-primary/10 text-heading px-2 py-0.5 rounded-full font-mono">
           {verse.surah}:{verse.ayah}
         </span>
       </div>
 
       {/* Arabic */}
       <div className="px-5 py-3 bg-primary/5 border-y border-primary/10">
-        <ArabicText text={verse.arabic} size="sm" className="text-dark/90" />
+        <ArabicText text={verse.arabic} size="sm" className="text-ink/90" />
       </div>
 
       {/* Transliteration */}
       <div className="px-5 pt-2 pb-1">
-        <p className="text-xs italic text-primary/60 text-right">
+        <p className="text-xs italic text-heading/60 text-right">
           {verse.transliteration}
         </p>
       </div>
 
       {/* Translation */}
       <div className="px-5 pb-3">
-        <p className="text-sm text-dark/80 leading-relaxed">{translationSnippet}</p>
+        <p className="text-sm text-ink/80 leading-relaxed">{translationSnippet}</p>
       </div>
 
       {/* Category badges */}

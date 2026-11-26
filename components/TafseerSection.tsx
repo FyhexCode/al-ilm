@@ -59,12 +59,12 @@ export default function TafseerSection({
           <p className="text-xs font-bold text-gold uppercase tracking-widest mb-2">
             {t("tafseer.about")}
           </p>
-          <p className="text-dark/85 text-sm leading-relaxed">{tafseerSummary}</p>
+          <p className="text-ink/85 text-sm leading-relaxed">{tafseerSummary}</p>
         </div>
       )}
 
       {/* Full tafseer body */}
-      <div className="bg-cream px-5 py-5">
+      <div className="bg-surface px-5 py-5">
         {previewParas.map((para, i) => (
           <TafseerParagraph key={i} text={para} />
         ))}
@@ -77,7 +77,7 @@ export default function TafseerSection({
 
             <button
               onClick={() => setExpanded((v) => !v)}
-              className="mt-3 text-sm text-primary hover:text-primary-light font-medium flex items-center gap-1.5 transition-colors"
+              className="mt-3 text-sm text-heading hover:text-primary-light font-medium flex items-center gap-1.5 transition-colors"
             >
               <span>
                 {expanded
@@ -98,12 +98,12 @@ function TafseerParagraph({ text }: { text: string }) {
   // Section labels like [Refutation against...] get special styling
   if (text.startsWith("[") && text.endsWith("]")) {
     return (
-      <p className="text-primary font-semibold text-xs uppercase tracking-wide mt-4 mb-1">
+      <p className="text-heading font-semibold text-xs uppercase tracking-wide mt-4 mb-1">
         {text.slice(1, -1)}
       </p>
     );
   }
   return (
-    <p className="text-dark/80 text-sm leading-relaxed mb-3">{text}</p>
+    <p className="text-ink/80 text-sm leading-relaxed mb-3">{text}</p>
   );
 }

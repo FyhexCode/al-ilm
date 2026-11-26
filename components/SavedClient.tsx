@@ -33,11 +33,11 @@ export default function SavedClient() {
 
   return (
     <>
-      <h1 className="text-3xl font-bold text-primary mb-6">{t("saved.title")}</h1>
+      <h1 className="text-3xl font-bold text-heading mb-6">{t("saved.title")}</h1>
 
       {ids.length === 0 && (
         <div className="text-center py-16">
-          <p className="text-dark/50 text-sm mb-4">{t("saved.empty")}</p>
+          <p className="text-ink/50 text-sm mb-4">{t("saved.empty")}</p>
           <Link
             href="/browse"
             className="inline-block px-5 py-2.5 bg-gold hover:bg-gold-light text-dark font-semibold rounded-full transition-colors text-sm"
@@ -58,16 +58,16 @@ export default function SavedClient() {
                 {hit.surahName} {hit.surah}:{hit.ayah}
               </span>
               {hit.takeaway && (
-                <span className="block text-primary text-sm font-medium mt-1">{hit.takeaway}</span>
+                <span className="block text-heading text-sm font-medium mt-1">{hit.takeaway}</span>
               )}
-              <span className="block text-dark/70 text-sm leading-relaxed mt-1 line-clamp-3">
+              <span className="block text-ink/70 text-sm leading-relaxed mt-1 line-clamp-3">
                 {hit.translation}
               </span>
             </Link>
             <button
               onClick={() => toggle(`${hit.surah}:${hit.ayah}`)}
               aria-label={t("saved.remove")}
-              className="shrink-0 text-dark/40 hover:text-dark text-lg leading-none px-2 cursor-pointer"
+              className="shrink-0 text-ink/40 hover:text-ink text-lg leading-none px-2 cursor-pointer"
             >
               ×
             </button>

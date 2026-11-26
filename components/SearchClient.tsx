@@ -62,7 +62,7 @@ export default function SearchClient() {
 
   return (
     <>
-      <h1 className="text-3xl font-bold text-primary mb-6">{t("search.title")}</h1>
+      <h1 className="text-3xl font-bold text-heading mb-6">{t("search.title")}</h1>
       <input
         type="search"
         autoFocus
@@ -70,16 +70,16 @@ export default function SearchClient() {
         onChange={(e) => setInput(e.target.value)}
         placeholder={t("search.placeholder")}
         aria-label={t("search.title")}
-        className="w-full rounded-full border border-gold/40 bg-cream-dark px-5 py-3 text-base text-dark placeholder:text-dark/40 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
+        className="w-full rounded-full border border-gold/40 bg-surface-2 px-5 py-3 text-base text-ink placeholder:text-ink/40 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
       />
 
       <div aria-live="polite" className="mt-6">
-        {!active && <p className="text-dark/50 text-sm">{t("search.hint")}</p>}
+        {!active && <p className="text-ink/50 text-sm">{t("search.hint")}</p>}
         {settled && results.length === 0 && (
-          <p className="text-dark/50 text-sm">{t("search.noResults", { query })}</p>
+          <p className="text-ink/50 text-sm">{t("search.noResults", { query })}</p>
         )}
         {settled && results.length > 0 && (
-          <p className="text-dark/50 text-sm mb-4">{t("search.count", { count: results.length })}</p>
+          <p className="text-ink/50 text-sm mb-4">{t("search.count", { count: results.length })}</p>
         )}
       </div>
 
@@ -89,15 +89,15 @@ export default function SearchClient() {
             <li key={`${hit.surah}:${hit.ayah}`}>
               <Link
                 href={`/verse/${hit.surah}/${hit.ayah}`}
-                className="block rounded-2xl border border-gold/25 p-4 hover:border-gold hover:bg-cream-dark transition-colors"
+                className="block rounded-2xl border border-gold/25 p-4 hover:border-gold hover:bg-surface-2 transition-colors"
               >
                 <span className="text-gold font-mono text-xs">
                   {hit.surahName} {hit.surah}:{hit.ayah}
                 </span>
                 {hit.takeaway && (
-                  <span className="block text-primary text-sm font-medium mt-1">{hit.takeaway}</span>
+                  <span className="block text-heading text-sm font-medium mt-1">{hit.takeaway}</span>
                 )}
-                <span className="block text-dark/70 text-sm leading-relaxed mt-1 line-clamp-3">
+                <span className="block text-ink/70 text-sm leading-relaxed mt-1 line-clamp-3">
                   {hit.translation}
                 </span>
               </Link>

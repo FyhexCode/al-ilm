@@ -16,7 +16,7 @@ export default function CategoryChip({ slug, label, icon, active, href }: Catego
     "inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer select-none",
     active
       ? "bg-gold text-dark shadow-md"
-      : "bg-cream-dark text-primary border border-gold/30 hover:border-gold hover:bg-gold/10"
+      : "bg-surface-2 text-heading border border-gold/30 hover:border-gold hover:bg-gold/10"
   );
 
   if (href) {

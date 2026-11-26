@@ -26,6 +26,10 @@ const en = {
   "reading.title": "Reading settings",
   "reading.arabicSize": "Arabic size",
   "reading.transliteration": "Show transliteration",
+  "reading.theme": "Theme",
+  "theme.auto": "Auto",
+  "theme.light": "Light",
+  "theme.dark": "Dark",
 
   "saved.title": "Saved verses",
   "saved.empty": "No saved verses yet. Tap Save on any verse to keep it here.",
@@ -137,6 +141,10 @@ const id: Record<DictKey, string> = {
   "reading.title": "Pengaturan bacaan",
   "reading.arabicSize": "Ukuran teks Arab",
   "reading.transliteration": "Tampilkan transliterasi",
+  "reading.theme": "Tema",
+  "theme.auto": "Otomatis",
+  "theme.light": "Terang",
+  "theme.dark": "Gelap",
 
   "saved.title": "Ayat tersimpan",
   "saved.empty": "Belum ada ayat tersimpan. Ketuk Simpan pada ayat mana pun untuk menyimpannya di sini.",

@@ -11,12 +11,12 @@ export default function BrowseHeader({ count }: { count: number }) {
 
   return (
     <div className="mb-10">
-      <h1 className="text-4xl font-bold text-primary mb-2">{t("browse.title")}</h1>
+      <h1 className="text-4xl font-bold text-heading mb-2">{t("browse.title")}</h1>
       <div className="w-16 h-1 bg-gold rounded-full mb-4" />
-      <p className="text-dark/60">{t("browse.subtitle", { count })}</p>
+      <p className="text-ink/60">{t("browse.subtitle", { count })}</p>
 
       <div className="mt-6 max-w-md">
-        <div className="flex items-center justify-between text-sm text-dark/60 mb-2">
+        <div className="flex items-center justify-between text-sm text-ink/60 mb-2">
           <span>{t("progress.summary", { read: readCount, total: count })}</span>
           {streak > 0 && <span className="text-gold-dark font-medium">🔥 {t("progress.streak", { count: streak })}</span>}
         </div>

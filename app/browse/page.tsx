@@ -17,7 +17,7 @@ export default function BrowsePage() {
       {/* Page header */}
       <BrowseHeader count={lessons.length} />
 
-      <Suspense fallback={<div className="text-primary/40 text-sm">Loading…</div>}>
+      <Suspense fallback={<div className="text-heading/40 text-sm">Loading…</div>}>
         <BrowseClient lessons={lessons} categories={CATEGORIES} />
       </Suspense>
     </div>

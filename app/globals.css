@@ -11,20 +11,39 @@
   --color-cream-dark: #f5ead6;
   --color-dark: #0f2e1c;
 
+  /* Page-surface tokens — remapped in dark mode (see below). Dark hero/sections keep bg-dark. */
+  --color-surface: #fdf8ee;
+  --color-surface-2: #f5ead6;
+  --color-ink: #0f2e1c;
+  --color-heading: #1a5c38;
+
   --font-amiri: "Amiri", serif;
   --font-display: var(--font-cormorant);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-:root {
-  --background: #fdf8ee;
-  --foreground: #0f2e1c;
+body {
+  background: var(--color-surface);
+  color: var(--color-ink);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
+/* Dark theme: explicit choice via <html data-theme="dark">, or OS preference unless the reader chose light. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-surface: #0b130e;
+  --color-surface-2: #15221a;
+  --color-ink: #ece6d3;
+  --color-heading: #8fd3ab;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --color-surface: #0b130e;
+    --color-surface-2: #15221a;
+    --color-ink: #ece6d3;
+    --color-heading: #8fd3ab;
+  }
 }
 
 /* Arabic text direction and spacing */

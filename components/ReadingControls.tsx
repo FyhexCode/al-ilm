@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ARABIC_SCALES, useReadingPrefs } from "@/lib/readingPrefs";
+import { ARABIC_SCALES, useReadingPrefs, type Theme } from "@/lib/readingPrefs";
 import { useT } from "@/lib/i18n/useT";
+
+const THEMES: Theme[] = ["auto", "light", "dark"];
 
 /** Navbar "Aa" menu: Arabic text size + transliteration toggle. Also applies the prefs to <html>. */
 export default function ReadingControls() {
@@ -16,6 +18,8 @@ export default function ReadingControls() {
     const root = document.documentElement;
     root.style.setProperty("--arabic-scale", String(ARABIC_SCALES[prefs.arabicSize]));
     root.dataset.translit = prefs.showTransliteration ? "on" : "off";
+    if (prefs.theme === "auto") delete root.dataset.theme;
+    else root.dataset.theme = prefs.theme;
   }, [prefs]);
 
   // Close on outside click / Escape.
@@ -63,6 +67,24 @@ export default function ReadingControls() {
                 style={{ fontSize: `${0.9 + i * 0.25}rem` }}
               >
                 ع
+              </button>
+            ))}
+          </div>
+
+          <p className="text-cream/50 text-xs uppercase tracking-widest mb-2">{t("reading.theme")}</p>
+          <div className="flex gap-1.5 mb-4" role="group" aria-label={t("reading.theme")}>
+            {THEMES.map((theme) => (
+              <button
+                key={theme}
+                onClick={() => update({ theme })}
+                aria-pressed={prefs.theme === theme}
+                className={`flex-1 rounded-lg py-1.5 text-xs font-semibold cursor-pointer transition-colors ${
+                  prefs.theme === theme
+                    ? "bg-gold text-dark"
+                    : "bg-white/5 text-cream/70 hover:bg-white/10"
+                }`}
+              >
+                {t(`theme.${theme}` as const)}
               </button>
             ))}
           </div>

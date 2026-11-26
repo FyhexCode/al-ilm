@@ -6,13 +6,16 @@ const KEY = "al-ilm-reading";
 
 export const ARABIC_SCALES = [1, 1.2, 1.4, 1.6] as const;
 
+export type Theme = "auto" | "light" | "dark";
+
 export interface ReadingPrefs {
   /** Index into ARABIC_SCALES. */
   arabicSize: number;
   showTransliteration: boolean;
+  theme: Theme;
 }
 
-const DEFAULTS: ReadingPrefs = { arabicSize: 0, showTransliteration: true };
+const DEFAULTS: ReadingPrefs = { arabicSize: 0, showTransliteration: true, theme: "auto" };
 
 let cache: ReadingPrefs | null = null;
 const listeners = new Set<() => void>();
@@ -30,6 +33,7 @@ function read(): ReadingPrefs {
         typeof parsed?.showTransliteration === "boolean"
           ? parsed.showTransliteration
           : DEFAULTS.showTransliteration,
+      theme: parsed?.theme === "light" || parsed?.theme === "dark" ? parsed.theme : DEFAULTS.theme,
     };
   } catch {
     return DEFAULTS;

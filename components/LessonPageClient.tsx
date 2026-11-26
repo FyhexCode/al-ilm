@@ -21,12 +21,12 @@ export default function LessonPageClient({ lesson, prevLesson, nextLesson }: Pro
     <div>
       {/* Breadcrumb */}
       <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-8 pb-2">
-        <nav className="text-sm text-dark/40 flex items-center gap-2 flex-wrap">
-          <Link href="/" className="hover:text-primary transition-colors">{t("nav.home")}</Link>
+        <nav className="text-sm text-ink/40 flex items-center gap-2 flex-wrap">
+          <Link href="/" className="hover:text-heading transition-colors">{t("nav.home")}</Link>
           <span>/</span>
-          <Link href="/browse" className="hover:text-primary transition-colors">{t("nav.browse")}</Link>
+          <Link href="/browse" className="hover:text-heading transition-colors">{t("nav.browse")}</Link>
           <span>/</span>
-          <span className="text-dark/70 truncate max-w-xs">{lesson.surahName}</span>
+          <span className="text-ink/70 truncate max-w-xs">{lesson.surahName}</span>
         </nav>
       </div>
 
@@ -38,11 +38,11 @@ export default function LessonPageClient({ lesson, prevLesson, nextLesson }: Pro
           {prevLesson ? (
             <Link
               href={`/lesson/${prevLesson.surah}/${prevLesson.firstAyah}`}
-              className="flex flex-col p-4 rounded-2xl border border-gold/20 hover:border-gold hover:bg-cream-dark transition-all"
+              className="flex flex-col p-4 rounded-2xl border border-gold/20 hover:border-gold hover:bg-surface-2 transition-all"
             >
-              <span className="text-xs text-dark/40 mb-1">← {t("nav.prev")}</span>
-              <span className="text-sm font-semibold text-primary">{prevLesson.surahName}</span>
-              <span className="text-xs text-dark/40 mt-1">
+              <span className="text-xs text-ink/40 mb-1">← {t("nav.prev")}</span>
+              <span className="text-sm font-semibold text-heading">{prevLesson.surahName}</span>
+              <span className="text-xs text-ink/40 mt-1">
                 {pick(locale, prevLesson.surahNameTranslation, prevLesson.surahNameTranslationId)}
               </span>
             </Link>
@@ -53,11 +53,11 @@ export default function LessonPageClient({ lesson, prevLesson, nextLesson }: Pro
           {nextLesson ? (
             <Link
               href={`/lesson/${nextLesson.surah}/${nextLesson.firstAyah}`}
-              className="flex flex-col p-4 rounded-2xl border border-gold/20 hover:border-gold hover:bg-cream-dark transition-all text-right"
+              className="flex flex-col p-4 rounded-2xl border border-gold/20 hover:border-gold hover:bg-surface-2 transition-all text-right"
             >
-              <span className="text-xs text-dark/40 mb-1">{t("nav.next")} →</span>
-              <span className="text-sm font-semibold text-primary">{nextLesson.surahName}</span>
-              <span className="text-xs text-dark/40 mt-1">
+              <span className="text-xs text-ink/40 mb-1">{t("nav.next")} →</span>
+              <span className="text-sm font-semibold text-heading">{nextLesson.surahName}</span>
+              <span className="text-xs text-ink/40 mt-1">
                 {pick(locale, nextLesson.surahNameTranslation, nextLesson.surahNameTranslationId)}
               </span>
             </Link>

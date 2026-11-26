@@ -25,6 +25,8 @@ const cormorant = Cormorant_Garamond({
   weight: ["400", "600", "700"],
 });
 
+const THEME_INIT = `try{var p=JSON.parse(localStorage.getItem("al-ilm-reading")||"null");var t=p&&p.theme;if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}`;
+
 export const metadata: Metadata = {
   title: "Al-Ilm — Quran Verses",
   description: "Discover Quran verses by theme. Daily verse, category browsing, and more.",
@@ -38,8 +40,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${amiri.variable} ${cormorant.variable} h-full`}>
-      <body className="min-h-full flex flex-col bg-cream text-dark antialiased">
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${amiri.variable} ${cormorant.variable} h-full`}
+    >
+      <head>
+        {/* Apply a saved light/dark choice before first paint to avoid a flash. */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
+      </head>
+      <body className="min-h-full flex flex-col bg-surface text-ink antialiased">
         <LanguageProvider>
           <VisitTracker />
           <Navbar />

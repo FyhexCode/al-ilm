@@ -135,18 +135,18 @@ export default function DailyLesson({ verse: rawVerse, clusterVerses: rawCluster
         </div>
       </section>
 
-      <div className="h-14 bg-gradient-to-b from-dark to-cream" aria-hidden="true" />
+      <div className="h-14 bg-gradient-to-b from-dark to-surface" aria-hidden="true" />
 
-      <section className="bg-cream py-12 sm:py-16 px-6 overflow-hidden">
+      <section className="bg-surface py-12 sm:py-16 px-6 overflow-hidden">
         <div className="max-w-2xl mx-auto text-center">
-          <p className="text-dark/50 text-sm italic mb-2 font-[family-name:var(--font-display)]">{t("daily.translationDivider")}</p>
+          <p className="text-ink/50 text-sm italic mb-2 font-[family-name:var(--font-display)]">{t("daily.translationDivider")}</p>
           <p className="text-8xl text-gold/20 font-[family-name:var(--font-display)] leading-none mb-2 select-none text-left" aria-hidden="true">&ldquo;</p>
           {clusterVerses.map((v, idx) => (
             <div key={v.ayah}>
               {clusterVerses.length > 1 && (
-                <p className="text-dark/30 font-mono text-xs mb-2">{v.surah}:{v.ayah}</p>
+                <p className="text-ink/30 font-mono text-xs mb-2">{v.surah}:{v.ayah}</p>
               )}
-              <blockquote className={`text-dark text-2xl sm:text-3xl font-[family-name:var(--font-display)] font-light italic leading-relaxed ${idx < clusterVerses.length - 1 ? "mb-6" : "mb-8"}`}>
+              <blockquote className={`text-ink text-2xl sm:text-3xl font-[family-name:var(--font-display)] font-light italic leading-relaxed ${idx < clusterVerses.length - 1 ? "mb-6" : "mb-8"}`}>
                 {v.translation}
               </blockquote>
             </div>
@@ -157,7 +157,7 @@ export default function DailyLesson({ verse: rawVerse, clusterVerses: rawCluster
                 <Link
                   key={cat.slug}
                   href={`/browse?category=${cat.slug}`}
-                  className="px-3 py-1 rounded-full border border-dark/20 text-dark/60 hover:border-gold hover:text-primary text-xs uppercase tracking-wider transition-colors"
+                  className="px-3 py-1 rounded-full border border-dark/20 text-ink/60 hover:border-gold hover:text-heading text-xs uppercase tracking-wider transition-colors"
                 >
                   {cat.label}
                 </Link>
@@ -167,7 +167,7 @@ export default function DailyLesson({ verse: rawVerse, clusterVerses: rawCluster
         </div>
       </section>
 
-      <div className="h-14 bg-gradient-to-b from-cream to-primary-dark" aria-hidden="true" />
+      <div className="h-14 bg-gradient-to-b from-surface to-primary-dark" aria-hidden="true" />
 
       <section className="bg-primary-dark py-12 sm:py-16 px-6 overflow-hidden">
         <div className="max-w-2xl mx-auto text-center">
