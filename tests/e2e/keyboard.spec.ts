@@ -50,3 +50,34 @@ test.describe("keyboard", () => {
     await expect(page.locator("h1")).toHaveText("Jelajahi Pelajaran");
   });
 });
+
+test.describe("reading settings menu", () => {
+  test("Escape closes the menu and returns focus to its button", async ({ page }) => {
+    await page.goto("/");
+    const button = page.getByRole("button", { name: "Reading settings" });
+    await button.click();
+    await expect(button).toHaveAttribute("aria-expanded", "true");
+    await page.getByRole("button", { name: "Arabic size 2" }).focus();
+    await page.keyboard.press("Escape");
+    await expect(button).toHaveAttribute("aria-expanded", "false");
+    await expect(button).toBeFocused();
+  });
+
+  test("tabbing out of the menu closes it", async ({ page }) => {
+    await page.goto("/");
+    const button = page.getByRole("button", { name: "Reading settings" });
+    await button.click();
+    await page.getByLabel("Show transliteration").focus();
+    await page.keyboard.press("Tab");
+    await expect(button).toHaveAttribute("aria-expanded", "false");
+  });
+
+  test("the menu is operable entirely by keyboard", async ({ page }) => {
+    await page.goto("/verse/78/2");
+    await page.getByRole("button", { name: "Reading settings" }).focus();
+    await page.keyboard.press("Enter");
+    await page.getByRole("button", { name: "Dark", exact: true }).focus();
+    await page.keyboard.press("Enter");
+    await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  });
+});

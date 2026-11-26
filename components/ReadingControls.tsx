@@ -12,6 +12,7 @@ export default function ReadingControls() {
   const { prefs, update } = useReadingPrefs();
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   // Expose prefs to CSS (see globals.css: --arabic-scale, [data-translit]).
   useEffect(() => {
@@ -28,7 +29,11 @@ export default function ReadingControls() {
     const onPointer = (e: MouseEvent) => {
       if (!rootRef.current?.contains(e.target as Node)) setOpen(false);
     };
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setOpen(false);
+      buttonRef.current?.focus(); // hand focus back so keyboard users do not lose their place
+    };
     document.addEventListener("mousedown", onPointer);
     document.addEventListener("keydown", onKey);
     return () => {
@@ -38,8 +43,16 @@ export default function ReadingControls() {
   }, [open]);
 
   return (
-    <div ref={rootRef} className="relative">
+    <div
+      ref={rootRef}
+      className="relative"
+      onBlur={(e) => {
+        // Tabbing out of the menu closes it.
+        if (open && !rootRef.current?.contains(e.relatedTarget as Node | null)) setOpen(false);
+      }}
+    >
       <button
+        ref={buttonRef}
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-haspopup="true"
