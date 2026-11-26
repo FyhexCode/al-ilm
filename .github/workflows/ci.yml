@@ -44,7 +44,6 @@ jobs:
             test-results/
           retention-days: 7
       - name: Lighthouse budgets
-        run: |
-          npm run start -- -p 3217 &
-          curl --retry 30 --retry-connection-refused --retry-delay 1 -s -o /dev/null http://localhost:3217/
-          npm run lighthouse
+        run: npm run lighthouse
+        env:
+          LH_START_SERVER: "1"

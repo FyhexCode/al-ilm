@@ -3,7 +3,9 @@
  *   npm run build && npm run start -- -p 3217   (in another terminal)
  *   npm run lighthouse
  * Fails (exit 1) if any category drops below its threshold. Override the URL with LH_BASE_URL.
+ * With LH_START_SERVER=1 the script starts and stops `next start` itself (used in CI).
  */
+import { spawn } from "node:child_process";
 import { launch } from "chrome-launcher";
 import lighthouse from "lighthouse";
 
@@ -31,7 +33,33 @@ function annotate(level, title, message) {
   if (IN_CI) console.log(`::${level} title=${title}::${message}`);
 }
 
+async function startServer() {
+  const port = new URL(BASE).port || "3217";
+  const server = spawn(process.execPath, ["node_modules/next/dist/bin/next", "start", "-p", port], {
+    stdio: "inherit",
+  });
+  for (let i = 0; i < 60; i++) {
+    try {
+      if ((await fetch(BASE)).ok) return server;
+    } catch {
+      // not up yet
+    }
+    await new Promise((r) => setTimeout(r, 1000));
+  }
+  server.kill();
+  throw new Error(`Server did not start at ${BASE}`);
+}
+
 async function main() {
+  const server = process.env.LH_START_SERVER ? await startServer() : null;
+  try {
+    await run();
+  } finally {
+    server?.kill();
+  }
+}
+
+async function run() {
   const chrome = await launch({
     chromePath: await chromePath(),
     chromeFlags: ["--headless=new", "--no-sandbox", "--disable-gpu"],
@@ -69,7 +97,8 @@ async function main() {
   if (failures.length) {
     console.error("Lighthouse budget failures:\n" + failures.join("\n"));
     annotate("error", "Lighthouse budgets", failures.join("; "));
-    process.exit(1);
+    process.exitCode = 1; // not process.exit(): main() must still stop the server it started
+    return;
   }
   console.log("Lighthouse budgets met.");
 }
