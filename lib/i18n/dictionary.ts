@@ -16,6 +16,7 @@ const en = {
 
   "copy.copy": "Copy verse",
   "copy.copied": "Copied!",
+  "card.download": "Save as image",
 
   "progress.markRead": "Mark this surah as read",
   "progress.markedRead": "Read — tap to undo",
@@ -131,6 +132,7 @@ const id: Record<DictKey, string> = {
 
   "copy.copy": "Salin ayat",
   "copy.copied": "Tersalin!",
+  "card.download": "Simpan sebagai gambar",
 
   "progress.markRead": "Tandai surah ini sudah dibaca",
   "progress.markedRead": "Sudah dibaca — ketuk untuk batal",

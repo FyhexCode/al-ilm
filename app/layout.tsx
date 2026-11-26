@@ -28,6 +28,8 @@ const cormorant = Cormorant_Garamond({
 const THEME_INIT = `try{var p=JSON.parse(localStorage.getItem("al-ilm-reading")||"null");var t=p&&p.theme;if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}`;
 
 export const metadata: Metadata = {
+  // Absolute base so relative Open Graph image URLs resolve for link previews.
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://al-ilm-omega.vercel.app"),
   title: "Al-Ilm — Quran Verses",
   description: "Discover Quran verses by theme. Daily verse, category browsing, and more.",
   openGraph: { siteName: "Al-Ilm", type: "website" },

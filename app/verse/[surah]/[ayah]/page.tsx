@@ -29,7 +29,16 @@ export async function generateMetadata({ params }: Props) {
       type: "article",
       title: `${verse.surahName} ${verse.surah}:${verse.ayah} — Al-Ilm`,
       description: verse.translation,
+      images: [
+        {
+          url: `/og/${verse.surah}/${verse.ayah}`,
+          width: 1200,
+          height: 630,
+          alt: `${verse.surahName} ${verse.surah}:${verse.ayah}`,
+        },
+      ],
     },
+    twitter: { card: "summary_large_image" },
   };
 }
 

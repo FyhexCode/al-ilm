@@ -5,6 +5,7 @@ import ArabicText from "./ArabicText";
 import ShareButton from "./ShareButton";
 import BookmarkButton from "./BookmarkButton";
 import CopyVerseButton from "./CopyVerseButton";
+import DownloadCardButton from "./DownloadCardButton";
 import TafseerSection from "./TafseerSection";
 import type { Verse } from "@/lib/types";
 import { CATEGORIES } from "@/data/categories";
@@ -127,6 +128,7 @@ export default function VerseDetail({ verse: rawVerse, prev, next }: Props) {
           translation={verse.translation}
           reference={`${verse.surahName} ${verse.surah}:${verse.ayah}`}
         />
+        <DownloadCardButton surah={verse.surah} ayah={verse.ayah} />
         <ShareButton surah={verse.surah} ayah={verse.ayah} />
       </div>
 
