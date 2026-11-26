@@ -1,22 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import type { LessonGroup } from "@/lib/getLessons";
+import type { LessonSummary } from "@/lib/getLessons";
 import { CATEGORIES } from "@/data/categories";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import { useT } from "@/lib/i18n/useT";
 import { useProgress } from "@/lib/progress";
-import { localizeLesson, localizeCategory } from "@/lib/i18n/pick";
+import { localizeLessonSummary, localizeCategory } from "@/lib/i18n/pick";
 
 interface LessonCardProps {
-  lesson: LessonGroup;
+  lesson: LessonSummary;
 }
 
 export default function LessonCard({ lesson: rawLesson }: LessonCardProps) {
   const { locale } = useLanguage();
   const t = useT();
   const { isRead } = useProgress();
-  const lesson = localizeLesson(rawLesson, locale);
+  const lesson = localizeLessonSummary(rawLesson, locale);
   const done = isRead(lesson.surah);
 
   const cats = CATEGORIES.filter((c) => lesson.categories.includes(c.slug)).map((c) =>
@@ -26,7 +26,7 @@ export default function LessonCard({ lesson: rawLesson }: LessonCardProps) {
     lesson.firstAyah === lesson.lastAyah
       ? `${lesson.surah}:${lesson.firstAyah}`
       : `${lesson.surah}:${lesson.firstAyah}–${lesson.lastAyah}`;
-  const verseWord = lesson.verses.length === 1 ? t("common.verse") : t("common.verses");
+  const verseWord = lesson.verseCount === 1 ? t("common.verse") : t("common.verses");
 
   return (
     <Link
@@ -60,7 +60,7 @@ export default function LessonCard({ lesson: rawLesson }: LessonCardProps) {
       {/* Range + verse count */}
       <div className="px-5 pb-4">
         <p className="text-gold-light font-mono text-xs">
-          {range} · {lesson.verses.length} {verseWord}
+          {range} · {lesson.verseCount} {verseWord}
           {done && <span className="ml-2 text-gold-light font-sans font-semibold">✓ {t("progress.read")}</span>}
         </p>
       </div>

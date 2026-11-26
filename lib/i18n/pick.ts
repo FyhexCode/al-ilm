@@ -1,6 +1,6 @@
 import type { Locale } from "./types";
 import type { Verse, Category, VerseCluster } from "@/lib/types";
-import type { LessonGroup } from "@/lib/getLessons";
+import type { LessonGroup, LessonSummary } from "@/lib/getLessons";
 
 /** Pick the Indonesian value when present and non-empty, else fall back to English. */
 export function pick(
@@ -63,5 +63,16 @@ export function localizeLesson(lesson: LessonGroup, locale: Locale): LessonGroup
       ? pick(locale, lesson.previewTakeaway, lesson.previewTakeawayId)
       : undefined,
     verses: lesson.verses.map((v) => localizeVerse(v, locale)),
+  };
+}
+
+export function localizeLessonSummary(lesson: LessonSummary, locale: Locale): LessonSummary {
+  if (locale === "en") return lesson;
+  return {
+    ...lesson,
+    surahNameTranslation: pick(locale, lesson.surahNameTranslation, lesson.surahNameTranslationId),
+    previewTakeaway: lesson.previewTakeaway
+      ? pick(locale, lesson.previewTakeaway, lesson.previewTakeawayId)
+      : undefined,
   };
 }

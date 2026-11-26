@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getLessons } from "@/lib/getLessons";
+import { getLessons, getLessonSummaries, slimLessonForClient } from "@/lib/getLessons";
 import LessonPageClient from "@/components/LessonPageClient";
 
 interface Props {
@@ -48,12 +48,14 @@ export default async function LessonPage({ params }: Props) {
   const lessonIdx = lessons.findIndex(
     (l) => l.surah === surahNum && l.firstAyah === ayahNum
   );
-  const prevLesson = lessonIdx > 0 ? lessons[lessonIdx - 1] : null;
-  const nextLesson = lessonIdx < lessons.length - 1 ? lessons[lessonIdx + 1] : null;
+  // Neighbours only need a title and link, so send summaries, not whole lessons.
+  const summaries = getLessonSummaries();
+  const prevLesson = lessonIdx > 0 ? summaries[lessonIdx - 1] : null;
+  const nextLesson = lessonIdx < summaries.length - 1 ? summaries[lessonIdx + 1] : null;
 
   return (
     <LessonPageClient
-      lesson={lesson}
+      lesson={slimLessonForClient(lesson)}
       prevLesson={prevLesson}
       nextLesson={nextLesson}
     />

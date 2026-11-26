@@ -126,3 +126,40 @@ describe("lessons", () => {
     for (const l of lessons) expect(l.previewTakeaway, `surah ${l.surah}`).toBeTruthy();
   });
 });
+
+describe("lesson payload slimming", () => {
+  it("summaries carry no verse bodies and the right verse counts", async () => {
+    const { getLessonSummaries } = await import("@/lib/getLessons");
+    const summaries = getLessonSummaries();
+    expect(summaries).toHaveLength(37);
+    for (const [i, s] of summaries.entries()) {
+      expect(s).not.toHaveProperty("verses");
+      expect(s.verseCount).toBe(getLessons()[i].verses.length);
+      expect(s.surahName).toBeTruthy();
+    }
+  });
+
+  it("slimLessonForClient keeps tafseer on the first verse only", async () => {
+    const { slimLessonForClient } = await import("@/lib/getLessons");
+    const lesson = getLessons()[0];
+    const slim = slimLessonForClient(lesson);
+    expect(slim.verses).toHaveLength(lesson.verses.length);
+    expect(slim.verses[0].tafseer).toBe(lesson.verses[0].tafseer);
+    expect(slim.verses[0].tafseer).toBeTruthy();
+    for (const v of slim.verses.slice(1)) {
+      expect(v.tafseer).toBeNull();
+      expect(v.tafseerSummary).toBeNull();
+    }
+    // Everything the UI renders per verse is untouched.
+    expect(slim.verses.map((v) => v.arabic)).toEqual(lesson.verses.map((v) => v.arabic));
+    expect(slim.verses.map((v) => v.translationId)).toEqual(lesson.verses.map((v) => v.translationId));
+  });
+
+  it("does not mutate the source lesson", async () => {
+    const { slimLessonForClient } = await import("@/lib/getLessons");
+    const lesson = getLessons()[0];
+    const before = lesson.verses[1].tafseer;
+    slimLessonForClient(lesson);
+    expect(lesson.verses[1].tafseer).toBe(before);
+  });
+});

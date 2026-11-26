@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { getLessons } from "@/lib/getLessons";
+import { getLessonSummaries } from "@/lib/getLessons";
 import { CATEGORIES } from "@/data/categories";
 import BrowseClient from "@/components/BrowseClient";
 import BrowseHeader from "@/components/BrowseHeader";
@@ -10,7 +10,7 @@ export const metadata = {
 };
 
 export default function BrowsePage() {
-  const lessons = getLessons();
+  const lessons = getLessonSummaries();
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">

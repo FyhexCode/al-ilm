@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import type { LessonGroup } from "@/lib/getLessons";
+import type { LessonGroup, LessonSummary } from "@/lib/getLessons";
 import LessonDetail from "./LessonDetail";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import { useT } from "@/lib/i18n/useT";
@@ -9,8 +9,8 @@ import { pick } from "@/lib/i18n/pick";
 
 interface Props {
   lesson: LessonGroup;
-  prevLesson: LessonGroup | null;
-  nextLesson: LessonGroup | null;
+  prevLesson: LessonSummary | null;
+  nextLesson: LessonSummary | null;
 }
 
 export default function LessonPageClient({ lesson, prevLesson, nextLesson }: Props) {

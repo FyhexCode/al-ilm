@@ -20,6 +20,54 @@ export interface LessonGroup {
   verses: Verse[];
 }
 
+/** What a lesson *card* needs — no verse bodies, so Browse stays small. */
+export interface LessonSummary {
+  id: string;
+  surah: number;
+  surahName: string;
+  surahNameTranslation: string;
+  surahNameTranslationId?: string;
+  surahNameAr: string;
+  categories: string[];
+  firstAyah: number;
+  lastAyah: number;
+  verseCount: number;
+  previewTakeaway?: string;
+  previewTakeawayId?: string;
+}
+
+export function getLessonSummaries(): LessonSummary[] {
+  return getLessons().map((l) => ({
+    id: l.id,
+    surah: l.surah,
+    surahName: l.surahName,
+    surahNameTranslation: l.surahNameTranslation,
+    surahNameTranslationId: l.surahNameTranslationId,
+    surahNameAr: l.surahNameAr,
+    categories: l.categories,
+    firstAyah: l.firstAyah,
+    lastAyah: l.lastAyah,
+    verseCount: l.verses.length,
+    previewTakeaway: l.previewTakeaway,
+    previewTakeawayId: l.previewTakeawayId,
+  }));
+}
+
+/**
+ * Every verse in a group carries the same (very long) tafseer text. The lesson page shows it once,
+ * from the first verse, so strip it from the rest before the lesson is sent to the browser.
+ */
+export function slimLessonForClient(lesson: LessonGroup): LessonGroup {
+  return {
+    ...lesson,
+    verses: lesson.verses.map((v, i) =>
+      i === 0
+        ? v
+        : { ...v, tafseer: null, tafseerSummary: null, tafseerId: null, tafseerSummaryId: null }
+    ),
+  };
+}
+
 export function getLessons(): LessonGroup[] {
   const verses = getAllVerses();
   const groupMap = new Map<string, LessonGroup>();

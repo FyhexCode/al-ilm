@@ -3,14 +3,14 @@
 import { useMemo } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import LessonCard from "./LessonCard";
-import type { LessonGroup } from "@/lib/getLessons";
+import type { LessonSummary } from "@/lib/getLessons";
 import type { Category } from "@/lib/types";
 import { useLanguage } from "@/lib/i18n/useLanguage";
 import { useT } from "@/lib/i18n/useT";
 import { localizeCategory } from "@/lib/i18n/pick";
 
 interface BrowseClientProps {
-  lessons: LessonGroup[];
+  lessons: LessonSummary[];
   categories: Category[];
 }
 
@@ -24,11 +24,11 @@ const SORT_LABELS = {
   shortest: "browse.sort.shortest",
 } as const;
 
-const SORTERS: Record<SortKey, (a: LessonGroup, b: LessonGroup) => number> = {
+const SORTERS: Record<SortKey, (a: LessonSummary, b: LessonSummary) => number> = {
   order: (a, b) => a.surah - b.surah,
   reverse: (a, b) => b.surah - a.surah,
-  longest: (a, b) => b.verses.length - a.verses.length || a.surah - b.surah,
-  shortest: (a, b) => a.verses.length - b.verses.length || a.surah - b.surah,
+  longest: (a, b) => b.verseCount - a.verseCount || a.surah - b.surah,
+  shortest: (a, b) => a.verseCount - b.verseCount || a.surah - b.surah,
 };
 
 export default function BrowseClient({ lessons, categories }: BrowseClientProps) {
