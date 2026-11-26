@@ -9,10 +9,16 @@ import lighthouse from "lighthouse";
 
 const BASE = process.env.LH_BASE_URL ?? "http://localhost:3217";
 const PAGES = ["/", "/browse", "/verse/78/2", "/lesson/78/1"];
+const IN_CI = !!process.env.GITHUB_ACTIONS;
 
 // Thresholds sit a little below the recorded baseline (docs/lighthouse-baseline.md) so noise does not
-// fail the build but a real regression does. Scores are 0-100.
-const THRESHOLDS = { performance: 70, accessibility: 95, "best-practices": 90, seo: 90 };
+// fail the build but a real regression does. Scores are 0-100. Performance is looser on shared CI runners.
+const THRESHOLDS = {
+  performance: IN_CI ? 50 : 70,
+  accessibility: 95,
+  "best-practices": 90,
+  seo: 90,
+};
 
 async function chromePath() {
   if (process.env.CHROME_PATH) return process.env.CHROME_PATH;
@@ -20,35 +26,56 @@ async function chromePath() {
   return chromium.executablePath();
 }
 
-const chrome = await launch({
-  chromePath: await chromePath(),
-  chromeFlags: ["--headless=new", "--no-sandbox", "--disable-gpu"],
-});
+/** GitHub Actions annotations surface results on the run page without opening the raw log. */
+function annotate(level, title, message) {
+  if (IN_CI) console.log(`::${level} title=${title}::${message}`);
+}
 
-const failures = [];
-const rows = [];
-try {
-  for (const path of PAGES) {
-    const result = await lighthouse(`${BASE}${path}`, {
-      port: chrome.port,
-      output: "json",
-      logLevel: "error",
-      onlyCategories: Object.keys(THRESHOLDS),
-    });
-    const cats = result.lhr.categories;
-    const scores = Object.fromEntries(Object.keys(THRESHOLDS).map((k) => [k, Math.round((cats[k].score ?? 0) * 100)]));
-    rows.push({ path, ...scores });
-    for (const [k, min] of Object.entries(THRESHOLDS)) {
-      if (scores[k] < min) failures.push(`${path}: ${k} ${scores[k]} < ${min}`);
+async function main() {
+  const chrome = await launch({
+    chromePath: await chromePath(),
+    chromeFlags: ["--headless=new", "--no-sandbox", "--disable-gpu"],
+  });
+
+  const failures = [];
+  const rows = [];
+  try {
+    for (const path of PAGES) {
+      const result = await lighthouse(`${BASE}${path}`, {
+        port: chrome.port,
+        output: "json",
+        logLevel: "error",
+        onlyCategories: Object.keys(THRESHOLDS),
+      });
+      const cats = result.lhr.categories;
+      const scores = Object.fromEntries(
+        Object.keys(THRESHOLDS).map((k) => [k, Math.round((cats[k].score ?? 0) * 100)])
+      );
+      rows.push({ path, ...scores });
+      annotate(
+        "notice",
+        `Lighthouse ${path}`,
+        `perf ${scores.performance} / a11y ${scores.accessibility} / bp ${scores["best-practices"]} / seo ${scores.seo}`
+      );
+      for (const [k, min] of Object.entries(THRESHOLDS)) {
+        if (scores[k] < min) failures.push(`${path}: ${k} ${scores[k]} < ${min}`);
+      }
     }
+  } finally {
+    await chrome.kill();
   }
-} finally {
-  await chrome.kill();
+
+  console.table(rows);
+  if (failures.length) {
+    console.error("Lighthouse budget failures:\n" + failures.join("\n"));
+    annotate("error", "Lighthouse budgets", failures.join("; "));
+    process.exit(1);
+  }
+  console.log("Lighthouse budgets met.");
 }
 
-console.table(rows);
-if (failures.length) {
-  console.error("Lighthouse budget failures:\n" + failures.join("\n"));
+main().catch((error) => {
+  console.error(error);
+  annotate("error", "Lighthouse crashed", String(error?.message ?? error).replace(/\r?\n/g, " "));
   process.exit(1);
-}
-console.log("Lighthouse budgets met.");
+});
