@@ -49,3 +49,7 @@ next-env.d.ts
 .claude/
 .playwright-mcp/
 .serena/
+
+# playwright
+/test-results/
+/playwright-report/
