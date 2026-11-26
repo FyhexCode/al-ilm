@@ -51,7 +51,7 @@ export default function ReadingControls() {
 
       {open && (
         <div className="absolute right-0 mt-2 w-60 rounded-2xl border border-gold/30 bg-dark p-4 shadow-xl z-50">
-          <p className="text-cream/50 text-xs uppercase tracking-widest mb-2">{t("reading.arabicSize")}</p>
+          <p className="text-cream/70 text-xs uppercase tracking-widest mb-2">{t("reading.arabicSize")}</p>
           <div className="flex gap-1.5 mb-4" role="group" aria-label={t("reading.arabicSize")}>
             {ARABIC_SCALES.map((_, i) => (
               <button
@@ -71,7 +71,7 @@ export default function ReadingControls() {
             ))}
           </div>
 
-          <p className="text-cream/50 text-xs uppercase tracking-widest mb-2">{t("reading.theme")}</p>
+          <p className="text-cream/70 text-xs uppercase tracking-widest mb-2">{t("reading.theme")}</p>
           <div className="flex gap-1.5 mb-4" role="group" aria-label={t("reading.theme")}>
             {THEMES.map((theme) => (
               <button

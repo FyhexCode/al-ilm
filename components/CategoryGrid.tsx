@@ -14,7 +14,7 @@ export default function CategoryGrid() {
     <section className="max-w-5xl mx-auto px-6 py-16">
       <div className="text-center mb-10">
         <h2 className="text-3xl font-semibold text-heading mb-3 font-[family-name:var(--font-display)]">{t("categoryGrid.title")}</h2>
-        <p className="text-ink/60 text-sm">
+        <p className="text-muted text-sm">
           {t("categoryGrid.subtitle")}
         </p>
       </div>
@@ -30,7 +30,7 @@ export default function CategoryGrid() {
             >
               {cat.icon && <span className="text-2xl" aria-hidden="true">{cat.icon}</span>}
               <span className="text-sm font-semibold text-heading">{cat.label}</span>
-              <p className="text-xs text-ink/50 leading-relaxed hidden sm:block">
+              <p className="text-xs text-muted leading-relaxed hidden sm:block">
                 {cat.description}
               </p>
             </Link>
@@ -44,7 +44,7 @@ export default function CategoryGrid() {
         >
           <span className="text-2xl" aria-hidden="true">📚</span>
           <span className="text-sm font-semibold text-cream">{t("categoryGrid.allVerses")}</span>
-          <p className="text-xs text-cream/60 leading-relaxed hidden sm:block">
+          <p className="text-xs text-cream/70 leading-relaxed hidden sm:block">
             {t("categoryGrid.allVersesDesc")}
           </p>
         </Link>

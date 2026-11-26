@@ -98,7 +98,7 @@ export default function BrowseClient({ lessons, categories }: BrowseClientProps)
 
       {/* Result count + sort */}
       <div className="flex flex-wrap items-center justify-between gap-3 mt-6 mb-4">
-      <p className="text-sm text-ink/50">
+      <p className="text-sm text-muted">
         {t("browse.showing")}{" "}
         <span className="font-semibold text-heading">{filtered.length}</span>{" "}
         {lessonWord}
@@ -109,7 +109,7 @@ export default function BrowseClient({ lessons, categories }: BrowseClientProps)
           </>
         )}
       </p>
-        <label className="flex items-center gap-2 text-sm text-ink/50">
+        <label className="flex items-center gap-2 text-sm text-muted">
           {t("browse.sortBy")}
           <select
             value={sort}
@@ -126,7 +126,7 @@ export default function BrowseClient({ lessons, categories }: BrowseClientProps)
       </div>
 
       {filtered.length === 0 && (
-        <p className="text-center text-ink/50 text-sm py-12">{t("browse.empty")}</p>
+        <p className="text-center text-muted text-sm py-12">{t("browse.empty")}</p>
       )}
 
       {/* Lesson grid */}

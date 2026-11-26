@@ -22,10 +22,10 @@ export default function VerseCard({ verse }: VerseCardProps) {
       {/* Header */}
       <div className="px-5 pt-4 pb-2 flex items-center justify-between">
         <div>
-          <span className="text-xs font-semibold text-gold uppercase tracking-wider">
+          <span className="text-xs font-semibold text-gold-ink uppercase tracking-wider">
             {verse.surahName}
           </span>
-          <span className="text-xs text-heading/50 ml-2">
+          <span className="text-xs text-muted ml-2">
             {verse.surahNameTranslation}
           </span>
         </div>
@@ -41,7 +41,7 @@ export default function VerseCard({ verse }: VerseCardProps) {
 
       {/* Transliteration */}
       <div className="px-5 pt-2 pb-1">
-        <p className="text-xs italic text-heading/60 text-right">
+        <p className="text-xs italic text-muted text-right">
           {verse.transliteration}
         </p>
       </div>
@@ -57,7 +57,7 @@ export default function VerseCard({ verse }: VerseCardProps) {
           {verseCategories.map((cat) => (
             <span
               key={cat.slug}
-              className="text-xs bg-gold/15 text-gold-dark px-2 py-0.5 rounded-full"
+              className="text-xs bg-gold/15 text-gold-ink px-2 py-0.5 rounded-full"
             >
               {cat.icon} {cat.label}
             </span>

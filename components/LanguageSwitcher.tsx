@@ -22,7 +22,7 @@ export default function LanguageSwitcher() {
             className={`px-2.5 py-1 text-xs font-semibold rounded-full transition-colors cursor-pointer ${
               active
                 ? "bg-gold text-dark"
-                : "text-cream/60 hover:text-cream"
+                : "text-cream/70 hover:text-cream"
             }`}
           >
             {LOCALE_LABELS[loc]}

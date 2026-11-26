@@ -15,7 +15,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-2.5 group shrink-0">
           <div>
             <span className="font-bold text-cream text-lg leading-none block whitespace-nowrap">Al-Ilm</span>
-            <span className="text-gold/60 text-[10px] tracking-widest uppercase leading-none block">
+            <span className="text-gold-light text-[10px] tracking-widest uppercase leading-none block">
               العِلم
             </span>
           </div>

@@ -18,7 +18,7 @@ export default function ShareButton({ surah, ayah }: { surah: number; ayah: numb
   return (
     <button
       onClick={handleCopy}
-      className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-gold/40 text-sm text-gold hover:bg-gold/10 hover:border-gold transition-all duration-200"
+      className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-gold/40 text-sm text-gold-ink hover:bg-gold/10 hover:border-gold transition-all duration-200"
     >
       {copied ? (
         <>{t("share.copied")}</>

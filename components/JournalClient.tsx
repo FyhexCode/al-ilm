@@ -50,17 +50,17 @@ export default function JournalClient() {
         {entries.length > 0 && (
           <button
             onClick={exportNotes}
-            className="px-4 py-2 rounded-full border border-gold/40 text-sm text-gold hover:bg-gold/10 hover:border-gold transition-colors cursor-pointer"
+            className="px-4 py-2 rounded-full border border-gold/40 text-sm text-gold-ink hover:bg-gold/10 hover:border-gold transition-colors cursor-pointer"
           >
             {t("journal.export")}
           </button>
         )}
       </div>
-      <p className="text-ink/50 text-sm mb-6">{t("journal.privacy")}</p>
+      <p className="text-muted text-sm mb-6">{t("journal.privacy")}</p>
 
       {idsKey === "" && (
         <div className="text-center py-16">
-          <p className="text-ink/50 text-sm mb-4">{t("journal.empty")}</p>
+          <p className="text-muted text-sm mb-4">{t("journal.empty")}</p>
           <Link
             href="/browse"
             className="inline-block px-5 py-2.5 bg-gold hover:bg-gold-light text-dark font-semibold rounded-full transition-colors text-sm"
@@ -78,19 +78,19 @@ export default function JournalClient() {
               <div className="flex items-start justify-between gap-3 mb-2">
                 <Link
                   href={`/verse/${hit.surah}/${hit.ayah}`}
-                  className="text-gold font-mono text-xs hover:underline"
+                  className="text-gold-ink font-mono text-xs hover:underline"
                 >
                   {hit.surahName} {hit.surah}:{hit.ayah}
                 </Link>
                 <button
                   onClick={() => setNote(id, "")}
                   aria-label={t("journal.remove")}
-                  className="shrink-0 text-ink/40 hover:text-ink text-lg leading-none px-1 cursor-pointer"
+                  className="shrink-0 text-muted hover:text-ink text-lg leading-none px-1 cursor-pointer"
                 >
                   ×
                 </button>
               </div>
-              <p className="text-ink/60 text-xs italic line-clamp-2 mb-2">{hit.translation}</p>
+              <p className="text-muted text-xs italic line-clamp-2 mb-2">{hit.translation}</p>
               <p className="text-ink text-sm leading-relaxed whitespace-pre-wrap">{notes[id]}</p>
             </li>
           );

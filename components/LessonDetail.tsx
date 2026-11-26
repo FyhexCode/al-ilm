@@ -95,7 +95,7 @@ export default function LessonDetail({ lesson: rawLesson }: Props) {
               className={`px-5 py-3 text-sm font-medium transition-colors border-b-2 -mb-px cursor-pointer ${
                 tab === tabId
                   ? "border-gold text-heading"
-                  : "border-transparent text-ink/50 hover:text-heading hover:border-gold/40"
+                  : "border-transparent text-muted hover:text-heading hover:border-gold/40"
               }`}
             >
               {t(TAB_KEYS[tabId])}
@@ -145,13 +145,13 @@ function OverviewTab({
       {/* Hero block */}
       <div className="bg-dark rounded-3xl hero-pattern overflow-hidden">
         <div className="relative z-10 p-8 sm:p-12 text-center">
-          <p className="text-cream/20 text-4xl font-[family-name:var(--font-amiri)] mb-4">
+          <p className="text-cream/70 text-4xl font-[family-name:var(--font-amiri)] mb-4">
             {lesson.surahNameAr}
           </p>
           <h1 className="text-3xl sm:text-4xl font-bold text-cream leading-tight mb-2">
             {lesson.surahName}
           </h1>
-          <p className="text-cream/50 text-base mb-4">{lesson.surahNameTranslation}</p>
+          <p className="text-cream/70 text-base mb-4">{lesson.surahNameTranslation}</p>
           <p className="gold-shimmer text-xs tracking-[0.2em] uppercase font-medium">{range}</p>
         </div>
       </div>
@@ -159,9 +159,9 @@ function OverviewTab({
       {/* Cluster-based lessons — clickable to reveal lesson text */}
       {clusters.length > 0 && (
         <div>
-          <p className="text-ink/40 text-xs tracking-widest uppercase mb-4">
+          <p className="text-muted text-xs tracking-widest uppercase mb-4">
             {t("lesson.lessonsInSurah")}
-            <span className="ml-2 normal-case text-ink/30">{t("lesson.tapToApply")}</span>
+            <span className="ml-2 normal-case text-muted">{t("lesson.tapToApply")}</span>
           </p>
           <div className="rounded-2xl border border-gold/20 overflow-hidden divide-y divide-gold/10">
             {clusters.map((cluster) => {
@@ -178,20 +178,20 @@ function OverviewTab({
                     aria-expanded={isOpen}
                     className="w-full flex items-start gap-3 px-5 py-3.5 text-left hover:bg-gold/5 transition-colors cursor-pointer"
                   >
-                    <span className="text-gold font-mono text-xs shrink-0 mt-0.5 w-16">
+                    <span className="text-gold-ink font-mono text-xs shrink-0 mt-0.5 w-16">
                       {rangeLabel}
                     </span>
                     <p className={`text-sm flex-1 ${isOpen ? "text-heading font-medium" : "text-ink/80"}`}>
                       {cluster.keyTakeaway}
                     </p>
-                    <span className="text-ink/30 text-xs shrink-0 mt-0.5">
+                    <span className="text-muted text-xs shrink-0 mt-0.5">
                       {isOpen ? "▲" : "▼"}
                     </span>
                   </button>
 
                   {isOpen && cluster.lesson && (
                     <div className="px-5 pb-4 pt-1 bg-primary/5 border-t border-gold/10">
-                      <p className="text-gold/60 text-xs tracking-widest uppercase mb-2">
+                      <p className="text-gold-ink text-xs tracking-widest uppercase mb-2">
                         {t("lesson.howToApply")}
                       </p>
                       <p className="text-ink/70 text-sm leading-relaxed">{cluster.lesson}</p>
@@ -207,7 +207,7 @@ function OverviewTab({
       {/* Categories */}
       {cats.length > 0 && (
         <div>
-          <p className="text-ink/40 text-xs tracking-widest uppercase mb-3">{t("common.themes")}</p>
+          <p className="text-muted text-xs tracking-widest uppercase mb-3">{t("common.themes")}</p>
           <div className="flex flex-wrap gap-2">
             {cats.map((raw) => {
               const cat = localizeCategory(raw, locale);
@@ -215,7 +215,7 @@ function OverviewTab({
                 <Link
                   key={cat.slug}
                   href={`/browse?category=${cat.slug}`}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium bg-gold/15 text-gold-dark hover:bg-gold/25 transition-colors border border-gold/30"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium bg-gold/15 text-gold-ink hover:bg-gold/25 transition-colors border border-gold/30"
                 >
                   {cat.icon} {cat.label}
                 </Link>
@@ -244,7 +244,7 @@ function VersesTab({ lesson }: { lesson: LessonGroup }) {
 
   return (
     <div className="space-y-6">
-      <p className="text-ink/40 text-xs tracking-widest uppercase">
+      <p className="text-muted text-xs tracking-widest uppercase">
         {lesson.verses.length} {lesson.verses.length === 1 ? t("common.verse") : t("common.verses")} {t("common.in")} {lesson.surahName}
       </p>
 
@@ -265,16 +265,16 @@ function VersesTab({ lesson }: { lesson: LessonGroup }) {
             {/* Cluster header */}
             <div className="px-5 py-3 flex items-center justify-between bg-primary/5 border-b border-gold/15">
               <div className="flex items-center gap-2">
-                <span className="text-gold font-mono text-xs font-semibold">{rangeLabel}</span>
+                <span className="text-gold-ink font-mono text-xs font-semibold">{rangeLabel}</span>
                 {isGroup && (
-                  <span className="text-gold/50 text-xs bg-gold/10 px-2 py-0.5 rounded-full">
+                  <span className="text-gold-ink text-xs bg-gold/10 px-2 py-0.5 rounded-full">
                     {t("lesson.connected")}
                   </span>
                 )}
               </div>
               <Link
                 href={`/verse/${lesson.surah}/${cluster.ayahs[0]}`}
-                className="text-xs text-heading/50 hover:text-heading transition-colors"
+                className="text-xs text-muted hover:text-heading transition-colors"
               >
                 {t("lesson.fullPage")}
               </Link>
@@ -284,7 +284,7 @@ function VersesTab({ lesson }: { lesson: LessonGroup }) {
             {clusterVerses.map((verse, idx) => (
               <div key={verse.ayah}>
                 {isGroup && (
-                  <p className="text-gold/40 font-mono text-xs px-5 pt-4 pb-1">
+                  <p className="text-gold-ink font-mono text-xs px-5 pt-4 pb-1">
                     {verse.surah}:{verse.ayah}
                   </p>
                 )}
@@ -292,7 +292,7 @@ function VersesTab({ lesson }: { lesson: LessonGroup }) {
                   <ArabicText text={verse.arabic} size="md" align="right" className="text-ink/90" />
                 </div>
                 <div className="translit px-5 pt-2 pb-1">
-                  <p className="text-xs italic text-heading/50 text-right">{verse.transliteration}</p>
+                  <p className="text-xs italic text-muted text-right">{verse.transliteration}</p>
                 </div>
                 <div className={`px-5 pb-4 pt-2 ${idx < clusterVerses.length - 1 ? "border-b border-gold/10" : ""}`}>
                   <p className="text-ink/80 text-sm leading-relaxed">
@@ -305,13 +305,13 @@ function VersesTab({ lesson }: { lesson: LessonGroup }) {
             {/* Key takeaway + lesson */}
             {cluster.keyTakeaway && (
               <div className="px-5 py-4 border-t border-gold/15 bg-gold/5">
-                <p className="text-gold text-xs uppercase tracking-wider mb-1.5">{t("lesson.keyTakeaway")}</p>
+                <p className="text-gold-ink text-xs uppercase tracking-wider mb-1.5">{t("lesson.keyTakeaway")}</p>
                 <p className="text-heading text-sm font-medium leading-snug mb-3">
                   {cluster.keyTakeaway}
                 </p>
                 {cluster.lesson && (
                   <>
-                    <p className="text-gold/60 text-xs uppercase tracking-wider mb-1.5">{t("lesson.lessonLabel")}</p>
+                    <p className="text-gold-ink text-xs uppercase tracking-wider mb-1.5">{t("lesson.lessonLabel")}</p>
                     <p className="text-ink/70 text-sm leading-relaxed">{cluster.lesson}</p>
                   </>
                 )}
@@ -331,8 +331,8 @@ function TafseerTab({ verse }: { verse: Verse | null }) {
   if (!verse) {
     return (
       <div className="text-center py-16">
-        <p className="text-ink/30 text-4xl mb-4">📖</p>
-        <p className="text-ink/50 text-sm">{t("lesson.noTafseer")}</p>
+        <p className="text-muted text-4xl mb-4">📖</p>
+        <p className="text-muted text-sm">{t("lesson.noTafseer")}</p>
       </div>
     );
   }

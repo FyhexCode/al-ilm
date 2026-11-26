@@ -37,7 +37,7 @@ export default function SavedClient() {
 
       {ids.length === 0 && (
         <div className="text-center py-16">
-          <p className="text-ink/50 text-sm mb-4">{t("saved.empty")}</p>
+          <p className="text-muted text-sm mb-4">{t("saved.empty")}</p>
           <Link
             href="/browse"
             className="inline-block px-5 py-2.5 bg-gold hover:bg-gold-light text-dark font-semibold rounded-full transition-colors text-sm"
@@ -54,7 +54,7 @@ export default function SavedClient() {
             className="flex items-start gap-3 rounded-2xl border border-gold/25 p-4 hover:border-gold transition-colors"
           >
             <Link href={`/verse/${hit.surah}/${hit.ayah}`} className="flex-1 min-w-0">
-              <span className="text-gold font-mono text-xs">
+              <span className="text-gold-ink font-mono text-xs">
                 {hit.surahName} {hit.surah}:{hit.ayah}
               </span>
               {hit.takeaway && (
@@ -67,7 +67,7 @@ export default function SavedClient() {
             <button
               onClick={() => toggle(`${hit.surah}:${hit.ayah}`)}
               aria-label={t("saved.remove")}
-              className="shrink-0 text-ink/40 hover:text-ink text-lg leading-none px-2 cursor-pointer"
+              className="shrink-0 text-muted hover:text-ink text-lg leading-none px-2 cursor-pointer"
             >
               ×
             </button>

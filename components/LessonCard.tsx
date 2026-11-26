@@ -35,7 +35,7 @@ export default function LessonCard({ lesson: rawLesson }: LessonCardProps) {
     >
       {/* Arabic name — visual anchor */}
       <div className="px-5 pt-5 pb-1">
-        <p className="text-gold/70 text-2xl font-[family-name:var(--font-amiri)] text-right leading-none">
+        <p className="text-gold-light text-2xl font-[family-name:var(--font-amiri)] text-right leading-none">
           {lesson.surahNameAr}
         </p>
       </div>
@@ -47,19 +47,19 @@ export default function LessonCard({ lesson: rawLesson }: LessonCardProps) {
         <h2 className="text-cream text-xl font-bold leading-snug group-hover:text-gold-light transition-colors">
           {lesson.surahName}
         </h2>
-        <p className="text-cream/40 text-sm mt-0.5">{lesson.surahNameTranslation}</p>
+        <p className="text-cream/70 text-sm mt-0.5">{lesson.surahNameTranslation}</p>
       </div>
 
       {lesson.previewTakeaway && (
         <div className="px-5 pb-3">
           {/* Padding lives on the wrapper: line-clamp's overflow:hidden would otherwise show a 3rd line inside the padding. */}
-          <p className="text-cream/60 text-sm leading-snug line-clamp-2">{lesson.previewTakeaway}</p>
+          <p className="text-cream/70 text-sm leading-snug line-clamp-2">{lesson.previewTakeaway}</p>
         </div>
       )}
 
       {/* Range + verse count */}
       <div className="px-5 pb-4">
-        <p className="text-gold/50 font-mono text-xs">
+        <p className="text-gold-light font-mono text-xs">
           {range} · {lesson.verses.length} {verseWord}
           {done && <span className="ml-2 text-gold-light font-sans font-semibold">✓ {t("progress.read")}</span>}
         </p>
@@ -71,7 +71,7 @@ export default function LessonCard({ lesson: rawLesson }: LessonCardProps) {
           {cats.map((cat) => (
             <span
               key={cat.slug}
-              className="text-xs bg-gold/10 text-gold/80 px-2.5 py-0.5 rounded-full border border-gold/30"
+              className="text-xs bg-gold/10 text-gold-light px-2.5 py-0.5 rounded-full border border-gold/30"
             >
               {cat.label}
             </span>

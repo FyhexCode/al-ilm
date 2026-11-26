@@ -37,7 +37,7 @@ export default function VerseDetail({ verse: rawVerse, prev, next }: Props) {
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
       {/* Breadcrumb */}
-      <nav className="text-sm text-ink/40 mb-8 flex items-center gap-2 flex-wrap">
+      <nav className="text-sm text-muted mb-8 flex items-center gap-2 flex-wrap">
         <Link href="/" className="hover:text-heading transition-colors">{t("nav.home")}</Link>
         <span>/</span>
         <Link href="/browse" className="hover:text-heading transition-colors">{t("nav.browse")}</Link>
@@ -49,13 +49,13 @@ export default function VerseDetail({ verse: rawVerse, prev, next }: Props) {
       <div className="flex items-start justify-between mb-8 flex-wrap gap-4">
         <div>
           <h1 className="text-3xl font-bold text-heading">{verse.surahName}</h1>
-          <p className="text-ink/50 mt-1">{verse.surahNameTranslation}</p>
+          <p className="text-muted mt-1">{verse.surahNameTranslation}</p>
         </div>
         <div className="text-right">
-          <span className="text-2xl font-[family-name:var(--font-amiri)] text-gold" dir="rtl">
+          <span className="text-2xl font-[family-name:var(--font-amiri)] text-gold-ink" dir="rtl">
             {verse.surahNameAr}
           </span>
-          <p className="text-xs text-ink/40 font-mono mt-1">
+          <p className="text-xs text-muted font-mono mt-1">
             {t("lesson.surahWord")} {verse.surah} · {t("verse.ayahWord")} {verse.ayah} · {t("lesson.juzWord")} {verse.juz}
           </p>
         </div>
@@ -73,7 +73,7 @@ export default function VerseDetail({ verse: rawVerse, prev, next }: Props) {
 
           <div className="flex items-center gap-4 mb-6">
             <div className="flex-1 h-px bg-gold/30" />
-            <span className="text-gold/50 text-xs">❖</span>
+            <span className="text-gold-light text-xs">❖</span>
             <div className="flex-1 h-px bg-gold/30" />
           </div>
 
@@ -94,7 +94,7 @@ export default function VerseDetail({ verse: rawVerse, prev, next }: Props) {
             <Link
               key={cat.slug}
               href={`/browse?category=${cat.slug}`}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium bg-gold/15 text-gold-dark hover:bg-gold/25 transition-colors border border-gold/30"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium bg-gold/15 text-gold-ink hover:bg-gold/25 transition-colors border border-gold/30"
             >
               {cat.icon} {cat.label}
             </Link>
@@ -105,7 +105,7 @@ export default function VerseDetail({ verse: rawVerse, prev, next }: Props) {
       {/* Lesson for this verse (cluster takeaway + how to apply) */}
       {hasLesson && cluster && (
         <section className="mb-8 rounded-2xl border border-gold/30 bg-gold/5 px-5 py-5">
-          <p className="text-gold text-xs uppercase tracking-widest mb-2">{t("verse.lessonHeading")}</p>
+          <p className="text-gold-ink text-xs uppercase tracking-widest mb-2">{t("verse.lessonHeading")}</p>
           {cluster.keyTakeaway && (
             <p className="text-heading font-semibold leading-snug mb-3">{cluster.keyTakeaway}</p>
           )}
@@ -188,9 +188,9 @@ function PrevNextLink({
         dir === "next" ? "text-right" : ""
       }`}
     >
-      <span className="text-xs text-ink/40 mb-1">{label}</span>
+      <span className="text-xs text-muted mb-1">{label}</span>
       <span className="text-sm font-semibold text-heading">{verse.surahName} {verse.surah}:{verse.ayah}</span>
-      <p className="text-xs text-ink/50 mt-1 line-clamp-2">{verse.translation}</p>
+      <p className="text-xs text-muted mt-1 line-clamp-2">{verse.translation}</p>
     </Link>
   );
 }

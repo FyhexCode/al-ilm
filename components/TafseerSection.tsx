@@ -45,18 +45,18 @@ export default function TafseerSection({
           <div className="flex items-center gap-2 mb-0.5">
             <h2 className="text-cream font-bold text-sm uppercase tracking-wider">{t("tafseer.title")}</h2>
           </div>
-          <p className="text-cream/50 text-xs">
+          <p className="text-cream/70 text-xs">
             {t("tafseer.source")} · {groupLabel}
           </p>
         </div>
         {/* Attribution badge */}
-        <span className="text-gold/50 text-xs shrink-0 mt-0.5">{t("tafseer.lang")}</span>
+        <span className="text-gold-light text-xs shrink-0 mt-0.5">{t("tafseer.lang")}</span>
       </div>
 
       {/* About This Verse highlight */}
       {tafseerSummary && tafseerSummary.length >= 60 && (
         <div className="bg-gold/8 border-b border-gold/20 px-5 py-4">
-          <p className="text-xs font-bold text-gold uppercase tracking-widest mb-2">
+          <p className="text-xs font-bold text-gold-ink uppercase tracking-widest mb-2">
             {t("tafseer.about")}
           </p>
           <p className="text-ink/85 text-sm leading-relaxed">{tafseerSummary}</p>

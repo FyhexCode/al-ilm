@@ -70,16 +70,16 @@ export default function SearchClient() {
         onChange={(e) => setInput(e.target.value)}
         placeholder={t("search.placeholder")}
         aria-label={t("search.title")}
-        className="w-full rounded-full border border-gold/40 bg-surface-2 px-5 py-3 text-base text-ink placeholder:text-ink/40 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
+        className="w-full rounded-full border border-gold/40 bg-surface-2 px-5 py-3 text-base text-ink placeholder:text-muted focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
       />
 
       <div aria-live="polite" className="mt-6">
-        {!active && <p className="text-ink/50 text-sm">{t("search.hint")}</p>}
+        {!active && <p className="text-muted text-sm">{t("search.hint")}</p>}
         {settled && results.length === 0 && (
-          <p className="text-ink/50 text-sm">{t("search.noResults", { query })}</p>
+          <p className="text-muted text-sm">{t("search.noResults", { query })}</p>
         )}
         {settled && results.length > 0 && (
-          <p className="text-ink/50 text-sm mb-4">{t("search.count", { count: results.length })}</p>
+          <p className="text-muted text-sm mb-4">{t("search.count", { count: results.length })}</p>
         )}
       </div>
 
@@ -91,7 +91,7 @@ export default function SearchClient() {
                 href={`/verse/${hit.surah}/${hit.ayah}`}
                 className="block rounded-2xl border border-gold/25 p-4 hover:border-gold hover:bg-surface-2 transition-colors"
               >
-                <span className="text-gold font-mono text-xs">
+                <span className="text-gold-ink font-mono text-xs">
                   {hit.surahName} {hit.surah}:{hit.ayah}
                 </span>
                 {hit.takeaway && (

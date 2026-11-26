@@ -16,6 +16,9 @@
   --color-surface-2: #f5ead6;
   --color-ink: #0f2e1c;
   --color-heading: #1a5c38;
+  /* AA-contrast text colours (see tests/e2e/a11y.spec.ts) */
+  --color-muted: #48594e;
+  --color-gold-ink: #7a5c12;
 
   --font-amiri: "Amiri", serif;
   --font-display: var(--font-cormorant);
@@ -35,6 +38,8 @@ body {
   --color-surface-2: #15221a;
   --color-ink: #ece6d3;
   --color-heading: #8fd3ab;
+  --color-muted: #a9b5ab;
+  --color-gold-ink: #dcbb62;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -43,6 +48,8 @@ body {
     --color-surface-2: #15221a;
     --color-ink: #ece6d3;
     --color-heading: #8fd3ab;
+  --color-muted: #a9b5ab;
+  --color-gold-ink: #dcbb62;
   }
 }
 

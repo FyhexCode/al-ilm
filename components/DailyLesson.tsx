@@ -71,7 +71,7 @@ export default function DailyLesson({ verse: rawVerse, clusterVerses: rawCluster
         <div className="relative z-10 w-full max-w-3xl mx-auto flex flex-col items-center gap-8">
           <div className="relative w-full h-36 sm:h-44 flex items-center justify-center">
             <span
-              className="text-gold text-4xl sm:text-6xl font-[family-name:var(--font-amiri)] leading-[1.6] whitespace-nowrap"
+              className="text-gold-light text-4xl sm:text-6xl font-[family-name:var(--font-amiri)] leading-[1.6] whitespace-nowrap"
               aria-label="Bismillah ir-Rahman ir-Rahim"
             >
               بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
@@ -81,7 +81,7 @@ export default function DailyLesson({ verse: rawVerse, clusterVerses: rawCluster
             <p className="gold-shimmer text-xs tracking-[0.2em] uppercase font-medium text-center">
               {t("daily.ofTheDay")}
             </p>
-            <p className="text-cream/40 text-xs tracking-[0.1em] uppercase text-center">
+            <p className="text-cream/70 text-xs tracking-[0.1em] uppercase text-center">
               {today}
             </p>
           </div>
@@ -92,7 +92,7 @@ export default function DailyLesson({ verse: rawVerse, clusterVerses: rawCluster
           className="absolute left-1/2 -translate-x-1/2 select-none"
           style={{ bottom: "calc(2rem + env(safe-area-inset-bottom, 0px))" }}
         >
-          <span className="text-gold/40 text-2xl font-[family-name:var(--font-amiri)] motion-safe:animate-bounce" aria-hidden="true">۝</span>
+          <span className="text-gold-light text-2xl font-[family-name:var(--font-amiri)] motion-safe:animate-bounce" aria-hidden="true">۝</span>
         </div>
       </section>
 
@@ -107,11 +107,11 @@ export default function DailyLesson({ verse: rawVerse, clusterVerses: rawCluster
       <section className="bg-primary-dark py-12 sm:py-16 px-6 overflow-hidden">
         <div className="max-w-2xl mx-auto text-center">
           <p className="text-cream text-2xl sm:text-3xl font-semibold mb-1 font-[family-name:var(--font-display)]">{verse.surahName}</p>
-          <p className="text-cream/50 text-sm mb-4">{verse.surahNameTranslation}</p>
-          <p className="text-gold font-mono text-sm tracking-wider mb-6">
+          <p className="text-cream/70 text-sm mb-4">{verse.surahNameTranslation}</p>
+          <p className="text-gold-light font-mono text-sm tracking-wider mb-6">
             {verse.surah}:{verse.ayah}
           </p>
-          <p className="text-gold/60 text-2xl font-[family-name:var(--font-amiri)] mb-10">
+          <p className="text-gold-light text-2xl font-[family-name:var(--font-amiri)] mb-10">
             {verse.surahNameAr}
           </p>
 
@@ -121,11 +121,11 @@ export default function DailyLesson({ verse: rawVerse, clusterVerses: rawCluster
             {clusterVerses.map((v, idx) => (
               <div key={v.ayah}>
                 {clusterVerses.length > 1 && (
-                  <p className="text-gold/40 font-mono text-xs mb-4">{v.surah}:{v.ayah}</p>
+                  <p className="text-gold-light font-mono text-xs mb-4">{v.surah}:{v.ayah}</p>
                 )}
                 <ArabicText text={v.arabic} size="xl" align="center" className="text-cream mb-8" />
                 <div className="h-px bg-gold/20 mb-6" />
-                <p className="translit text-cream/50 text-sm italic leading-relaxed">{v.transliteration}</p>
+                <p className="translit text-cream/70 text-sm italic leading-relaxed">{v.transliteration}</p>
                 {idx < clusterVerses.length - 1 && (
                   <div className="mt-10 h-px bg-gold/10" />
                 )}
@@ -139,12 +139,12 @@ export default function DailyLesson({ verse: rawVerse, clusterVerses: rawCluster
 
       <section className="bg-surface py-12 sm:py-16 px-6 overflow-hidden">
         <div className="max-w-2xl mx-auto text-center">
-          <p className="text-ink/50 text-sm italic mb-2 font-[family-name:var(--font-display)]">{t("daily.translationDivider")}</p>
-          <p className="text-8xl text-gold/20 font-[family-name:var(--font-display)] leading-none mb-2 select-none text-left" aria-hidden="true">&ldquo;</p>
+          <p className="text-muted text-sm italic mb-2 font-[family-name:var(--font-display)]">{t("daily.translationDivider")}</p>
+          <svg className="mb-2 h-12 w-12 text-gold/40 select-none" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.4 5C5.9 5 3 7.9 3 11.4V19h7.4v-7.6H7c0-1.5 1.2-2.7 2.7-2.7H10V5zM20.4 5C16.9 5 14 7.9 14 11.4V19h7.4v-7.6H18c0-1.5 1.2-2.7 2.7-2.7H21V5z"/></svg>
           {clusterVerses.map((v, idx) => (
             <div key={v.ayah}>
               {clusterVerses.length > 1 && (
-                <p className="text-ink/30 font-mono text-xs mb-2">{v.surah}:{v.ayah}</p>
+                <p className="text-muted font-mono text-xs mb-2">{v.surah}:{v.ayah}</p>
               )}
               <blockquote className={`text-ink text-2xl sm:text-3xl font-[family-name:var(--font-display)] font-light italic leading-relaxed ${idx < clusterVerses.length - 1 ? "mb-6" : "mb-8"}`}>
                 {v.translation}
@@ -157,7 +157,7 @@ export default function DailyLesson({ verse: rawVerse, clusterVerses: rawCluster
                 <Link
                   key={cat.slug}
                   href={`/browse?category=${cat.slug}`}
-                  className="px-3 py-1 rounded-full border border-dark/20 text-ink/60 hover:border-gold hover:text-heading text-xs uppercase tracking-wider transition-colors"
+                  className="px-3 py-1 rounded-full border border-dark/20 text-muted hover:border-gold hover:text-heading text-xs uppercase tracking-wider transition-colors"
                 >
                   {cat.label}
                 </Link>
@@ -171,7 +171,7 @@ export default function DailyLesson({ verse: rawVerse, clusterVerses: rawCluster
 
       <section className="bg-primary-dark py-12 sm:py-16 px-6 overflow-hidden">
         <div className="max-w-2xl mx-auto text-center">
-          <p className="text-gold/50 text-sm italic mb-6 font-[family-name:var(--font-display)]">
+          <p className="text-gold-light text-sm italic mb-6 font-[family-name:var(--font-display)]">
             {t("daily.theLesson")}
           </p>
           <p className="text-cream/80 text-xl sm:text-2xl font-[family-name:var(--font-display)] font-light leading-relaxed">
@@ -182,7 +182,7 @@ export default function DailyLesson({ verse: rawVerse, clusterVerses: rawCluster
 
       <section className="bg-dark py-12 sm:py-16 px-6 overflow-hidden">
         <div className="max-w-xl mx-auto">
-          <p className="text-gold/50 text-sm italic mb-6 font-[family-name:var(--font-display)] text-center">
+          <p className="text-gold-light text-sm italic mb-6 font-[family-name:var(--font-display)] text-center">
             {t("daily.howToApply")}
           </p>
           <div className="border-l-2 border-gold/40 pl-6">
@@ -204,7 +204,7 @@ export default function DailyLesson({ verse: rawVerse, clusterVerses: rawCluster
           {verse.categories[0] && (
             <Link
               href={`/browse?category=${verse.categories[0]}`}
-              className="px-6 py-3 border border-gold/40 text-gold hover:bg-gold/10 rounded-full transition-colors text-center"
+              className="px-6 py-3 border border-gold/40 text-gold-light hover:bg-gold/10 rounded-full transition-colors text-center"
             >
               {t("daily.browseRelated")}
             </Link>

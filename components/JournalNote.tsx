@@ -13,7 +13,7 @@ export default function JournalNote({ surah, ayah }: { surah: number; ayah: numb
 
   return (
     <section className="mt-8">
-      <label htmlFor={`note-${id}`} className="block text-gold text-xs uppercase tracking-widest mb-2">
+      <label htmlFor={`note-${id}`} className="block text-gold-ink text-xs uppercase tracking-widest mb-2">
         {t("journal.label")}
       </label>
       <textarea
@@ -23,9 +23,9 @@ export default function JournalNote({ surah, ayah }: { surah: number; ayah: numb
         maxLength={MAX_NOTE_CHARS}
         rows={4}
         placeholder={t("journal.placeholder")}
-        className="w-full rounded-2xl border border-gold/30 bg-surface-2 px-4 py-3 text-sm leading-relaxed text-ink placeholder:text-ink/40 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/30 resize-y"
+        className="w-full rounded-2xl border border-gold/30 bg-surface-2 px-4 py-3 text-sm leading-relaxed text-ink placeholder:text-muted focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/30 resize-y"
       />
-      <div className="mt-1.5 flex flex-wrap items-center justify-between gap-2 text-xs text-ink/50">
+      <div className="mt-1.5 flex flex-wrap items-center justify-between gap-2 text-xs text-muted">
         <span>{t("journal.privacy")}</span>
         <span className="flex items-center gap-3">
           {value && (

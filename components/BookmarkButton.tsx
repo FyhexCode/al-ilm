@@ -16,7 +16,7 @@ export default function BookmarkButton({ surah, ayah }: { surah: number; ayah: n
       className={`flex items-center gap-2 px-5 py-2.5 rounded-full border text-sm transition-all duration-200 cursor-pointer ${
         saved
           ? "bg-gold text-dark border-gold"
-          : "border-gold/40 text-gold hover:bg-gold/10 hover:border-gold"
+          : "border-gold/40 text-gold-ink hover:bg-gold/10 hover:border-gold"
       }`}
     >
       <svg
