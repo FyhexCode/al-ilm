@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import VisitTracker from "@/components/VisitTracker";
 import BackToTop from "@/components/BackToTop";
+import SkipLink from "@/components/SkipLink";
 import { LanguageProvider } from "@/lib/i18n/LanguageProvider";
 
 const geistSans = Geist({
@@ -53,9 +54,12 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-surface text-ink antialiased">
         <LanguageProvider>
+          <SkipLink />
           <VisitTracker />
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
+            {children}
+          </main>
           <Footer />
           <BackToTop />
         </LanguageProvider>

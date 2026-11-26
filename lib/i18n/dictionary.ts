@@ -13,6 +13,7 @@ const en = {
   "nav.saved": "Saved",
   "nav.random": "Random verse",
   "nav.backToTop": "Back to top",
+  "nav.skip": "Skip to content",
 
   "copy.copy": "Copy verse",
   "copy.copied": "Copied!",
@@ -139,6 +140,7 @@ const id: Record<DictKey, string> = {
   "nav.saved": "Tersimpan",
   "nav.random": "Ayat acak",
   "nav.backToTop": "Kembali ke atas",
+  "nav.skip": "Lewati ke konten",
 
   "copy.copy": "Salin ayat",
   "copy.copied": "Tersalin!",

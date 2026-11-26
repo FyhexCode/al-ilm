@@ -114,7 +114,7 @@ export default function BrowseClient({ lessons, categories }: BrowseClientProps)
           <select
             value={sort}
             onChange={(e) => navigate(active, e.target.value as SortKey)}
-            className="rounded-full border border-gold/30 bg-surface-2 text-heading px-3 py-1.5 text-sm cursor-pointer focus:outline-none focus:border-gold"
+            className="rounded-full border border-gold/30 bg-surface-2 text-heading px-3 py-1.5 text-sm cursor-pointer focus:border-gold"
           >
             {SORT_KEYS.map((key) => (
               <option key={key} value={key}>

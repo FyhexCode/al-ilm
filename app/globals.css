@@ -111,3 +111,11 @@ html[data-translit="off"] .translit { display: none; }
   html { scroll-behavior: auto; }
   .gold-shimmer { animation: none; }
 }
+
+/* Keyboard focus: two-tone ring (dark inner, gold outer) readable on cream, dark green and the dark theme.
+   :where() keeps specificity at zero so components can still define their own focus style. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-dark);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px var(--color-gold-light);
+}
