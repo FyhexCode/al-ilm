@@ -11,6 +11,7 @@ export default function Footer() {
         {/* Plain <a>: /random is a redirecting route handler, not a page to prefetch. */}
         <a href="/random" className="hover:text-cream transition-colors">{t("nav.random")}</a>
         <Link href="/saved" className="hover:text-cream transition-colors">{t("nav.saved")}</Link>
+        <Link href="/journal" className="hover:text-cream transition-colors">{t("nav.journal")}</Link>
         <Link href="/search" className="hover:text-cream transition-colors">{t("nav.search")}</Link>
       </nav>
       <p>{t("footer.tagline")}</p>

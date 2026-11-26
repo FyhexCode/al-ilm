@@ -18,6 +18,16 @@ const en = {
   "copy.copied": "Copied!",
   "card.download": "Save as image",
 
+  "nav.journal": "Journal",
+  "journal.title": "My reflections",
+  "journal.label": "Your reflection",
+  "journal.placeholder": "How does this verse apply to you today?",
+  "journal.privacy": "Private — stored only in this browser. Clearing site data erases it, so export to keep a copy.",
+  "journal.viewAll": "All reflections",
+  "journal.export": "Export as text",
+  "journal.empty": "No reflections yet. Open any verse and write what it means for you.",
+  "journal.remove": "Delete reflection",
+
   "progress.markRead": "Mark this surah as read",
   "progress.markedRead": "Read — tap to undo",
   "progress.summary": "{read} of {total} surahs read",
@@ -133,6 +143,16 @@ const id: Record<DictKey, string> = {
   "copy.copy": "Salin ayat",
   "copy.copied": "Tersalin!",
   "card.download": "Simpan sebagai gambar",
+
+  "nav.journal": "Jurnal",
+  "journal.title": "Renungan saya",
+  "journal.label": "Renungan Anda",
+  "journal.placeholder": "Bagaimana ayat ini berlaku bagi Anda hari ini?",
+  "journal.privacy": "Pribadi — hanya disimpan di peramban ini. Menghapus data situs akan menghapusnya, jadi ekspor untuk menyimpan salinan.",
+  "journal.viewAll": "Semua renungan",
+  "journal.export": "Ekspor sebagai teks",
+  "journal.empty": "Belum ada renungan. Buka ayat mana pun dan tuliskan maknanya bagi Anda.",
+  "journal.remove": "Hapus renungan",
 
   "progress.markRead": "Tandai surah ini sudah dibaca",
   "progress.markedRead": "Sudah dibaca — ketuk untuk batal",

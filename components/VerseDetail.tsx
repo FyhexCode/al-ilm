@@ -6,6 +6,7 @@ import ShareButton from "./ShareButton";
 import BookmarkButton from "./BookmarkButton";
 import CopyVerseButton from "./CopyVerseButton";
 import DownloadCardButton from "./DownloadCardButton";
+import JournalNote from "./JournalNote";
 import TafseerSection from "./TafseerSection";
 import type { Verse } from "@/lib/types";
 import { CATEGORIES } from "@/data/categories";
@@ -131,6 +132,8 @@ export default function VerseDetail({ verse: rawVerse, prev, next }: Props) {
         <DownloadCardButton surah={verse.surah} ayah={verse.ayah} />
         <ShareButton surah={verse.surah} ayah={verse.ayah} />
       </div>
+
+      <JournalNote surah={verse.surah} ayah={verse.ayah} />
 
       {/* Tafseer — Ibn Kathir (Abridged) */}
       {verse.tafseer && (
